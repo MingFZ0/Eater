@@ -5,6 +5,10 @@ using TMPro;
 
 public class TurnManager : MonoBehaviour
 {
+    private static TurnManager _instance;
+    public static TurnManager Instance { get { return _instance; } }
+
+
     public static int RoundCount = 1;
     public static int TurnCount = 0;
     public static int PhaseCount;
@@ -12,6 +16,18 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] TMP_Text roundCounter;
     [SerializeField] TMP_Text turnCounter;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

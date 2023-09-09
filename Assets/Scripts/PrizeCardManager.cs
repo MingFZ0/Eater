@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PrizeCardManager : MonoBehaviour
 {
+    private static PrizeCardManager _instance;
+    public static PrizeCardManager Instance { get { return _instance; } }
+
+
     // Start is called before the first frame update
     public static List<PrizeCard> PrizeCardsList = new List<PrizeCard>();
     [SerializeField] GameObject prizeSlot;
@@ -12,6 +16,19 @@ public class PrizeCardManager : MonoBehaviour
     [SerializeField] float distanceBetweenEachCardStacked;
 
     [SerializeField] Card cardPrefab;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     void Start()
     {
         InitalizePrizePile();

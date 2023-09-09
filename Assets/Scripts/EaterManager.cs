@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class EaterManager : MonoBehaviour
 {
+    private static EaterManager _instance;
+    public static EaterManager Instance { get { return _instance; } }
 
     public static Card[] EaterList = new Card[2];
     public static int[] ValueLeftToEat = new int[2];
     int[] recordedValueLeftToEat = new int[2];
     int recordedEaterListCount;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
