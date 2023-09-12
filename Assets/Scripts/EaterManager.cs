@@ -7,8 +7,77 @@ public class EaterManager : MonoBehaviour
     private static EaterManager _instance;
     public static EaterManager Instance { get { return _instance; } }
 
-    public static Card[] EaterList = new Card[2];
-    public static int[] ValueLeftToEat = new int[2];
+    public static List<Card> EaterList = new List<Card>();
+    [SerializeField] public static List<Card> StoredList = new List<Card>();
+    [SerializeField] public static List<Card> FullList = new List<Card>();
+
+    private static Card _currentEater;
+    public static Card CurrentEater
+    {
+        get { return _currentEater; }
+        set
+        {
+            if (_currentEater == value)
+            {
+                if (FullList.Contains(value))
+                {
+                    _currentEater = null;
+                    return;
+                }
+            }
+            else if (!FullList.Contains(_currentEater))
+            { 
+                if (_currentEater != null) { _currentEater = null; }
+                _currentEater = value;
+                _currentHunger = _currentEater.CardValue;
+                Debug.Log($"FullHunger is {CurrentHunger}");
+            }
+        }
+    }
+
+    private static int _currentHunger;
+    public static int CurrentHunger 
+    { 
+        get { return _currentHunger; } 
+        set
+        {
+            //Debug.Log($"{CurrentHunger} - {value} vs. {CurrentHunger - value}");
+            _currentHunger = value;
+
+            if ((_currentHunger) < 0)
+            {
+                Debug.Log("Too Full!");
+
+                _currentHunger = CurrentEater.CardValue;
+
+                foreach (Card card in StoredList)
+                {
+                    Debug.Log($"Spitting back out {card.name}");
+                    card.gameObject.SetActive(true);
+                    card.stored = false;
+
+                }
+                StoredList.Clear();
+            }
+            else if ((_currentHunger) == 0)
+            {
+                foreach (Card card in StoredList)
+                {
+                    card.stored = false;
+                    Destroy(card.gameObject);
+                }
+
+                FullList.Add(CurrentEater);
+                StoredList.Clear();
+                Debug.Log($"{CurrentEater.name} is now full");
+                _currentEater = null;
+
+                //_currentHunger = value;
+            }
+            
+        }
+    }
+
     int[] recordedValueLeftToEat = new int[2];
     int recordedEaterListCount;
 
@@ -34,37 +103,57 @@ public class EaterManager : MonoBehaviour
     void Update()
     {
 
-        if (recordedEaterListCount != EaterList.Length)
+        if (recordedEaterListCount != EaterList.Count)
         {
-            recordedEaterListCount = EaterList.Length;
-            UpdateEaterList();
+            recordedEaterListCount = EaterList.Count;
         }
 
         if (TurnManager.PhaseCount == 0)
         {
-            recordedValueLeftToEat = ValueLeftToEat;
+            //recordedValueLeftToEat = ValueLeftToEat;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(EaterManager.ValueLeftToEat[0]);
-            Debug.Log(EaterManager.ValueLeftToEat[1]);
+            Debug.Log($"Current Eater is {_currentEater.name}");
+            Debug.Log($"Current Hunger is {CurrentHunger}");
+            Debug.Log($"Current StoreList size is {StoredList.Count}");
         }
+
+        KillCheck();
 
     }
 
-    private void UpdateEaterList()
+    void KillCheck()
     {
-       //if (EaterList[0])
-       //{
-       //     ValueLeftEater1 = EaterList[0].CardValue;
+        if (TurnManager.TurnCount <= 0 || TurnManager.PhaseCount <= 0) { return; }
+        {
+            if (Input.GetMouseButtonDown(0))      //Detect card being moved to EaterSlot
+            {
+                Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+                //Debug.Log(mousePosInWorld);
 
-       //} else { ValueLeftEater1 = 0; }
-       
-       //if (EaterList[1])
-       //{
-       //     ValueLeftEater2 = EaterList[1].CardValue;
-       //}
+                RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
+
+                Card selectedCard = RaycastHit2DToObject(hit, "EaterList");
+
+                if (selectedCard == null) { return; }
+
+                if (selectedCard.EaterKilled)
+                {
+                    selectedCard.EaterKilled = false;
+                    Debug.Log($"{selectedCard.transform.name} is not being killed");
+                    selectedCard.transform.GetComponentInChildren<TextMesh>().color = Color.black;
+                }
+                else if (!selectedCard.EaterKilled)
+                {
+                    selectedCard.EaterKilled = true;
+                    Debug.Log($"{selectedCard.transform.name} is being killed off");
+                    selectedCard.transform.GetComponentInChildren<TextMesh>().color = Color.red;
+                }
+            }
+        }
     }
 
     private Card RaycastHit2DToObject(RaycastHit2D hitObject, string targetList)
@@ -108,7 +197,9 @@ public class EaterManager : MonoBehaviour
             return null;
         }
 
-        Debug.LogWarning($"{gameObject.name} Unable to Convert RaycastHit2D of {hitObject.transform.gameObject.name} to Object");
+        Debug.LogWarning($"{gameObject.name} Unable to Find {hitObject.transform.gameObject.name} within {targetList}");
         return null;
     }
+
+
 }

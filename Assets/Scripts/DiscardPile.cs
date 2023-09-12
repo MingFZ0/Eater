@@ -26,7 +26,7 @@ public class DiscardPile : MonoBehaviour
         {
             RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.zero);
 
-            if (hit.collider && hit.transform.gameObject.tag == "Card" && DiscardCount <= 2 && TurnManager.TurnCount != 1)
+            if (hit.collider && hit.transform.gameObject.tag == "Card" && DiscardCount <= 2 && TurnManager.TurnCount >= 1 && EaterManager.StoredList.Count == 0)
             {
 
                 int currentCardInstanceId = hit.transform.gameObject.GetInstanceID();

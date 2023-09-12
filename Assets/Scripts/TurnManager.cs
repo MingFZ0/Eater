@@ -16,6 +16,9 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] TMP_Text roundCounter;
     [SerializeField] TMP_Text turnCounter;
+    [SerializeField] TMP_Text phaseCounter;
+
+    [SerializeField] List<GameObject> eaterSlotList = new List<GameObject>();
 
     private void Awake()
     {
@@ -42,9 +45,9 @@ public class TurnManager : MonoBehaviour
             NextTurn();
         }
 
-        if (TurnCount == 0)
+        if (TurnCount == 0 && PhaseCount == 1)
         {
-            if (EaterManager.EaterList[0] != null && EaterManager.EaterList[1] != null && Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
@@ -57,26 +60,63 @@ public class TurnManager : MonoBehaviour
                     NextTurn();
                 }
             }
-        } 
-    }
+        }
 
-    void InitializeTurn()
-    {
-
+        phaseCounter.text = "Phase " + PhaseCount.ToString();
     }
 
     public void ResetPhase()
     {
+
         PhaseCount = 0;
     }
 
-    public void NextTurn()
+    private void NextTurn()
     {
+        if (PrizeCardManager.PrizeCardsList.Count <= 0)
+        {
+            Debug.Log("New Round!");
+
+            EaterManager.EaterList.Clear();
+            PrizeCardManager.PrizeCardsList.Clear();
+            PrizeCardManager.Instance.InitalizePrizePile();
+
+            HandManager.CardsInHand.Clear();
+
+        }
+
+        foreach (Card card in EaterManager.EaterList)
+        {
+            if (card.EaterKilled == true)
+            {
+                card.GetComponent<SpriteRenderer>().color = card.FaceDownColor;
+            }
+
+            EaterDisable();
+        }
 
         PhaseCount = 0;
         TurnCount++;
         DiscardPile.DiscardCount = 0;
-        Debug.Log(TurnCount);
         turnCounter.text = "Turn " + TurnCount.ToString();
+    }
+
+    void EaterDisable()
+    {
+        foreach (GameObject eaterSlot in eaterSlotList)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(eaterSlot.transform.position, Vector2.zero);
+
+            if (hit.collider && hit.transform.gameObject.tag == "Card")
+            {
+                Card card = HandManager.Instance.RaycastHit2DToObject(hit, "EaterList");
+                if (card.EaterKilled) 
+                {
+                    card.gameObject.SetActive(false);
+                    eaterSlot.gameObject.SetActive(false);
+                }
+
+            }
+        }
     }
 }

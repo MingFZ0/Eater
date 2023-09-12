@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EaterSlots : MonoBehaviour
 {
-    [SerializeField] int eaterSlotNum;
     SpriteRenderer spriteRender;
     BoxCollider2D hitboxCollider;
 
@@ -28,7 +27,8 @@ public class EaterSlots : MonoBehaviour
         FirstTurnCheck();
 
 
-        if (TurnManager.TurnCount > 0 && TurnManager.PhaseCount > 0 && Input.GetMouseButtonUp(0))
+        // Feeding Mechanic
+        if (TurnManager.TurnCount >= 1 && TurnManager.PhaseCount >= 1 && Input.GetMouseButtonUp(0))
         {
             RaycastHit2D[] hit = Physics2D.RaycastAll(EaterSelected.transform.position, Vector2.zero);
                 
@@ -45,11 +45,26 @@ public class EaterSlots : MonoBehaviour
 
                         if (cardInHand.transform.GetInstanceID() == hitObjectID)
                         {
+                            EaterManager.CurrentEater = EaterSelected;
                             Card feedingCard = cardInHand;
 
-                            EaterManager.ValueLeftToEat[eaterSlotNum] -= feedingCard.CardValue;
 
-                            Destroy(feedingCard.gameObject);
+                            EaterManager.StoredList.Add(feedingCard);
+
+                            feedingCard.stored = true;
+                            feedingCard.gameObject.SetActive(false);
+
+                            Debug.Log(EaterManager.StoredList.Count);
+
+                            EaterManager.CurrentHunger -= feedingCard.CardValue;
+
+                            //Debug.Log($"EaterSelected is {EaterSelected.name}");
+
+
+                            //EaterManager.ValueLeftToEat[eaterSlotNum] -= feedingCard.CardValue;
+                            
+
+                            //Destroy(feedingCard.gameObject);
 
                         }
                     }
@@ -75,7 +90,7 @@ public class EaterSlots : MonoBehaviour
         {
             foreach (Card card in HandManager.CardsInHand) {if (card.gameObject.GetInstanceID() == cardInstanceID) 
                 {
-                    Debug.Log($"Card Found in HandManager: {card}");
+                    //Debug.Log($"Card Found in HandManager: {card}");
                     return card;
                 }}
         }
@@ -84,7 +99,7 @@ public class EaterSlots : MonoBehaviour
         {
             foreach (Card card in EaterManager.EaterList) {if (card.gameObject.GetInstanceID() == cardInstanceID) 
                 {
-                    Debug.Log($"Card Found in EaterManager: {card}");
+                    //Debug.Log($"Card Found in EaterManager: {card}");
                     return card;
                 }}
         }
@@ -115,8 +130,9 @@ public class EaterSlots : MonoBehaviour
             selectedCard.Selected = false;
             selectedCard.transform.position = spriteRender.transform.position;
             HandManager.CardsInHand.Remove(selectedCard);
-            EaterManager.EaterList[eaterSlotNum] = selectedCard;
-            EaterManager.ValueLeftToEat[eaterSlotNum] = selectedCard.CardValue;
+            EaterManager.EaterList.Add(selectedCard);
+            
+            //EaterManager.ValueLeftToEat[eaterSlotNum] = selectedCard.CardValue;
             EaterSelected = selectedCard;
         }
 
@@ -127,18 +143,27 @@ public class EaterSlots : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero);
 
-            Card selectedCard = RaycastHit2DToObject(hit, "EaterList");
+            try
+            {
+                Card selectedCard = RaycastHit2DToObject(hit, "EaterList");
 
-            if (selectedCard == null || selectedCard != EaterSelected) { return; }
+                if (selectedCard == null || selectedCard != EaterSelected) { return; }
 
-            selectedCard.Eater = false;
-            EaterManager.EaterList[eaterSlotNum] = null;
-            EaterManager.ValueLeftToEat[eaterSlotNum] = 0;
-            HandManager.CardsInHand.Add(selectedCard);
+                selectedCard.Eater = false;
+                EaterManager.EaterList.Remove(selectedCard);
+                //EaterManager.ValueLeftToEat[eaterSlotNum] = 0;
+                HandManager.CardsInHand.Add(selectedCard);
 
-            EaterSelected = null;
+                EaterSelected = null;
 
-            selectedCard.transform.position = selectedCard.prevPos;
+                selectedCard.transform.position = selectedCard.prevPos;
+            }
+            catch
+            {
+                return;
+            }
+            
         }
     }
+
 }

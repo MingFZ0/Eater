@@ -146,10 +146,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardValue: 0
   CardType: 0
-  cardLayerValue: 0
+  FaceUpColor: {r: 1, g: 1, b: 1, a: 1}
+  FaceDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prevPos: {x: 0, y: 0}
   Selected: 1
   Eater: 0
+  EaterKilled: 0
   displayText: {fileID: 6928122626713150926}
 --- !u!212 &1162587701463229461
 SpriteRenderer:

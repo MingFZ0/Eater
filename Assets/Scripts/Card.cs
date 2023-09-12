@@ -11,12 +11,14 @@ public class Card : MonoBehaviour
     public int CardValue;
     public CardProperties.cardTypes CardType;
 
-    [SerializeField] int cardLayerValue;
-    private LayerMask cardLayerMask;
+    public Color FaceUpColor;
+    public Color FaceDownColor;
 
     public Vector2 prevPos;
     public bool Selected;
     public bool Eater = false;
+    public bool EaterKilled = false;
+    public bool stored = false;
 
     System.Random randomNumGen = new System.Random();
 

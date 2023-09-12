@@ -63,7 +63,7 @@ public class PrizeCardManager : MonoBehaviour
         }
     }
 
-    private void InitalizePrizePile()
+    public void InitalizePrizePile()
     {
         int totalPrizeCards = TurnManager.RoundCount + 2;
         float newY = prizeSlot.transform.position.y;
@@ -72,7 +72,6 @@ public class PrizeCardManager : MonoBehaviour
         for (int i = 0; i < totalPrizeCards; i++)
         {
             PrizeCard newPrizeCard = Instantiate(prizeCard);
-            Debug.Log(prizeCard.gameObject.name);
 
             SpriteRenderer cardRenderer = newPrizeCard.GetComponent<SpriteRenderer>();
             float cardSize = cardRenderer.size.y;
@@ -80,7 +79,6 @@ public class PrizeCardManager : MonoBehaviour
 
             newPrizeCard.transform.position = spawnLocation;
             PrizeCardsList.Add(newPrizeCard);
-            Debug.Log(spawnLocation.y);
             newY -= distanceBetweenEachCardStacked;
             newZ--;
         }
