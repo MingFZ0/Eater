@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TurnManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] TMP_Text roundCounter;
     [SerializeField] TMP_Text turnCounter;
     [SerializeField] TMP_Text phaseCounter;
+    [SerializeField] Button saveButon;
 
     [SerializeField] List<GameObject> eaterSlotList = new List<GameObject>();
 
@@ -70,6 +72,16 @@ public class TurnManager : MonoBehaviour
 
         PhaseCount = 0;
     }
+    void PhaseRun()
+    {
+        //Phase 0 is save or not save
+
+        //Phase 1 is drawing deck and prize card
+
+        //Phase 2 is feeding and discard
+
+        //Phase 3 is flipping over prize card
+    }
 
     private void NextTurn()
     {
@@ -101,6 +113,10 @@ public class TurnManager : MonoBehaviour
         turnCounter.text = "Turn " + TurnCount.ToString();
     }
 
+    public void SaveRound()
+    {
+        print("Round is saved");
+    }
     void EaterDisable()
     {
         foreach (GameObject eaterSlot in eaterSlotList)
