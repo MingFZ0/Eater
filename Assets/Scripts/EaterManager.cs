@@ -72,6 +72,11 @@ public class EaterManager : MonoBehaviour
                 Debug.Log($"{CurrentEater.name} is now full");
                 _currentEater = null;
 
+                if (FullList.Count == EaterList.Count)
+                {
+                    TurnManager.PhaseCount = 3;
+                }
+
                 //_currentHunger = value;
             }
             
@@ -115,9 +120,10 @@ public class EaterManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log($"Current Eater is {_currentEater.name}");
             Debug.Log($"Current Hunger is {CurrentHunger}");
             Debug.Log($"Current StoreList size is {StoredList.Count}");
+            Debug.Log($"Current FullList size is {FullList.Count}");
+            Debug.Log($"Current Eater is {_currentEater.name}");
         }
 
         KillCheck();
@@ -145,12 +151,38 @@ public class EaterManager : MonoBehaviour
                     selectedCard.EaterKilled = false;
                     Debug.Log($"{selectedCard.transform.name} is not being killed");
                     selectedCard.transform.GetComponentInChildren<TextMesh>().color = Color.black;
+                    selectedCard.GetComponent<SpriteRenderer>().color = selectedCard.FaceUpColor;
+
+                    //if (!EaterList.Contains(selectedCard))
+                    //{
+                    //    EaterList.Add(selectedCard);
+                    //}    
+
+                    
                 }
                 else if (!selectedCard.EaterKilled)
                 {
                     selectedCard.EaterKilled = true;
                     Debug.Log($"{selectedCard.transform.name} is being killed off");
                     selectedCard.transform.GetComponentInChildren<TextMesh>().color = Color.red;
+                    selectedCard.GetComponent<SpriteRenderer>().color = selectedCard.FaceDownColor;
+
+                    if (StoredList.Count > 0)
+                    {
+                        foreach (Card card in StoredList)
+                        {
+                            card.stored = false;
+                            card.gameObject.SetActive(true);
+                        }
+                    }
+
+                    //_currentEater = null;
+                    //_currentHunger = 0;
+                    //EaterList.Remove(selectedCard);
+
+                    //if (FullList.Contains(selectedCard)) { FullList.Remove(selectedCard); }
+                    //if (FullList.Count == 1 || EaterList.Count == 0) { TurnManager.PhaseCount = 3; }
+
                 }
             }
         }

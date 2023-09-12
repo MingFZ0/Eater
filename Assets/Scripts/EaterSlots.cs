@@ -134,6 +134,11 @@ public class EaterSlots : MonoBehaviour
             
             //EaterManager.ValueLeftToEat[eaterSlotNum] = selectedCard.CardValue;
             EaterSelected = selectedCard;
+
+            if (EaterManager.EaterList.Count == 2)
+            {
+                TurnManager.PhaseCount = 2;
+            }
         }
 
         else if (Input.GetMouseButton(0) && EaterSelected)      //Detect card being moved out from EaterSlot
@@ -157,6 +162,11 @@ public class EaterSlots : MonoBehaviour
                 EaterSelected = null;
 
                 selectedCard.transform.position = selectedCard.prevPos;
+
+                if (EaterManager.EaterList.Count < 2)
+                {
+                    TurnManager.PhaseCount = 1;
+                }
             }
             catch
             {

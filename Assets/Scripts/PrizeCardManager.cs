@@ -50,14 +50,15 @@ public class PrizeCardManager : MonoBehaviour
             {
                 PrizeCard hitPrizeCard = RaycastHit2DToObject(hit);
 
-                if (hitPrizeCard.IsFaceUp)
+                if (hitPrizeCard.IsFaceUp && TurnManager.PhaseCount == 1)
                 {
                     ConvertPrizeCardToHandCard(hitPrizeCard);
+                    TurnManager.PhaseCount = 2;
                 }
-                else if (!hitPrizeCard.IsFaceUp)
+                else if (!hitPrizeCard.IsFaceUp && TurnManager.PhaseCount == 3)
                 {
                     hitPrizeCard.IsFaceUp = true;
-                    TurnManager.PhaseCount = 2;
+                    TurnManager.PhaseCount = 4;
                 }
             }
         }

@@ -42,12 +42,12 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhaseCount == 2)
+        if (PhaseCount == 4)
         {
             NextTurn();
         }
 
-        if (TurnCount == 0 && PhaseCount == 1)
+        if (TurnCount == 0 && PhaseCount == 2)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -64,27 +64,6 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        phaseCounter.text = "Phase " + PhaseCount.ToString();
-    }
-
-    public void ResetPhase()
-    {
-
-        PhaseCount = 0;
-    }
-    void PhaseRun()
-    {
-        //Phase 0 is save or not save
-
-        //Phase 1 is drawing deck and prize card
-
-        //Phase 2 is feeding and discard
-
-        //Phase 3 is flipping over prize card
-    }
-
-    private void NextTurn()
-    {
         if (PrizeCardManager.PrizeCardsList.Count <= 0)
         {
             Debug.Log("New Round!");
@@ -97,6 +76,30 @@ public class TurnManager : MonoBehaviour
 
         }
 
+        phaseCounter.text = "Phase " + PhaseCount.ToString();
+    }
+
+    public void ResetPhase()
+    {
+
+        PhaseCount = 0;
+    }
+    void PhaseRun()
+    {
+        //Phase 0 is save or not save
+
+        //Phase 1 is drawing deck
+
+        //Phase 2 is drawing prize card
+
+        //Phase 3 is feeding and discard
+
+        //Phase 4 is flipping over prize card
+    }
+
+    private void NextTurn()
+    {
+
         foreach (Card card in EaterManager.EaterList)
         {
             if (card.EaterKilled == true)
@@ -107,9 +110,16 @@ public class TurnManager : MonoBehaviour
             EaterDisable();
         }
 
+        if (EaterManager.EaterList.Count == 0 && TurnCount > 0)
+        {
+            Debug.Log("GGs, You Lost");
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+
         PhaseCount = 0;
         TurnCount++;
         DiscardPile.DiscardCount = 0;
+        EaterManager.FullList.Clear();
         turnCounter.text = "Turn " + TurnCount.ToString();
     }
 

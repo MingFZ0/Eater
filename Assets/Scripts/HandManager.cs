@@ -60,20 +60,16 @@ public class HandManager : MonoBehaviour
                         CardsInHand.Add(newCard);
                     }
                 }
-                else if (TurnManager.PhaseCount == 0)
+                else if (TurnManager.PhaseCount == 0 || TurnManager.PhaseCount == 4)
                 {
                     Card newCard = Instantiate(cardPrefab);
                     CardsInHand.Add(newCard);
-                }
-
-                if (TurnManager.TurnCount <= 0)
-                {
-                    
-                }
-
-                if (TurnManager.PhaseCount == 0)
-                {
                     TurnManager.PhaseCount = 1;
+                }
+                
+                if (TurnManager.TurnCount == 1 && TurnManager.PhaseCount == 1)
+                {
+                    TurnManager.PhaseCount = 2;
                 }
 
             }
