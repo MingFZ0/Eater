@@ -39,6 +39,9 @@ public class Card : MonoBehaviour
     private void OnDestroy()
     {
         HandManager.CardsInHand.Remove(this);
+        EaterManager.FullList.Remove(this);
+        EaterManager.EaterList.Remove(this);
+
     }
     //void OnEnable() => HandManager.CardsInHand.Add(this);
     //void OnDisable() => HandManager.CardsInHand.Remove(this);

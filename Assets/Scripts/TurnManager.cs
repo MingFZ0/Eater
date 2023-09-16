@@ -64,19 +64,11 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        if (PrizeCardManager.PrizeCardsList.Count <= 0)
-        {
-            Debug.Log("New Round!");
-
-            EaterManager.EaterList.Clear();
-            PrizeCardManager.PrizeCardsList.Clear();
-            PrizeCardManager.Instance.InitalizePrizePile();
-
-            HandManager.CardsInHand.Clear();
-
-        }
-
+        NewRound();
+        
         phaseCounter.text = "Phase " + PhaseCount.ToString();
+        turnCounter.text = "Turn " + TurnCount.ToString();
+        roundCounter.text = "Round " + RoundCount.ToString();
     }
 
     public void ResetPhase()
@@ -120,7 +112,6 @@ public class TurnManager : MonoBehaviour
         TurnCount++;
         DiscardPile.DiscardCount = 0;
         EaterManager.FullList.Clear();
-        turnCounter.text = "Turn " + TurnCount.ToString();
     }
 
     public void SaveRound()
@@ -135,6 +126,7 @@ public class TurnManager : MonoBehaviour
 
             if (hit.collider && hit.transform.gameObject.tag == "Card")
             {
+                
                 Card card = HandManager.Instance.RaycastHit2DToObject(hit, "EaterList");
                 if (card.EaterKilled) 
                 {
@@ -144,5 +136,31 @@ public class TurnManager : MonoBehaviour
 
             }
         }
+    }
+
+    void NewRound()
+    {
+        if (!(PrizeCardManager.PrizeCardsList.Count == 0 && TurnCount > 3 && EaterManager.EaterList.Count == EaterManager.FullList.Count)) { return; }
+
+        Debug.Log("New Round!");
+
+        EaterManager.EaterList.Clear();
+        HandManager.CardsInHand.Clear();
+
+        Card[] cardList = FindObjectsOfType<Card>();
+        foreach (Card card in cardList)
+        {
+            Destroy(card.gameObject);
+        }
+
+        //set card slots active
+
+        //spawn in the prizecards
+        PrizeCardManager.Instance.InitalizePrizePile();
+
+        PhaseCount = 0;
+        TurnCount = 0;
+        RoundCount++;
+
     }
 }

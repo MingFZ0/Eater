@@ -72,10 +72,10 @@ public class EaterManager : MonoBehaviour
                 Debug.Log($"{CurrentEater.name} is now full");
                 _currentEater = null;
 
-                if (FullList.Count == EaterList.Count)
-                {
-                    TurnManager.PhaseCount = 3;
-                }
+                //if (FullList.Count == EaterList.Count)
+                //{
+                //    TurnManager.PhaseCount = 3;
+                //}
 
                 //_currentHunger = value;
             }
@@ -124,6 +124,11 @@ public class EaterManager : MonoBehaviour
             Debug.Log($"Current StoreList size is {StoredList.Count}");
             Debug.Log($"Current FullList size is {FullList.Count}");
             Debug.Log($"Current Eater is {_currentEater.name}");
+        }
+
+        if (FullList.Count == EaterList.Count)
+        {
+            TurnManager.PhaseCount = 3;
         }
 
         KillCheck();
@@ -176,9 +181,9 @@ public class EaterManager : MonoBehaviour
                         }
                     }
 
-                    //_currentEater = null;
-                    //_currentHunger = 0;
-                    //EaterList.Remove(selectedCard);
+                    _currentEater = null;
+                    _currentHunger = 0;
+                    EaterList.Remove(selectedCard);
 
                     //if (FullList.Contains(selectedCard)) { FullList.Remove(selectedCard); }
                     //if (FullList.Count == 1 || EaterList.Count == 0) { TurnManager.PhaseCount = 3; }

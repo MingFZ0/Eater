@@ -72,6 +72,7 @@ public class HandManager : MonoBehaviour
                     TurnManager.PhaseCount = 2;
                 }
 
+
             }
         }
 
@@ -180,11 +181,13 @@ public class HandManager : MonoBehaviour
 
         else if (targetList == "EaterList")
         {
-            foreach (Card card in EaterManager.EaterList)
+            Card[] cardList = FindObjectsOfType<Card>();
+            foreach (Card card in cardList)
             {
                 if (card.gameObject.GetInstanceID() == cardInstanceID)
                 {
-                    Debug.Log($"Card Found in EaterManager: {card}");
+                    if (card.Eater == false) { return null; }
+                    Debug.Log($"Card Found Via cardType: {card}");
                     return card;
                 }
             }
