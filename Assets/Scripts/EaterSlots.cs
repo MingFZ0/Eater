@@ -45,6 +45,7 @@ public class EaterSlots : MonoBehaviour
 
                         if (cardInHand.transform.GetInstanceID() == hitObjectID)
                         {
+                            if (EaterManager.FullList.Contains(EaterSelected)) { return; }
                             EaterManager.CurrentEater = EaterSelected;
                             Card feedingCard = cardInHand;
 
@@ -128,7 +129,7 @@ public class EaterSlots : MonoBehaviour
 
             selectedCard.Eater = true;
             selectedCard.Selected = false;
-            selectedCard.transform.position = spriteRender.transform.position;
+            selectedCard.transform.position = new Vector3(spriteRender.transform.position.x, spriteRender.transform.position.y, 10);
             HandManager.CardsInHand.Remove(selectedCard);
             EaterManager.EaterList.Add(selectedCard);
             
