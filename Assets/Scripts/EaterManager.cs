@@ -180,6 +180,7 @@ public class EaterManager : MonoBehaviour
                             card.gameObject.SetActive(true);
                         }
                     }
+                    StoredList.Clear();
 
                     _currentEater = null;
                     _currentHunger = 0;
