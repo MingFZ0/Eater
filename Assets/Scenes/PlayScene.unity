@@ -1552,10 +1552,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a1b965297a1394a8e2377d6a9f96f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handManager: {fileID: 0}
-  _eaterManger: {fileID: 0}
-  _turnManager: {fileID: 0}
-  _prizeCardManager: {fileID: 0}
+  _handManager: {fileID: 1232343008}
+  _eaterManger: {fileID: 1993579573}
+  _turnManager: {fileID: 287870591}
+  _prizeCardManager: {fileID: 146528758}
 --- !u!1 &1924608600
 GameObject:
   m_ObjectHideFlags: 0
