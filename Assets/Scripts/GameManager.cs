@@ -18,14 +18,18 @@ public class GameManager : MonoBehaviour
         FeedPhrase,
         EndPhrase
     }
-
+    private PhaseType _gamePhase;
     public PhaseType GamePhase
     {
         get {return _gamePhase;}
-        set 
-        {throw new System.Exception("You tried modifying the View-Only global variable GamePhase. If you want to modify it, modify the private _gamePhase within GameManager's methods.");}
+        set {throw new System.Exception("You tried modifying the View-Only global variable GamePhase. If you want to modify it, modify the private _gamePhase within GameManager's methods.");}
     }
-    private PhaseType _gamePhase;
+
+    public int GameRound { get { return _gameRound; } }
+    private int _gameRound;
+    public int Score { get { return _score; } }
+    private int _score;
+
 
     private void Awake()
     {
