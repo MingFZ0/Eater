@@ -17,6 +17,7 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] Card cardPrefab;
 
+
     bool selectedCard;
 
     private void Awake()
