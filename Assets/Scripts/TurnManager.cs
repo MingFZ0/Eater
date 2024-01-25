@@ -28,8 +28,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            _instance = this;
-        }
+            _instance = this;}
     }
 
     // Start is called before the first frame update
