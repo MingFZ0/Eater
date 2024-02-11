@@ -19,4 +19,9 @@ public abstract class RuntimeSetSO<T> : ScriptableObject
         if (Items.Contains(thing))
             Items.Remove(thing);
     }
+
+    public T GetValue(int index)
+    {
+        return Items[index];
+    }
 }
