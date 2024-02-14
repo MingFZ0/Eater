@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class RuntimeSetSO<T> : ScriptableObject
 {
-    [SerializeField] protected List<T> items = new List<T>();
+    [SerializeReference] protected List<T> items = new List<T>();
 
     public abstract void Add(T thing);
     //{

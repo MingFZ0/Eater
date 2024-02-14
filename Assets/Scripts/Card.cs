@@ -5,11 +5,13 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
 
+    public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 }; 
+
     // Fields for the card
-    private readonly Sprite CardSprite;
-    private readonly Sprite CardBackSprite;
-    private readonly int cardValue;
-    private readonly CardTypeEnumScriptableObject cardType;
+    [SerializeReference] private readonly Sprite CardSprite;
+    [SerializeReference] private readonly Sprite CardBackSprite;
+    [SerializeReference] private int cardValue;
+    [SerializeReference] private CardTypeEnumScriptableObject cardType;
 
     [SerializeField] CardsInHand hand;
 
