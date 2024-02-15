@@ -38,7 +38,7 @@ public class CardsInHand : RuntimeSetSO<Card>
 
     public int GetHandLength() { return items.Count; }
 
-    private bool ContainSameValueInList(Card card)
+    public bool ContainSameValueInList(Card card)
     {
         int value = card.GetCardValue();
         CardTypeEnumScriptableObject type = card.GetCardType();
@@ -46,6 +46,17 @@ public class CardsInHand : RuntimeSetSO<Card>
         for (int i = 0; i < items.Count; i++)
         {
             if (value == items[i].GetCardValue() && type == items[i].GetCardType()) {return true;}
+        }
+
+        return false;
+    }
+
+    public bool ContainSameValueInList(int value, CardTypeEnumScriptableObject type)
+    {
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (value == items[i].GetCardValue() && type == items[i].GetCardType()) { return true; }
         }
 
         return false;

@@ -6,10 +6,9 @@ using UnityEditor;
 
 public class Deck : MonoBehaviour
 {
-
-    [SerializeField] Card card;
-    [SerializeField] CardsInHand hand;
-    [SerializeField] List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
+    [SerializeField] private Card emptyCard;
+    [SerializeField] private CardsInHand hand;
+    [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
     #if UNITY_EDITOR
     private void Awake()
@@ -36,23 +35,24 @@ public class Deck : MonoBehaviour
     }
     #endif
 
-    // Start is called before the first frame update
-    void Start()
+    public void CreateCard()
     {
-        
-    }
+        int cardValue = Random.Range(Card.CARD_VALUE_RANGE_EXCLUSIVE[0], Card.CARD_VALUE_RANGE_EXCLUSIVE[1]);
+        int cardTypeIndex = Random.Range(0, availableCardTypes.Count);
+        CardTypeEnumScriptableObject cardType = availableCardTypes[cardTypeIndex];
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        while (hand.ContainSameValueInList(cardValue, cardType))
+        {
+            cardValue = Random.Range(Card.CARD_VALUE_RANGE_EXCLUSIVE[0], Card.CARD_VALUE_RANGE_EXCLUSIVE[1]);
+            cardTypeIndex = Random.Range(0, availableCardTypes.Count);
+            cardType = availableCardTypes[cardTypeIndex];
+        }
 
-    ////public Card CreateCard()
-    ////{
-    ////    int cardValue = Random.Range(Card.CARD_VALUE_RANGE_EXCLUSIVE[0], Card.CARD_VALUE_RANGE_EXCLUSIVE[1]);
-    ////    int cardType = Random.Range(0, )
-    ////}
+        Card card = Instantiate(emptyCard);
+        card.Instantiation(cardValue, cardType);
+
+
+    }
 
 
 }

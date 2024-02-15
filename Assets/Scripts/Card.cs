@@ -5,20 +5,22 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
 
-    public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 }; 
+    public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
 
     // Fields for the card
-    [SerializeReference] private readonly Sprite CardSprite;
-    [SerializeReference] private readonly Sprite CardBackSprite;
+    [SerializeReference] private Sprite CardSprite;
+    [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
 
     [SerializeField] CardsInHand hand;
 
-    public Card(int cardValue, CardTypeEnumScriptableObject cardType)
+    //Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/
+    public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
+        this.name = cardType.name + " of " + cardValue;
     }
 
     public int GetCardValue() { return this.cardValue; }
@@ -28,21 +30,13 @@ public class Card : MonoBehaviour
     private void OnEnable() { hand.Add(this); }
 
 
-
-
-    private void Awake()
-    {
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (this.cardType == null)
+        {
+            throw new System.Exception("Instance of Card: " + this.GetType().Name + " did not initizated. Did you forget to run it through the Instantiation class method?"); 
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
