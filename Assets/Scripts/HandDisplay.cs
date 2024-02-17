@@ -12,6 +12,8 @@ public class HandDisplay : MonoBehaviour
     [SerializeField] CardsInHand hand;
     [SerializeReference] private Card selectedCard;
 
+    private bool mouseDown;
+
     private Collider2D hitbox;
 
     private void Awake()
@@ -19,7 +21,7 @@ public class HandDisplay : MonoBehaviour
         this.hitbox = gameObject.GetComponent<Collider2D>();
     }
 
-    public void updateHandDisplay()
+    public void UpdateHandDisplay()
     {
         int handSize = hand.GetHandLength();
         Debug.Log("Hand Size is " + handSize);
@@ -36,6 +38,38 @@ public class HandDisplay : MonoBehaviour
             card.previousPos = new Vector2(currentIteratingPos, hitbox.transform.position.y);
             currentIteratingPos += distanceBetweenEachCard;
         }
+    }
+
+    private void DraggingCard(Vector2 movePos) {this.selectedCard.transform.position = movePos;}
+
+    private void Update()
+    {   
+        //Check for Mouse Activity
+        if (!Input.GetMouseButton(0))
+        {
+            if (this.mouseDown && selectedCard != null)
+            {
+                this.mouseDown = false;
+                this.selectedCard = null;
+                UpdateHandDisplay();
+            }
+            return;
+
+        } else { this.mouseDown = true; }
+           
+        //Finds the actual coordinates
+        Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+
+        RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
+
+        //Dragging the selected Card
+        if (selectedCard == null && hit.collider) { 
+            Card card = hit.collider.GetComponent<Card>();
+            this.selectedCard = card;
+        } 
+        if (selectedCard) { DraggingCard(mousePosInWorld); }
+
     }
 
 }
