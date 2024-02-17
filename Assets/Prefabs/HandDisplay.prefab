@@ -145,7 +145,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6189826501889359588}
         m_TargetAssemblyTypeName: HandDisplay, Assembly-CSharp
-        m_MethodName: updateHandDisplay
+        m_MethodName: UpdateHandDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

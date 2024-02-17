@@ -14,7 +14,6 @@ public class Card : MonoBehaviour
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
-
     [Header("Attributes Used Mainly for HandDisplay")]
     [SerializeReference] public Vector2 previousPos;
 
@@ -24,6 +23,7 @@ public class Card : MonoBehaviour
         this.cardValue = cardValue;
         this.cardType = cardType;
         this.name = cardType.name + " of " + cardValue;
+
     }
     public int GetCardValue() { return this.cardValue; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
