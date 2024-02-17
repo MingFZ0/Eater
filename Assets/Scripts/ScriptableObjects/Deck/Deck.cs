@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Events;
 
 public class Deck : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class Deck : MonoBehaviour
             }
         }
     }
-    #endif
+#endif
+
+    [SerializeField] private UnityEvent UpdateHand;
 
     public void CreateCard()
     {
@@ -51,7 +54,7 @@ public class Deck : MonoBehaviour
         Card card = Instantiate(emptyCard);
         card.Instantiation(cardValue, cardType);
 
-
+        UpdateHand.Invoke();
     }
 
 

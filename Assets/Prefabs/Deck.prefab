@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174ebb6610182ff47ba6e140bfb8e3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
+  emptyCard: {fileID: 0}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
   availableCardTypes:
   - {fileID: 11400000, guid: 31e651a60dc4a4d4dadc4bdf748a2542, type: 2}

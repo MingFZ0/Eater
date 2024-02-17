@@ -20,7 +20,7 @@ public abstract class RuntimeSetSO<T> : ScriptableObject
     //        Items.Remove(thing);
     //}
 
-    public abstract T GetValue(int index);
+    public abstract T GetItem(int index);
     //{
     //    return Items[index];
     //}

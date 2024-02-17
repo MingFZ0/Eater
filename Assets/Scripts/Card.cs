@@ -7,13 +7,16 @@ public class Card : MonoBehaviour
 
     public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
 
-    // Fields for the card
+    [SerializeField] CardsInHand hand;
+
+    [Header("Fields for the Card")]
     [SerializeReference] private Sprite CardSprite;
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
 
-    [SerializeField] CardsInHand hand;
+    [Header("Attributes Used Mainly for HandDisplay")]
+    [SerializeReference] public Vector2 previousPos;
 
     //Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/
     public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
@@ -22,9 +25,9 @@ public class Card : MonoBehaviour
         this.cardType = cardType;
         this.name = cardType.name + " of " + cardValue;
     }
-
     public int GetCardValue() { return this.cardValue; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
+
 
     private void OnDisable() { hand.Remove(this); }
     private void OnEnable() { hand.Add(this); }
