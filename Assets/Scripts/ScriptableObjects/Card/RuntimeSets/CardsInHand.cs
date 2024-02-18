@@ -12,9 +12,12 @@ using UnityEngine;
 public class CardsInHand : RuntimeSetSO<Card>
 {
 
-    [SerializeField]
-    public int handLength 
-    { get { return items.Count; } private set { } }
+    [SerializeField] public int handLength { get { return items.Count; } private set { } }
+    [SerializeReference] public Card selectedCard;
+    [SerializeField] private float displayBoxWidth;
+    [SerializeField] private float displayBoxYCoord;
+
+
 
     public override void Add(Card card)
     {
@@ -61,5 +64,20 @@ public class CardsInHand : RuntimeSetSO<Card>
         }
 
         return false;
+    }
+
+    public void UpdateHandDisplay()
+    {
+        float distanceBetweenEachCard = displayBoxWidth / (items.Count);
+
+        float currentIteratingPos = distanceBetweenEachCard - (displayBoxWidth / 2);
+        currentIteratingPos -= (distanceBetweenEachCard / 2);
+
+        foreach (Card card in items)
+        {
+            card.transform.position = new Vector2(currentIteratingPos, displayBoxYCoord);
+            card.previousPos = new Vector2(currentIteratingPos, displayBoxYCoord);
+            currentIteratingPos += distanceBetweenEachCard;
+        }
     }
 }

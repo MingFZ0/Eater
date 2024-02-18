@@ -54,7 +54,7 @@ public class Deck : MonoBehaviour
         Card card = Instantiate(emptyCard);
         card.Instantiation(cardValue, cardType);
 
-        UpdateHand.Invoke();
+        hand.UpdateHandDisplay();
     }
 
 
