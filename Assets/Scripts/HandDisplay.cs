@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HandDisplay : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HandDisplay : MonoBehaviour
      * 3. When the mouse lets go of the card, raise an event that is corsponding to the location that it was dropped at.
      */
 
+    [Header("Fields For Displaying the cards in hand")]
     [SerializeField] CardsInHand hand;
     [SerializeReference] private Card selectedCard;
 
@@ -16,10 +18,10 @@ public class HandDisplay : MonoBehaviour
 
     private Collider2D hitbox;
 
-    private void Awake()
-    {
-        this.hitbox = gameObject.GetComponent<Collider2D>();
-    }
+    [Header("Field for the spawnEater Event")]
+    [SerializeField] private UnityEvent spawnEater;
+
+    private void Awake() {this.hitbox = gameObject.GetComponent<Collider2D>();}
 
     public void UpdateHandDisplay()
     {
@@ -39,12 +41,8 @@ public class HandDisplay : MonoBehaviour
             currentIteratingPos += distanceBetweenEachCard;
         }
     }
-
-    private void DraggingCard(Vector2 movePos) {this.selectedCard.transform.position = movePos;}
-
-    private void Update()
-    {   
-        //Check for Mouse Activity
+    private void mouseCheck()
+    {
         if (!Input.GetMouseButton(0))
         {
             if (this.mouseDown && selectedCard != null)
@@ -55,7 +53,23 @@ public class HandDisplay : MonoBehaviour
             }
             return;
 
-        } else { this.mouseDown = true; }
+        }
+        else { this.mouseDown = true; }
+    }
+    private void DraggingCard(RaycastHit2D hit, Vector2 movePos) 
+    {
+        if (selectedCard == null && hit.collider)
+        {
+            Card card = hit.collider.GetComponent<Card>();
+            this.selectedCard = card;
+        }
+        if (selectedCard) {this.selectedCard.transform.position = movePos;}
+    }
+
+    private void Update()
+    {   
+        //Check for Mouse Activity
+        mouseCheck();
            
         //Finds the actual coordinates
         Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -63,12 +77,13 @@ public class HandDisplay : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
 
+        if (Input.GetMouseButtonUp(0) && this.selectedCard == true)
+        {
+            
+        }
+
         //Dragging the selected Card
-        if (selectedCard == null && hit.collider) { 
-            Card card = hit.collider.GetComponent<Card>();
-            this.selectedCard = card;
-        } 
-        if (selectedCard) { DraggingCard(mousePosInWorld); }
+        DraggingCard(hit, mousePosOnScreen);
 
     }
 

@@ -378,7 +378,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1915491198}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &363301346
 BoxCollider2D:
@@ -615,10 +615,10 @@ GameObject:
   m_Component:
   - component: {fileID: 618567053}
   - component: {fileID: 618567052}
-  - component: {fileID: 618567055}
   - component: {fileID: 618567054}
+  - component: {fileID: 618567055}
   m_Layer: 0
-  m_Name: EaterSlot1
+  m_Name: EaterCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,12 +684,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618567051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8, y: -0.55, z: -29.729534}
+  m_LocalPosition: {x: -1.4316177, y: 0.32375193, z: 0}
   m_LocalScale: {x: 1.4643608, y: 2.4246626, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1915491198}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &618567054
 BoxCollider2D:
@@ -726,9 +726,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 618567051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433c701db0b01dd40bab161049e80653, type: 3}
+  m_Script: {fileID: 11500000, guid: a7fc8eacae51dee4d933d5cb020970d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
+  CardSprite: {fileID: 0}
+  CardBackSprite: {fileID: 0}
+  cardValue: 0
+  cardType: {fileID: 0}
 --- !u!224 &792812392 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
@@ -745,8 +750,9 @@ GameObject:
   - component: {fileID: 1120589734}
   - component: {fileID: 1120589737}
   - component: {fileID: 1120589735}
+  - component: {fileID: 1120589738}
   m_Layer: 0
-  m_Name: EaterSlot2
+  m_Name: EaterCard 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,12 +766,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120589733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8, y: -0.55, z: -29.729534}
+  m_LocalPosition: {x: 2.1683822, y: 0.32375193, z: 0}
   m_LocalScale: {x: 1.4643608, y: 2.4246626, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1915491198}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1120589735
 BoxCollider2D:
@@ -845,6 +851,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1120589738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120589733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fc8eacae51dee4d933d5cb020970d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eaterList: {fileID: 0}
+  CardSprite: {fileID: 0}
+  CardBackSprite: {fileID: 0}
+  cardValue: 0
+  cardType: {fileID: 0}
 --- !u!1 &1232343007
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +942,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1915491198}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1334419078
 SpriteRenderer:
@@ -1175,7 +1198,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1915491198}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &1832743698
 BoxCollider2D:
@@ -1367,13 +1390,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 618567053}
-  - {fileID: 1120589734}
   - {fileID: 1832743696}
   - {fileID: 1334419077}
   - {fileID: 363301345}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917482436
 GameObject:
@@ -1628,7 +1649,7 @@ RectTransform:
   - {fileID: 392199161}
   - {fileID: 792812392}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1741,7 +1762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1784,8 +1805,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpdateHandDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: HandDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6189826501889359598, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
       propertyPath: m_Name

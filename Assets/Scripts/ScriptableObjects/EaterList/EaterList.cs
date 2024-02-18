@@ -14,13 +14,14 @@ public class EaterList : RuntimeSetSO<EaterCard>
     [SerializeField] private static readonly int NUM_OF_EATERS;
 
     [SerializeField]
-    public int eaterCount
+    public int EaterCount
     { get { return items.Count; } private set { } }
 
 
     public override void Add(EaterCard eaterCard)
     {
         if (items.Count < NUM_OF_EATERS) { items.Add(eaterCard); }
+        else { throw new System.Exception("Too many Eaters"); }
     }
 
     public override EaterCard GetItem(int index)

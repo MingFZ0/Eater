@@ -16,13 +16,14 @@ public class EaterCard : MonoBehaviour
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
+        this.name = "EATER " + cardType.name + " of " + cardValue;
     }
 
     public int GetCardValue() { return this.cardValue; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
 
     private void OnDisable() { 
-        if (eaterList.eaterCount == 1)
+        if (eaterList.EaterCount == 1)
         {
             throw new System.Exception("GAME OVER!");
         }
