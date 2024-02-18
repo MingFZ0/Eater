@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class EaterList : RuntimeSetSO<EaterCard>
 {
-    [SerializeField] private int NUM_OF_EATERS;
+    [SerializeField] private GameVariables gameVar;
 
     [SerializeField]
     public int EaterCount
@@ -20,8 +20,8 @@ public class EaterList : RuntimeSetSO<EaterCard>
 
     public override void Add(EaterCard eaterCard)
     {
-        if (!items.Contains(eaterCard) && items.Count < NUM_OF_EATERS) { items.Add(eaterCard); }
-        else if (!items.Contains(eaterCard) && items.Count > NUM_OF_EATERS) { throw new System.Exception("Too many Eaters"); }
+        if (!items.Contains(eaterCard) && items.Count < gameVar.GetNUM_OF_EATERS()) { items.Add(eaterCard); }
+        else if (!items.Contains(eaterCard) && items.Count > gameVar.GetNUM_OF_EATERS()) { throw new System.Exception("Too many Eaters"); }
     }
 
     public override EaterCard GetItem(int index)

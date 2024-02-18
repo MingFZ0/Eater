@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 363301345}
   - component: {fileID: 363301348}
   - component: {fileID: 363301346}
-  - component: {fileID: 363301349}
   m_Layer: 0
   m_Name: DiscardPile
   m_TagString: Untagged
@@ -370,18 +369,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &363301349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363301344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477098fde54afb649be3ce063c8cb4d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &392199160
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,135 +504,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392199160}
   m_CullTransparentMesh: 1
---- !u!1 &618567051
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 618567053}
-  - component: {fileID: 618567052}
-  - component: {fileID: 618567054}
-  - component: {fileID: 618567055}
-  m_Layer: 0
-  m_Name: EaterCard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &618567052
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618567051}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.5215687, b: 0.52156866, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &618567053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618567051}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4316177, y: 0.32375193, z: 0}
-  m_LocalScale: {x: 1.4643608, y: 2.4246626, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &618567054
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618567051}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.028785557}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6332839, y: 1.6332839}
-  m_EdgeRadius: 0
---- !u!114 &618567055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618567051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fc8eacae51dee4d933d5cb020970d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
-  CardSprite: {fileID: 0}
-  CardBackSprite: {fileID: 0}
-  cardValue: 0
-  cardType: {fileID: 0}
 --- !u!224 &792812392 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
@@ -663,6 +521,7 @@ GameObject:
   - component: {fileID: 1120589737}
   - component: {fileID: 1120589735}
   - component: {fileID: 1120589738}
+  - component: {fileID: 1120589739}
   m_Layer: 0
   m_Name: EaterCard 1
   m_TagString: Untagged
@@ -775,11 +634,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fc8eacae51dee4d933d5cb020970d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eaterList: {fileID: 0}
+  eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
+  hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
   CardSprite: {fileID: 0}
   CardBackSprite: {fileID: 0}
   cardValue: 0
   cardType: {fileID: 0}
+  isInstantiated: 0
+--- !u!114 &1120589739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120589733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02d3621b89c292428889b58f2b1d55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 560c5dcb3dbec87478494de7d4b1ce25, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1120589738}
+        m_TargetAssemblyTypeName: EaterCard, Assembly-CSharp
+        m_MethodName: TrySpawnEater
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1334419076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,3 +1386,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
+--- !u!1001 &8912873607101833630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8912873606503789585, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: hand
+      value: 
+      objectReference: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.4316177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32375193
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912873606503789589, guid: 49edd52115964444f9b6a578c9384070, type: 3}
+      propertyPath: m_Name
+      value: EaterCard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49edd52115964444f9b6a578c9384070, type: 3}
