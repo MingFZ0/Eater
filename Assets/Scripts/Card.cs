@@ -5,42 +5,50 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
 
+    /* === [Fields for the Card] */
     public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
-
-    [SerializeField] CardsInHand hand;
-
     [Header("Fields for the Card")]
+    [SerializeField] CardsInHand hand;
     [SerializeReference] private Sprite CardSprite;
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
 
+    /* === [Fields for Card Display] */
     [Header("Attributes Used for Card Display")]
     [SerializeReference] private bool isSelected;
     [SerializeReference] public Vector2 previousPos;
-    
 
-    //Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/
+    /* === [Fields for GameEvents For Dropped Cards] */
+    [Header("Fields for GameEvents For Dropped Cards")]
+    [SerializeField] private GameEvent trySpawnEater;
+
+
+    /* Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/ */
     public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
-        this.name = cardType.name + " of " + cardValue;
+        name = cardType.name + " of " + cardValue;
     }
+
+
     public int GetCardValue() { return this.cardValue; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
+
 
     private void OnDisable() { hand.Remove(this); }
     private void OnEnable() { hand.Add(this); }
 
-    /* =================================================
-        Section for Dragging and displaying the card
-    */
+    private void OnDestroy()
+    {
+        Destroy(this.gameObject);
+    }
+
     private void isSelectedCheck()
     {
         if (Input.GetMouseButtonDown(0) && hand.selectedCard == null)
         {
-            Debug.Log("First Check");
             Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
 
@@ -52,6 +60,21 @@ public class Card : MonoBehaviour
         }
     }
 
+    private void OnMouseDrag()
+    {
+        if (Input.GetMouseButton(0) && hand.selectedCard == this)
+        {
+            Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+
+            this.transform.position = mousePosInWorld;
+        }
+    }
+
+    private void cardDropped()
+    {
+        trySpawnEater.Raise();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,17 +92,11 @@ public class Card : MonoBehaviour
 
         if (hand.selectedCard != null && hand.selectedCard != this) { return; }
 
-        if (Input.GetMouseButton(0) && hand.selectedCard == this)
-        {
-            Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
-
-            this.transform.position = mousePosInWorld;
-            Debug.Log("Mouse is being held");
-        }
+        OnMouseDrag();
 
         if (Input.GetMouseButtonUp(0) && hand.selectedCard == this)
         {
+            cardDropped();
             hand.selectedCard = null;
             hand.UpdateHandDisplay();
         }

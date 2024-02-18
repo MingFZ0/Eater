@@ -30,8 +30,19 @@ public class CardsInHand : RuntimeSetSO<Card>
 
     public override void Remove(Card card)
     {
-        if (items.Contains(card)) { items.Remove(card); }
+        if (items.Contains(card)) { 
+            items.Remove(card);
+        }
         else { throw new System.Exception("Unable to find " + card + " in list"); }
+    }
+
+    public void Destory(Card card)
+    {
+        if (items.Contains(card))
+        {
+            Destroy(card);
+        }
+        
     }
 
     public override Card GetItem(int index) {

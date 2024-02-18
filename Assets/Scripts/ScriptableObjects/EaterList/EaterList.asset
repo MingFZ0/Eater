@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: EaterList
   m_EditorClassIdentifier: 
   items: []
+  NUM_OF_EATERS: 2
