@@ -888,6 +888,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422793499}
   m_CullTransparentMesh: 1
+--- !u!1 &1473129154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473129156}
+  - component: {fileID: 1473129155}
+  m_Layer: 0
+  m_Name: PrizeCardSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1473129155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473129154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3420f04bb4e4cb0419be6e4619b76184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 3631553180346286721, guid: 1691b9eaf2b648f4b8025713357080b0, type: 3}
+  hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  availableCardTypes:
+  - {fileID: 11400000, guid: 31e651a60dc4a4d4dadc4bdf748a2542, type: 2}
+  - {fileID: 11400000, guid: 55da43a0652954547a01f3f3dce3f928, type: 2}
+  - {fileID: 11400000, guid: 59070e1792c15c24ca70486f72b808bc, type: 2}
+  - {fileID: 11400000, guid: e87824d00d08241499d6534765d1ff0c, type: 2}
+  gameVars: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
+--- !u!4 &1473129156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473129154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.64, y: 1.32, z: 4.0227566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832743695
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ public class Card : MonoBehaviour
 {
 
     /* === [Fields for the Card] */
-    public static readonly int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
     [Header("Fields for the Card")]
     [SerializeField] CardsInHand hand;
     [SerializeReference] private Sprite CardSprite;

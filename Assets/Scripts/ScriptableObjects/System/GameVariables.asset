@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameVariables
   m_EditorClassIdentifier: 
   gamePhase: 0
+  NUM_OF_EATERS: 2

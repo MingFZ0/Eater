@@ -9,7 +9,11 @@ public class GameVariables : ScriptableObject
 
     [SerializeField] private int NUM_OF_EATERS;
 
+    [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
+
     public GamePhaseEnum GetGamePhase() { return gamePhase; }
     public int GetNUM_OF_EATERS() { return NUM_OF_EATERS; }
+
+    public int[] GetCARD_VALUE_RANGE() { return CARD_VALUE_RANGE_EXCLUSIVE; }
     
 }
