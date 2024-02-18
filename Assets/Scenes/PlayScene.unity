@@ -623,7 +623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &618567052
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1120589734
 Transform:
   m_ObjectHideFlags: 0
@@ -1649,7 +1649,7 @@ RectTransform:
   - {fileID: 392199161}
   - {fileID: 792812392}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1753,80 +1753,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
---- !u!1001 &6189826503416793945
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.1874
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359585, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateHandDisplay
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359589, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: HandDisplay, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6189826501889359598, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}
-      propertyPath: m_Name
-      value: HandDisplay
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 73b1253f672c34847893e9c1dab2f187, type: 3}

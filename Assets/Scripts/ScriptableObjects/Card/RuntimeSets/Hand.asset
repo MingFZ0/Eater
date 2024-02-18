@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Hand
   m_EditorClassIdentifier: 
   items: []
+  selectedCard: {fileID: 0}
+  displayBoxWidth: 11.9
+  displayBoxYCoord: -2.74
