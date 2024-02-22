@@ -33,7 +33,7 @@ public class PrizeCardSpawner : MonoBehaviour
         float yCoord = transform.position.y;
         for (int i = 0; i < 3; i++)
         {
-            Vector3 spawnPos = new Vector3(transform.position.z, yCoord, transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, yCoord, transform.position.z);
             SpawnCard(spawnPos);
             yCoord -= 1;
 

@@ -85,9 +85,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  emptyCard: {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
   CardSprite: {fileID: 0}
   CardBackSprite: {fileID: 0}
   cardValue: 0
   cardType: {fileID: 0}
   isRevealed: 0
-  PrizeCardDrawn: {fileID: 11400000, guid: 7bac072650ca8d24387197031a064480, type: 2}
+  PrizeCardClicked: {fileID: 0}
