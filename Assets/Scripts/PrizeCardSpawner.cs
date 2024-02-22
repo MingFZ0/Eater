@@ -6,9 +6,14 @@ public class PrizeCardSpawner : MonoBehaviour
 {
     [SerializeField] private PrizeCard card;
     [SerializeField] private CardsInHand hand;
-    [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
+    private List<CardTypeEnumScriptableObject> availableCardTypes;
 
     [SerializeField] private GameVariables gameVars;
+
+    public void Awake()
+    {
+        availableCardTypes = gameVars.GetAvailableCardTypes();
+    }
 
     public void SpawnCard(Vector3 spawnPos)
     {

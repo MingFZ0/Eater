@@ -57,6 +57,7 @@ public class Deck : MonoBehaviour
         card.Instantiation(cardValue, cardType);
 
         hand.UpdateHandDisplay();
+        gameVars.MoveToNextPhase();
     }
 
 
