@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PrizeCard : MonoBehaviour
 {
+    [SerializeField] private GameVariables gameVar;
 
     [Header("Fields for the Card")]
     [SerializeField] CardsInHand hand;
@@ -15,10 +16,7 @@ public class PrizeCard : MonoBehaviour
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
-
-    /* === [Fields for PrizeCard Display] */
-    [Header("Attributes Used for Card Display")]
-    [SerializeReference] private bool isRevealed;
+    [SerializeReference] private TextMesh displayText;
 
     /* === [Fields for GameEvents For PrizeCards] */
     [Header("Fields for GameEvents For PrizeCards")]
@@ -34,8 +32,22 @@ public class PrizeCard : MonoBehaviour
         this.cardValue = cardValue;
         this.cardType = cardType;
         name = "[PrizeCard] " + cardValue + " of " + cardType.ToString();
-        this.isRevealed = false;
 
+    }
+
+    private void revealCard()
+    {
+        prizeList.revealed = this;
+        this.displayText.text = cardValue.ToString();
+    }
+
+    private void drawCard()
+    {
+        Card card = Instantiate(emptyCard);
+        card.Instantiation(cardValue, cardType);
+        hand.UpdateHandDisplay();
+        prizeList.revealed = null;
+        Destroy(this.gameObject);
     }
 
     private void Update()
@@ -50,10 +62,8 @@ public class PrizeCard : MonoBehaviour
             if (!hit.collider) { return; }
             if (hit.collider.gameObject == this.gameObject)
             {
-                Card card = Instantiate(emptyCard);
-                card.Instantiation(cardValue, cardType);
-                hand.UpdateHandDisplay();
-                Destroy(this.gameObject);
+                if (prizeList.revealed == null && gameVar.GetGamePhase().name == "ACTION_PHASE") {revealCard();} 
+                else if (prizeList.revealed == this && gameVar.GetGamePhase().name == "DRAW_PHASE") {drawCard();}
             }
 
         }

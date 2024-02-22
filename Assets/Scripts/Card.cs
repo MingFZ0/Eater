@@ -12,6 +12,7 @@ public class Card : MonoBehaviour
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
+    [SerializeField] private TextMesh displayText;
 
     /* === [Fields for Card Display] */
     [Header("Attributes Used for Card Display")]
@@ -29,6 +30,7 @@ public class Card : MonoBehaviour
         this.cardValue = cardValue;
         this.cardType = cardType;
         name = cardType.name + " of " + cardValue;
+        this.displayText.text = cardValue.ToString();
     }
 
 

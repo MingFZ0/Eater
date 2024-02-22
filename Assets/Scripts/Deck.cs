@@ -9,11 +9,13 @@ public class Deck : MonoBehaviour
 {
     [SerializeField] private Card emptyCard;
     [SerializeField] private CardsInHand hand;
+    [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
     [SerializeField] private GameVariables gameVars;
+    [SerializeField] private UnityEvent UpdateHand;
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     private void Awake()
     {
         if (availableCardTypes.Count == 0) {Debug.LogWarning("There are no Available Card Type set assigned. Are you sure you want to proceed with such affecting the CreateCard Method? "); }
@@ -38,9 +40,7 @@ public class Deck : MonoBehaviour
     }
     #endif
 
-    [SerializeField] private UnityEvent UpdateHand;
-
-    public void CreateCard()
+    private void _createCard()
     {
         int cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
         int cardTypeIndex = Random.Range(0, availableCardTypes.Count);
@@ -55,9 +55,28 @@ public class Deck : MonoBehaviour
 
         Card card = Instantiate(emptyCard);
         card.Instantiation(cardValue, cardType);
-
         hand.UpdateHandDisplay();
-        gameVars.MoveToNextPhase();
+    }
+
+    public void CreateCard()
+    {
+
+        if (hand.GetHandLength() == 0) { 
+            for (int i = 0; i < gameVars.GetHAND_SIZE(); i++)
+            {
+                _createCard();
+            }
+            if (gameVars.Turn == 0) { gameVars.MoveToNextPhase(); }
+
+        } else if (gameVars.GetGamePhase().name == "DRAW_PHASE")
+        {
+            if (prizeList.revealed == null)
+            {
+                _createCard();
+                gameVars.MoveToNextPhase();
+            }
+            else { throw new System.Exception("You didn't draw your prize card"); }
+        }
     }
 
 

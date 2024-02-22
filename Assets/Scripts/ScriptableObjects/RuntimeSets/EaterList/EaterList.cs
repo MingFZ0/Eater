@@ -13,7 +13,6 @@ public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
 
-    [SerializeField]
     public int EaterCount
     { get { return items.Count; } private set { } }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PrizeCardList", menuName = "ScriptableObjects/RuntimeSet/PrizeCardList")]
 public class PrizeCardList : RuntimeSetSO<PrizeCard>
 {
+    public PrizeCard revealed;
+
     public int PrizeCardsCount
     { get { return items.Count; } private set { } }
 

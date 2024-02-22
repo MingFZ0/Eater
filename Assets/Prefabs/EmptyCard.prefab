@@ -130,6 +130,7 @@ MonoBehaviour:
   CardBackSprite: {fileID: 0}
   cardValue: 0
   cardType: {fileID: 0}
+  displayText: {fileID: 4968485126588653969}
   isSelected: 0
   previousPos: {x: 0, y: 0}
   trySpawnEater: {fileID: 11400000, guid: 560c5dcb3dbec87478494de7d4b1ce25, type: 2}

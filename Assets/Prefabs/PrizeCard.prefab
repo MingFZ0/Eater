@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b27b58267de964a8d92e75a9785f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
   emptyCard: {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
   prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
@@ -91,5 +92,10 @@ MonoBehaviour:
   CardBackSprite: {fileID: 0}
   cardValue: 0
   cardType: {fileID: 0}
-  isRevealed: 0
+  displayText: {fileID: 4127481072031198969}
   PrizeCardClicked: {fileID: 0}
+--- !u!102 &4127481072031198969 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  m_PrefabInstance: {fileID: 9057962386592468840}
+  m_PrefabAsset: {fileID: 0}
