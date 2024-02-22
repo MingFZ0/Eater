@@ -933,7 +933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473129154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.64, y: 1.32, z: 4.0227566}
+  m_LocalPosition: {x: 5.59, y: 1.71, z: 4.0227566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1432,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1384877461023608403, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
+      propertyPath: gameVars
+      value: 
+      objectReference: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
     - target: {fileID: 1384877461023608413, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_Name
       value: Deck
