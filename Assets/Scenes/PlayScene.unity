@@ -1420,19 +1420,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000013351
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1454,6 +1454,10 @@ PrefabInstance:
       propertyPath: gameVars
       value: 
       objectReference: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
+    - target: {fileID: 1384877461023608403, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
+      propertyPath: prizeList
+      value: 
+      objectReference: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
     - target: {fileID: 1384877461023608413, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_Name
       value: Deck
