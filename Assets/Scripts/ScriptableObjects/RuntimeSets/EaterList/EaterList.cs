@@ -18,28 +18,18 @@ public class EaterList : RuntimeSetSO<EaterCard>
     [Header("Game Attributes that must be reset at the end of the game")]
     [SerializeReference] private int numOfInstantiatedEaters;
     public int NumOfInstantiatedEaters { get { return numOfInstantiatedEaters; } private set { numOfInstantiatedEaters = value; } }
-    
-    [SerializeReference] private int eatersFed;
-    public int EatersFed { get { return eatersFed; } private set { eatersFed = value; } }
 
 
 
     public int EaterCount
     { get { return items.Count; } private set { } }
 
-    public void ClearFed()
-    {
-        eatersFed = 0;
-    }
-
     public void NotifyInstantiated() 
     {
-        Debug.Log("An Eater has been instantiated");
         this.numOfInstantiatedEaters++;
         
         if (numOfInstantiatedEaters == gameVar.GetNUM_OF_EATERS())
         {
-            Debug.Log("Start first turn");
             gameVar.StartFirstTurn();
         }
     }
@@ -49,13 +39,12 @@ public class EaterList : RuntimeSetSO<EaterCard>
         if (!items.Contains(eaterCard) && items.Count < gameVar.GetNUM_OF_EATERS()) { items.Add(eaterCard); }
         else if (!items.Contains(eaterCard) && items.Count > gameVar.GetNUM_OF_EATERS()) { throw new System.Exception("Too many Eaters"); }
     }
-
     public override EaterCard GetItem(int index) {return items[index];}
     public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
+    public void Clear() { items.Clear(); }
 
     private void OnValidate()
     {
-        Debug.Log("Reset");
         numOfInstantiatedEaters = 0;
         items.Clear();
     }

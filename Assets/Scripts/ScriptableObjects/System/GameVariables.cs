@@ -24,6 +24,7 @@ public class GameVariables : ScriptableObject
 
     [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent updateStatDisplay;
+    [SerializeField] private UnityEvent startOfTurnSetup;
 
     [Header("<Runtime Sets>")]
     [SerializeField] private EaterList eaterList;
@@ -50,8 +51,7 @@ public class GameVariables : ScriptableObject
 
     public void StartFirstTurn()
     {
-        turn++;
-        gamePhaseIndex = 0;
+        StartTurnSetup();
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         updateStatDisplay.Invoke();
     }
@@ -60,11 +60,9 @@ public class GameVariables : ScriptableObject
     {
         this.gamePhaseIndex += 1;
 
-        if (gamePhaseIndex >= availableGamePhase.Count) {
+        if (gamePhaseIndex >= availableGamePhase.Count || availableGamePhase[gamePhaseIndex].GetDisplayName() == "End Phase") {
             EndPhaseCalculation();
-            gamePhaseIndex = 0;
-            turn++;
-            eaterList.ClearFed();
+            StartTurnSetup();
         }
         this.gamePhase = availableGamePhase[gamePhaseIndex];
 
@@ -74,19 +72,42 @@ public class GameVariables : ScriptableObject
 
     private void EndPhaseCalculation()
     {
-        
-
-        if (eaterList.EatersFed == eaterList.EaterCount)
+        if (feedingList.EaterCount == 0)
         {
-            MoveToNextPhase();
+            return;
+        } else
+        {
+            if (feedingList.EaterCount == eaterList.EaterCount)
+            {
+                Application.Quit();
+                throw new System.Exception("GAME OVER!");
+            }
+            else
+            {
+                for (int i = 0; i < feedingList.EaterCount; i++)
+                {
+                    EaterCard eater = feedingList.GetItem(i);
+                    eaterList.Remove(eater);
+                    Destroy(eater.gameObject);
+                }
+            }
         }
 
+        feedingList.Clear();
     }
 
 
     private void StartTurnSetup()
     {
+        for (int i = 0; i < eaterList.EaterCount; i++)
+        {
+            EaterCard eater = eaterList.GetItem(i);
+            feedingList.Add(eater);
+        }
 
+        startOfTurnSetup.Invoke();
+        gamePhaseIndex = 0;
+        turn++;
     }
 
     private void OnDisable()

@@ -34,7 +34,6 @@ public class PrizeCardSpawner : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(availableCardTypes.ToString());
         float yCoord = transform.position.y;
         for (int i = 0; i < 3; i++)
         {

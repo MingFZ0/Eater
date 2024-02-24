@@ -45,6 +45,7 @@ public class CardsInHand : RuntimeSetSO<Card>
         
     }
 
+
     public override Card GetItem(int index) {
         Debug.Log("DEBUG -GetItem--> Index is " + index);
         Debug.Log("DEBUG -GetItem--> Size of items is " + items.Count);
@@ -66,6 +67,7 @@ public class CardsInHand : RuntimeSetSO<Card>
 
         return false;
     }
+    
     public bool ContainSameValueInList(int value, CardTypeEnumScriptableObject type)
     {
 
@@ -76,6 +78,7 @@ public class CardsInHand : RuntimeSetSO<Card>
 
         return false;
     }
+
 
     public void UpdateHandDisplay()
     {
@@ -90,5 +93,11 @@ public class CardsInHand : RuntimeSetSO<Card>
             card.previousPos = new Vector2(currentIteratingPos, displayBoxYCoord);
             currentIteratingPos += distanceBetweenEachCard;
         }
+    }
+
+
+    private void OnValidate()
+    {
+        selectedCard = null;
     }
 }

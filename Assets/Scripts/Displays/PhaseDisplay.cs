@@ -12,7 +12,6 @@ public class PhaseDisplay : MonoBehaviour
 
     public void updateDisplay()
     {
-        Debug.Log("Display updated");
         roundDisplay.text = "Round " + gameVars.Round;
         turnDisplay.text = "Turn " + gameVars.Turn;
 

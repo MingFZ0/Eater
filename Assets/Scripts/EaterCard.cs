@@ -5,6 +5,7 @@ using UnityEngine;
 public class EaterCard : MonoBehaviour
 {
     [SerializeField] EaterList eaterList;
+    [SerializeField] EaterList feedingList;
     [SerializeField] CardsInHand hand;
 
     [Header("Fields for the EaterCard")]
@@ -51,18 +52,15 @@ public class EaterCard : MonoBehaviour
         }
     }
 
-    public void EndPhaseUpdate()
+    public void StartOfTurnUpdate()
     {
+        Debug.Log("Start of turn set up");
+        this.isFull = false;
+        this.hungerValue = this.cardValue;
     }
 
 
-    private void OnDisable() { 
-        if (eaterList.EaterCount == 1)
-        {
-            throw new System.Exception("GAME OVER!");
-        }
-        eaterList.Remove(this); 
-    }
+    private void OnDisable() {eaterList.Remove(this);}
     private void OnEnable() { eaterList.Add(this); }
 
 
@@ -82,6 +80,7 @@ public class EaterCard : MonoBehaviour
                 Debug.Log("Gabble Gabble. Eater " + name + " has " + hungerValue + " hunger points left");
                 Destroy(card.gameObject);
             }
+            if (this.hungerValue == 0) { feedingList.Remove(this); }
 
             if (hungerValue == 0) { this.isFull = true; }
         }
