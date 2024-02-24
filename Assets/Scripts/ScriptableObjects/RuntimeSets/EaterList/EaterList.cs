@@ -12,16 +12,24 @@ using UnityEngine;
 public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
-    public int NumOfInstantiatedEaters { get { return numOfInstantiatedEaters; } private set { numOfInstantiatedEaters = value; } }
+    [SerializeField] private EaterList feedingList;
+
+
+    [Header("Game Attributes that must be reset at the end of the game")]
     [SerializeReference] private int numOfInstantiatedEaters;
+    public int NumOfInstantiatedEaters { get { return numOfInstantiatedEaters; } private set { numOfInstantiatedEaters = value; } }
+    
+    [SerializeReference] private int eatersFed;
+    public int EatersFed { get { return eatersFed; } private set { eatersFed = value; } }
+
+
 
     public int EaterCount
     { get { return items.Count; } private set { } }
 
-    private void OnValidate()
+    public void ClearFed()
     {
-        Debug.Log("Reset");
-        numOfInstantiatedEaters = 0;
+        eatersFed = 0;
     }
 
     public void NotifyInstantiated() 
@@ -42,13 +50,13 @@ public class EaterList : RuntimeSetSO<EaterCard>
         else if (!items.Contains(eaterCard) && items.Count > gameVar.GetNUM_OF_EATERS()) { throw new System.Exception("Too many Eaters"); }
     }
 
-    public override EaterCard GetItem(int index)
-    {
-        return items[index];
-    }
+    public override EaterCard GetItem(int index) {return items[index];}
+    public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
 
-    public override void Remove(EaterCard eaterCard)
+    private void OnValidate()
     {
-        items.Remove(eaterCard);
+        Debug.Log("Reset");
+        numOfInstantiatedEaters = 0;
+        items.Clear();
     }
 }

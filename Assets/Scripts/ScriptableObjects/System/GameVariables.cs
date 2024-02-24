@@ -23,8 +23,12 @@ public class GameVariables : ScriptableObject
     [SerializeReference] private int turn;
 
     [Header("<Central Game Events>")]
-    [SerializeField] private UnityEvent endPhaseUpdate;
     [SerializeField] private UnityEvent updateStatDisplay;
+
+    [Header("<Runtime Sets>")]
+    [SerializeField] private EaterList eaterList;
+    [SerializeField] private EaterList feedingList;
+    [SerializeField] private CardsInHand hand;
 
     public int Turn { get { return turn; } private set { turn = value; } }
     public int Round { get { return round; } private set { turn = value; } }
@@ -43,6 +47,7 @@ public class GameVariables : ScriptableObject
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
 
+
     public void StartFirstTurn()
     {
         turn++;
@@ -59,6 +64,7 @@ public class GameVariables : ScriptableObject
             EndPhaseCalculation();
             gamePhaseIndex = 0;
             turn++;
+            eaterList.ClearFed();
         }
         this.gamePhase = availableGamePhase[gamePhaseIndex];
 
@@ -68,7 +74,19 @@ public class GameVariables : ScriptableObject
 
     private void EndPhaseCalculation()
     {
-        endPhaseUpdate.Invoke();
+        
+
+        if (eaterList.EatersFed == eaterList.EaterCount)
+        {
+            MoveToNextPhase();
+        }
+
+    }
+
+
+    private void StartTurnSetup()
+    {
+
     }
 
     private void OnDisable()

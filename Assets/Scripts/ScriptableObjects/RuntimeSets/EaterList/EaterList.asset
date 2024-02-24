@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf5bf6186a70734a929ec2539436e3a, type: 3}
   m_Name: EaterList
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
+  items: []
   gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
+  numOfInstantiatedEaters: 0
+  eatersFed: 0

@@ -39,6 +39,7 @@ public class PrizeCard : MonoBehaviour
     {
         prizeList.revealed = this;
         this.displayText.text = cardValue.ToString();
+        gameVar.MoveToNextPhase();
     }
 
     private void drawCard()
