@@ -5,5 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Enum/GamePhaseType")]
 public class GamePhaseEnumSO : ScriptableObject
 {
-    public string GamePhase { get; private set; }
+    [SerializeField] string displayName;
+
+    public string GetDisplayName() { return displayName; }
+
+
 }

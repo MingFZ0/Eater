@@ -24,7 +24,7 @@ public class CardsInHand : RuntimeSetSO<Card>
         if (!items.Contains(card) && !ContainSameValueInList(card))
         {
             items.Add(card);
-            Debug.Log("card added to hand");
+            //Debug.Log("card added to hand");
         } else { throw new System.Exception(card + " is already found in list. Unable to add it"); }
     }
 

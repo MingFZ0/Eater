@@ -6,25 +6,28 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "GameVariables", menuName = "ScriptableObjects/GameVariables")]
 public class GameVariables : ScriptableObject
 {
-    [Header("Static Constant Attributes")]
+    [Header("<Static Constant Attributes>")]
     [SerializeField] private int NUM_OF_EATERS;
     [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
     [SerializeField] private int HAND_SIZE;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
     [SerializeField] private List<GamePhaseEnumSO> availableGamePhase = new List<GamePhaseEnumSO>();
+    [Space]
+    [Space]
+
+    [Header("<Game Status Attributes> \n<They needs to be reset at the end of every game>")]
     [SerializeReference] private GamePhaseEnumSO gamePhase;
     [SerializeReference] private int gamePhaseIndex;
-
-    [Header("Game Status Attributes")]
     [SerializeReference] private int round;
     [SerializeReference] private int turn;
 
-    [Header("Central Game Events")]
+    [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent endPhaseUpdate;
+    [SerializeField] private UnityEvent updateStatDisplay;
 
-    public int Turn { get { return turn; } private set { } }
-    public int Round { get { return round; } private set { } }
+    public int Turn { get { return turn; } private set { turn = value; } }
+    public int Round { get { return round; } private set { turn = value; } }
 
     private void Awake()
     {
@@ -40,6 +43,13 @@ public class GameVariables : ScriptableObject
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
 
+    public void StartFirstTurn()
+    {
+        turn++;
+        gamePhaseIndex = 0;
+        this.gamePhase = availableGamePhase[gamePhaseIndex];
+        updateStatDisplay.Invoke();
+    }
 
     public void MoveToNextPhase()
     {
@@ -47,11 +57,13 @@ public class GameVariables : ScriptableObject
 
         if (gamePhaseIndex >= availableGamePhase.Count) {
             EndPhaseCalculation();
-            gamePhaseIndex = 0; 
+            gamePhaseIndex = 0;
+            turn++;
         }
         this.gamePhase = availableGamePhase[gamePhaseIndex];
 
-        Debug.Log("Current gamePhase is " + gamePhase);
+        updateStatDisplay.Invoke();
+        //Debug.Log("Current gamePhase is " + gamePhase);
     }
 
     private void EndPhaseCalculation()
@@ -59,4 +71,13 @@ public class GameVariables : ScriptableObject
         endPhaseUpdate.Invoke();
     }
 
+    private void OnDisable()
+    {
+        gamePhaseIndex = 0;
+        gamePhase = availableGamePhase[gamePhaseIndex];
+
+        round = 0;
+        turn = 0;
+
+    }
 }

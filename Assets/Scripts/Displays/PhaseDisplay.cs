@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class PhaseDisplay : MonoBehaviour
+{
+    [SerializeField] GameVariables gameVars;
+    [SerializeField] TextMeshProUGUI roundDisplay;
+    [SerializeField] TextMeshProUGUI turnDisplay;
+    [SerializeField] TextMeshProUGUI phaseDisplay;
+
+    public void updateDisplay()
+    {
+        Debug.Log("Display updated");
+        roundDisplay.text = "Round " + gameVars.Round;
+        turnDisplay.text = "Turn " + gameVars.Turn;
+
+        phaseDisplay.text = gameVars.GetGamePhase().GetDisplayName();
+        
+        
+
+    }
+}

@@ -10,6 +10,11 @@ public class PrizeCardList : RuntimeSetSO<PrizeCard>
     public int PrizeCardsCount
     { get { return items.Count; } private set { } }
 
+    private void OnValidate()
+    {
+        revealed = null;
+    }
+
     public override void Add(PrizeCard thing)
     {
         if (!items.Contains(thing)) { items.Add(thing); }

@@ -28,6 +28,8 @@ public class EaterCard : MonoBehaviour
         this.isInstantiated = true;
 
         this.hungerValue = cardValue;
+        eaterList.NotifyInstantiated();
+        
     }
 
     public int GetCardValue() { return this.cardValue; }

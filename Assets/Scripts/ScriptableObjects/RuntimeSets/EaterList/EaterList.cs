@@ -12,10 +12,29 @@ using UnityEngine;
 public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
+    public int NumOfInstantiatedEaters { get { return numOfInstantiatedEaters; } private set { numOfInstantiatedEaters = value; } }
+    [SerializeReference] private int numOfInstantiatedEaters;
 
     public int EaterCount
     { get { return items.Count; } private set { } }
 
+    private void OnValidate()
+    {
+        Debug.Log("Reset");
+        numOfInstantiatedEaters = 0;
+    }
+
+    public void NotifyInstantiated() 
+    {
+        Debug.Log("An Eater has been instantiated");
+        this.numOfInstantiatedEaters++;
+        
+        if (numOfInstantiatedEaters == gameVar.GetNUM_OF_EATERS())
+        {
+            Debug.Log("Start first turn");
+            gameVar.StartFirstTurn();
+        }
+    }
 
     public override void Add(EaterCard eaterCard)
     {

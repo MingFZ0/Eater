@@ -44,6 +44,7 @@ public class Card : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(this.gameObject);
+        hand.UpdateHandDisplay();
     }
 
     private void isSelectedCheck()
