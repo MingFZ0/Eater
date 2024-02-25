@@ -20,7 +20,6 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public int NumOfInstantiatedEaters { get { return numOfInstantiatedEaters; } private set { numOfInstantiatedEaters = value; } }
 
 
-
     public int EaterCount
     { get { return items.Count; } private set { } }
 
@@ -34,6 +33,7 @@ public class EaterList : RuntimeSetSO<EaterCard>
         }
     }
 
+
     public override void Add(EaterCard eaterCard)
     {
         if (!items.Contains(eaterCard) && items.Count < gameVar.GetNUM_OF_EATERS()) { items.Add(eaterCard); }
@@ -44,6 +44,7 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public bool GetIsFeeding() { return isFeeding; }
 
     public void Clear() { items.Clear(); }
+
 
     public void FeedingUpdate()
     {
