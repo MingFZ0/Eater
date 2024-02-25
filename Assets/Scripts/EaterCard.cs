@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EaterCard : MonoBehaviour
 {
+    [SerializeField] GameVariables gameVars;
     [SerializeField] EaterList eaterList;
     [SerializeField] EaterList feedingList;
     [SerializeField] CardsInHand hand;
@@ -19,6 +21,7 @@ public class EaterCard : MonoBehaviour
     [Header("Fields that relates to Feeding")]
     [SerializeReference] private int hungerValue;
     [SerializeReference] private bool isFull;
+    [SerializeField] private UnityEvent eaterFed;
 
     public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
@@ -54,7 +57,6 @@ public class EaterCard : MonoBehaviour
 
     public void StartOfTurnUpdate()
     {
-        Debug.Log("Start of turn set up");
         this.isFull = false;
         this.hungerValue = this.cardValue;
     }
@@ -78,6 +80,8 @@ public class EaterCard : MonoBehaviour
             {
                 this.hungerValue -= card.GetCardValue();
                 Debug.Log("Gabble Gabble. Eater " + name + " has " + hungerValue + " hunger points left");
+                gameVars.AddScore();
+                eaterFed.Invoke();
                 Destroy(card.gameObject);
             }
             if (this.hungerValue == 0) { feedingList.Remove(this); }

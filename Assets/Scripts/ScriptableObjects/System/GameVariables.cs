@@ -7,7 +7,9 @@ using UnityEngine.Events;
 public class GameVariables : ScriptableObject
 {
     [Header("<Static Constant Attributes>")]
+    [SerializeField] private int TOTAL_ROUNDS;
     [SerializeField] private int NUM_OF_EATERS;
+    [SerializeField] private int DISCARD_AMOUNT_ALLOWED;
     [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
     [SerializeField] private int HAND_SIZE;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
@@ -21,6 +23,7 @@ public class GameVariables : ScriptableObject
     [SerializeReference] private int gamePhaseIndex;
     [SerializeReference] private int round;
     [SerializeReference] private int turn;
+    [SerializeReference] private int score;
 
     [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent updateStatDisplay;
@@ -29,25 +32,42 @@ public class GameVariables : ScriptableObject
     [Header("<Runtime Sets>")]
     [SerializeField] private EaterList eaterList;
     [SerializeField] private EaterList feedingList;
+    [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private CardsInHand hand;
 
     public int Turn { get { return turn; } private set { turn = value; } }
     public int Round { get { return round; } private set { turn = value; } }
 
-    private void Awake()
+    private void OnValidate()
     {
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
-    }
 
+        round = 0;
+        turn = 0;
+        score = 0;
+    }
 
     public GamePhaseEnumSO GetGamePhase() { return gamePhase; }
     public int GetNUM_OF_EATERS() { return NUM_OF_EATERS; }
     public int[] GetCARD_VALUE_RANGE() { return CARD_VALUE_RANGE_EXCLUSIVE; }
     public int GetHAND_SIZE() { return HAND_SIZE; }
+    public int GetScore() { return score; }
+    public int GetDISCARD_AMOUNT_ALLOWED() { return DISCARD_AMOUNT_ALLOWED;}
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
 
+    public void AddScore() 
+    { 
+        score++;
+
+        if (prizeList.PrizeCardsCount == 0)
+        {
+            EndRound();
+
+        }
+        
+    }
 
     public void StartFirstTurn()
     {
@@ -96,7 +116,6 @@ public class GameVariables : ScriptableObject
         feedingList.Clear();
     }
 
-
     private void StartTurnSetup()
     {
         for (int i = 0; i < eaterList.EaterCount; i++)
@@ -110,13 +129,8 @@ public class GameVariables : ScriptableObject
         turn++;
     }
 
-    private void OnDisable()
+    public void EndRound()
     {
-        gamePhaseIndex = 0;
-        gamePhase = availableGamePhase[gamePhaseIndex];
-
-        round = 0;
-        turn = 0;
-
+        Debug.Log("Round has Ended! You Survived");
     }
 }

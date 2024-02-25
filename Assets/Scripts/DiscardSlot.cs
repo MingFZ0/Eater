@@ -6,19 +6,28 @@ public class DiscardSlot : MonoBehaviour
 {
     [SerializeField] CardsInHand hand;
     [SerializeField] GameVariables gameVars;
+    [SerializeReference] int discardAmount;
+
+    private void Awake()
+    {
+        discardAmount = gameVars.GetDISCARD_AMOUNT_ALLOWED();
+    }
 
     private void Update()
     {
         if (Input.GetMouseButtonUp(0) && hand.selectedCard != null)
         {
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.zero);
-            if (hit.collider && hit.collider.gameObject == hand.selectedCard.gameObject)
+            if (hit.collider && hit.collider.gameObject == hand.selectedCard.gameObject && discardAmount > 0)
             {
+                discardAmount--;
                 Destroy(hand.selectedCard.gameObject);
                 hand.UpdateHandDisplay();
             }
         }
     }
+
+    public void StartOfTurnSetup() { discardAmount = gameVars.GetDISCARD_AMOUNT_ALLOWED(); }
 
 
 

@@ -13,6 +13,7 @@ public class PrizeCardList : RuntimeSetSO<PrizeCard>
     private void OnValidate()
     {
         revealed = null;
+        items.Clear();
     }
 
     public override void Add(PrizeCard thing)
@@ -27,7 +28,7 @@ public class PrizeCardList : RuntimeSetSO<PrizeCard>
 
     public override void Remove(PrizeCard thing)
     {
-        if (!items.Contains(thing)) { items.Remove(thing); }
+        if (items.Contains(thing)) { items.Remove(thing); }
     }
 
 }

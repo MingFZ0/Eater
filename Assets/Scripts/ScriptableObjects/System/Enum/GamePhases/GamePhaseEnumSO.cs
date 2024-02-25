@@ -9,5 +9,4 @@ public class GamePhaseEnumSO : ScriptableObject
 
     public string GetDisplayName() { return displayName; }
 
-
 }

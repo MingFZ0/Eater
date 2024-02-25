@@ -9,6 +9,7 @@ public class PhaseDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundDisplay;
     [SerializeField] TextMeshProUGUI turnDisplay;
     [SerializeField] TextMeshProUGUI phaseDisplay;
+    [SerializeField] TextMeshProUGUI scoreDisplay;
 
     public void updateDisplay()
     {
@@ -16,8 +17,7 @@ public class PhaseDisplay : MonoBehaviour
         turnDisplay.text = "Turn " + gameVars.Turn;
 
         phaseDisplay.text = gameVars.GetGamePhase().GetDisplayName();
-        
-        
+        scoreDisplay.text = "Score: " + gameVars.GetScore();
 
     }
 }

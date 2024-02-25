@@ -48,6 +48,7 @@ public class PrizeCard : MonoBehaviour
         card.Instantiation(cardValue, cardType);
         hand.UpdateHandDisplay();
         prizeList.revealed = null;
+        prizeList.Remove(this);
         Destroy(this.gameObject);
     }
 
