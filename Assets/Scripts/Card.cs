@@ -38,7 +38,10 @@ public class Card : MonoBehaviour
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
 
 
-    private void OnDisable() { hand.Remove(this); }
+    private void OnDisable() { 
+        if (hand.selectedCard == this) { hand.selectedCard = null; }
+        hand.Remove(this);
+    }
     private void OnEnable() { hand.Add(this); }
 
     private void OnDestroy()

@@ -12,7 +12,7 @@ using UnityEngine;
 public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
-    [SerializeField] private EaterList feedingList;
+    [SerializeField] private bool isFeeding;
 
 
     [Header("Game Attributes that must be reset at the end of the game")]
@@ -41,11 +41,28 @@ public class EaterList : RuntimeSetSO<EaterCard>
     }
     public override EaterCard GetItem(int index) {return items[index];}
     public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
+    public bool GetIsFeeding() { return isFeeding; }
+
     public void Clear() { items.Clear(); }
+
+    public void FeedingUpdate()
+    {
+        foreach (EaterCard eater in items)
+        {
+            if (eater.GetHungerValue() > 0 || eater.GetIsFull() == true)
+            {
+                isFeeding = true;
+                return;
+            }
+        }
+        isFeeding = false;
+
+    }
 
     private void OnValidate()
     {
         numOfInstantiatedEaters = 0;
+        isFeeding = false;
         items.Clear();
     }
 }

@@ -60,14 +60,10 @@ public class GameVariables : ScriptableObject
     public void AddScore() 
     { 
         score++;
-
-        if (prizeList.PrizeCardsCount == 0)
-        {
-            EndRound();
-
-        }
-        
+        if (prizeList.PrizeCardsCount == 0) {EndRound();}
     }
+
+    public void SubtractScore() { score--; }
 
     public void StartFirstTurn()
     {
@@ -107,6 +103,8 @@ public class GameVariables : ScriptableObject
                 for (int i = 0; i < feedingList.EaterCount; i++)
                 {
                     EaterCard eater = feedingList.GetItem(i);
+                    eater.spit();
+                    score -= eater.GetTotalCardScore();
                     eaterList.Remove(eater);
                     Destroy(eater.gameObject);
                 }

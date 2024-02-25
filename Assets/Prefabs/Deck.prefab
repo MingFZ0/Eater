@@ -150,11 +150,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyCard: {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
+  feedingList: {fileID: 11400000, guid: c906eda8aa1c8e8488a132e1ae0b32a9, type: 2}
   availableCardTypes:
   - {fileID: 11400000, guid: 31e651a60dc4a4d4dadc4bdf748a2542, type: 2}
   - {fileID: 11400000, guid: 55da43a0652954547a01f3f3dce3f928, type: 2}
   - {fileID: 11400000, guid: 59070e1792c15c24ca70486f72b808bc, type: 2}
   - {fileID: 11400000, guid: e87824d00d08241499d6534765d1ff0c, type: 2}
+  gameVars: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
   UpdateHand:
     m_PersistentCalls:
       m_Calls:

@@ -234,12 +234,29 @@ MonoBehaviour:
   cardType: {fileID: 0}
   displayText: {fileID: 6424306103183184675}
   isInstantiated: 0
+  totalCardScore: 0
   hungerValue: 0
   isFull: 0
   eaterFed:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: c29a23d951fafdf428ae66da626561f2, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  cardsFed: []
+  scoreDisplay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 53fb350699d482749b92c217593e76e3, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1

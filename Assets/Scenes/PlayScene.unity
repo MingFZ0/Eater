@@ -196,11 +196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3314837137278425401, guid: cf687a91b6eb0474692753aca71829d5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -200
+      value: -411
       objectReference: {fileID: 0}
     - target: {fileID: 3314837137278425401, guid: cf687a91b6eb0474692753aca71829d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 102.20002
+      value: 182
       objectReference: {fileID: 0}
     - target: {fileID: 3314837137278425401, guid: cf687a91b6eb0474692753aca71829d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1001,11 +1001,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 133.22357
+      value: 219
       objectReference: {fileID: 0}
     - target: {fileID: 1384877461023608402, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1027,6 +1027,10 @@ PrefabInstance:
       propertyPath: prizeList
       value: 
       objectReference: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
+    - target: {fileID: 1384877461023608403, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
+      propertyPath: feedingList
+      value: 
+      objectReference: {fileID: 11400000, guid: c906eda8aa1c8e8488a132e1ae0b32a9, type: 2}
     - target: {fileID: 1384877461023608413, guid: f3663df7970ece24a8a1bc721a1929d4, type: 3}
       propertyPath: m_Name
       value: Deck
