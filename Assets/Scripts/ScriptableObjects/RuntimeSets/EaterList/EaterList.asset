@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
-  numOfInstantiatedEaters: 0
-  eatersFed: 0
+  feedingList: {fileID: 11400000, guid: c906eda8aa1c8e8488a132e1ae0b32a9, type: 2}
+  numOfInstantiatedEaters: 2
