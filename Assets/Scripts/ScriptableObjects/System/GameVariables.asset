@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2853bf1d8f47ceb4eb9e400656e39c95, type: 3}
   m_Name: GameVariables
   m_EditorClassIdentifier: 
-  TOTAL_ROUNDS: 3
+  MAX_ROUNDS: 3
+  INITIAL_PRIZE_AMOUNT: 3
   NUM_OF_EATERS: 2
   DISCARD_AMOUNT_ALLOWED: 2
   CARD_VALUE_RANGE_EXCLUSIVE: 010000000d000000
@@ -26,11 +27,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
   - {fileID: 11400000, guid: d8919586695d23240b196aef7d365d24, type: 2}
   - {fileID: 11400000, guid: c4e036b564df6fe41b201b7c669f1f46, type: 2}
-  gamePhase: {fileID: 11400000, guid: d8919586695d23240b196aef7d365d24, type: 2}
-  gamePhaseIndex: 1
+  gamePhase: {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
+  gamePhaseIndex: 0
   round: 0
-  turn: 4
-  score: 10
+  turn: 0
+  score: 0
   updateStatDisplay:
     m_PersistentCalls:
       m_Calls:
@@ -50,6 +51,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 9a4b47183c53ded428d81e8f37d0f2a7, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextRoundSetup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 31a7281d32bf4174080ceaa58abf265d, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1

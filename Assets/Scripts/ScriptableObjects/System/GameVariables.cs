@@ -7,7 +7,8 @@ using UnityEngine.Events;
 public class GameVariables : ScriptableObject
 {
     [Header("<Static Constant Attributes>")]
-    [SerializeField] private int TOTAL_ROUNDS;
+    [SerializeField] private int MAX_ROUNDS;
+    [SerializeField] private int INITIAL_PRIZE_AMOUNT;
     [SerializeField] private int NUM_OF_EATERS;
     [SerializeField] private int DISCARD_AMOUNT_ALLOWED;
     [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
@@ -28,12 +29,14 @@ public class GameVariables : ScriptableObject
     [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent updateStatDisplay;
     [SerializeField] private UnityEvent startOfTurnSetup;
+    [SerializeField] private UnityEvent nextRoundSetup;
 
     [Header("<Runtime Sets>")]
     [SerializeField] private EaterList eaterList;
     [SerializeField] private EaterList feedingList;
     [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private CardsInHand hand;
+
 
     public int Turn { get { return turn; } private set { turn = value; } }
     public int Round { get { return round; } private set { turn = value; } }
@@ -48,6 +51,8 @@ public class GameVariables : ScriptableObject
         score = 0;
     }
 
+    public int GetTOTAL_ROUNDS() { return MAX_ROUNDS; }
+    public int GetINITIALPRIZE() { return INITIAL_PRIZE_AMOUNT; }
     public GamePhaseEnumSO GetGamePhase() { return gamePhase; }
     public int GetNUM_OF_EATERS() { return NUM_OF_EATERS; }
     public int[] GetCARD_VALUE_RANGE() { return CARD_VALUE_RANGE_EXCLUSIVE; }
@@ -62,7 +67,6 @@ public class GameVariables : ScriptableObject
         score++;
         if (prizeList.PrizeCardsCount == 0) {EndRound();}
     }
-
     public void SubtractScore() { score--; }
 
     public void StartFirstTurn()
@@ -70,6 +74,18 @@ public class GameVariables : ScriptableObject
         StartTurnSetup();
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         updateStatDisplay.Invoke();
+    }
+    private void StartTurnSetup()
+    {
+        for (int i = 0; i < eaterList.EaterCount; i++)
+        {
+            EaterCard eater = eaterList.GetItem(i);
+            feedingList.Add(eater);
+        }
+
+        startOfTurnSetup.Invoke();
+        gamePhaseIndex = 0;
+        turn++;
     }
 
     public void MoveToNextPhase()
@@ -106,7 +122,7 @@ public class GameVariables : ScriptableObject
                     eater.spit();
                     score -= eater.GetTotalCardScore();
                     eaterList.Remove(eater);
-                    Destroy(eater.gameObject);
+                    eater.gameObject.SetActive(false);
                 }
             }
         }
@@ -114,21 +130,20 @@ public class GameVariables : ScriptableObject
         feedingList.Clear();
     }
 
-    private void StartTurnSetup()
+
+    private void endRoundCleanup()
     {
-        for (int i = 0; i < eaterList.EaterCount; i++)
-        {
-            EaterCard eater = eaterList.GetItem(i);
-            feedingList.Add(eater);
-        }
+        this.feedingList.Clear();
+        this.hand.Clear();
 
-        startOfTurnSetup.Invoke();
-        gamePhaseIndex = 0;
-        turn++;
+        this.gamePhaseIndex = 0;
+        this.gamePhase = availableGamePhase[gamePhaseIndex];
+        this.turn = 0;
     }
-
     public void EndRound()
     {
+        nextRoundSetup.Invoke();
+        endRoundCleanup();
         Debug.Log("Round has Ended! You Survived");
     }
 }

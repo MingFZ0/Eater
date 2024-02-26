@@ -74,14 +74,15 @@ public class EaterCard : MonoBehaviour
         {
             this.hungerValue -= card.GetCardValue();
             Debug.Log("Gabble Gabble. Eater " + name + " has " + hungerValue + " hunger points left");
+            card.gameObject.SetActive(false);
+            hand.UpdateHandDisplay();
+            feedingList.FeedingUpdate();
+
             gameVars.AddScore();
             totalCardScore++;
             eaterFed.Invoke();
             cardsFed.Add(card);
-            card.gameObject.SetActive(false);
-            hand.UpdateHandDisplay();
 
-            feedingList.FeedingUpdate();
         }
         if (this.hungerValue == 0) { feedingList.Remove(this); }
     }
@@ -108,6 +109,16 @@ public class EaterCard : MonoBehaviour
         cardsFed.Clear();
     }
 
+
+    public void NextRoundSetups()
+    {
+        this.cardValue = 0;
+        this.cardType = null;
+        this.name = "Uninstantiated";
+        displayText.text = name;
+        this.isInstantiated = false;
+        this.hungerValue = 0;
+    }
 
     private void OnDisable() {eaterList.Remove(this);}
     private void OnEnable() { eaterList.Add(this); }

@@ -42,7 +42,6 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public override EaterCard GetItem(int index) {return items[index];}
     public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
     public bool GetIsFeeding() { return isFeeding; }
-
     public void Clear() { items.Clear(); }
 
 
@@ -60,6 +59,14 @@ public class EaterList : RuntimeSetSO<EaterCard>
 
     }
 
+
+    public void ReactivateEaters()
+    {
+        foreach (EaterCard eater in items)
+        {
+            eater.gameObject.SetActive(true);
+        }
+    }
     private void OnValidate()
     {
         numOfInstantiatedEaters = 0;

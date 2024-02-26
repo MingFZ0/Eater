@@ -18,11 +18,6 @@ public class PrizeCard : MonoBehaviour
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeReference] private TextMesh displayText;
 
-    /* === [Fields for GameEvents For PrizeCards] */
-    [Header("Fields for GameEvents For PrizeCards")]
-    [SerializeField] private GameEvent PrizeCardClicked;          //When you click on a facedown prizecard, you reveal it
-                                                                  //When you click on a revealed prizecard, you draw it
-
 
     private void OnDisable() { prizeList.Remove(this); }
     private void OnEnable() { prizeList.Add(this); }

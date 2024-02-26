@@ -27,7 +27,6 @@ public class CardsInHand : RuntimeSetSO<Card>
             //Debug.Log("card added to hand");
         } else { throw new System.Exception(card + " is already found in list. Unable to add it"); }
     }
-
     public override void Remove(Card card)
     {
         if (items.Contains(card)) { 
@@ -35,7 +34,6 @@ public class CardsInHand : RuntimeSetSO<Card>
         }
         else { throw new System.Exception("Unable to find " + card + " in list"); }
     }
-
     public void Destory(Card card)
     {
         if (items.Contains(card))
@@ -52,9 +50,8 @@ public class CardsInHand : RuntimeSetSO<Card>
         Debug.Log("DEBUG -GetItem--> Items is " + items[index]);
         return items[index];
     }
-
     public int GetHandLength() { return items.Count; }
-
+    
     public bool ContainSameValueInList(Card card)
     {
         int value = card.GetCardValue();
@@ -67,7 +64,6 @@ public class CardsInHand : RuntimeSetSO<Card>
 
         return false;
     }
-    
     public bool ContainSameValueInList(int value, CardTypeEnumScriptableObject type)
     {
 
@@ -95,6 +91,7 @@ public class CardsInHand : RuntimeSetSO<Card>
         }
     }
 
+    public void Clear() { items.Clear(); }
 
     private void OnValidate()
     {

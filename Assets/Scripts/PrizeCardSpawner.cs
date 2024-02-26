@@ -14,6 +14,10 @@ public class PrizeCardSpawner : MonoBehaviour
     {
         availableCardTypes = gameVars.GetAvailableCardTypes();
     }
+    private void Start()
+    {
+        RoundStartSpawnPrize();
+    }
 
     public void SpawnCard(Vector3 spawnPos)
     {
@@ -32,10 +36,11 @@ public class PrizeCardSpawner : MonoBehaviour
         prizeCard.Instantiation(cardValue, cardType);
     }
 
-    private void Start()
+    public void RoundStartSpawnPrize()
     {
         float yCoord = transform.position.y;
-        for (int i = 0; i < 3; i++)
+        int amountNeeded = gameVars.GetINITIALPRIZE() + gameVars.Round;
+        for (int i = 0; i < amountNeeded; i++)
         {
             Vector3 spawnPos = new Vector3(transform.position.x, yCoord, transform.position.z);
             SpawnCard(spawnPos);
