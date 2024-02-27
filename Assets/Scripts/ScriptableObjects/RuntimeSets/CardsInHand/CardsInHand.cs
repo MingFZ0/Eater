@@ -91,7 +91,16 @@ public class CardsInHand : RuntimeSetSO<Card>
         }
     }
 
-    public void Clear() { items.Clear(); }
+    public void Clear() 
+    { 
+        for (int i = 0; i < items.Count; i++)
+        {
+            Card card = items[i];
+            Destroy(card.gameObject);
+        }
+        items.Clear(); 
+
+    }
 
     private void OnValidate()
     {

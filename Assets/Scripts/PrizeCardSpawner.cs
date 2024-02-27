@@ -8,6 +8,8 @@ public class PrizeCardSpawner : MonoBehaviour
     [SerializeField] private CardsInHand hand;
     private List<CardTypeEnumScriptableObject> availableCardTypes;
 
+    [SerializeField] private TreasureCard treasure;
+
     [SerializeField] private GameVariables gameVars;
 
     public void Awake()
@@ -40,6 +42,9 @@ public class PrizeCardSpawner : MonoBehaviour
     {
         float yCoord = transform.position.y;
         int amountNeeded = gameVars.GetINITIALPRIZE() + gameVars.Round;
+        TreasureCard treasureCard = Instantiate(treasure, this.transform.position, new Quaternion());
+        treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+
         for (int i = 0; i < amountNeeded; i++)
         {
             Vector3 spawnPos = new Vector3(transform.position.x, yCoord, transform.position.z);

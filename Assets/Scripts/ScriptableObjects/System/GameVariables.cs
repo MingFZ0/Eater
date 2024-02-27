@@ -62,11 +62,7 @@ public class GameVariables : ScriptableObject
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
 
-    public void AddScore() 
-    { 
-        score++;
-        if (prizeList.PrizeCardsCount == 0) {EndRound();}
-    }
+    public void AddScore() { score++;}
     public void SubtractScore() { score--; }
 
     public void StartFirstTurn()
@@ -133,17 +129,21 @@ public class GameVariables : ScriptableObject
 
     private void endRoundCleanup()
     {
-        this.feedingList.Clear();
-        this.hand.Clear();
+        feedingList.Clear();
+        hand.Clear();
+        hand.selectedCard = null;
 
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         this.turn = 0;
+        round++;
     }
     public void EndRound()
     {
+
         nextRoundSetup.Invoke();
         endRoundCleanup();
+        updateStatDisplay.Invoke();
         Debug.Log("Round has Ended! You Survived");
     }
 }
