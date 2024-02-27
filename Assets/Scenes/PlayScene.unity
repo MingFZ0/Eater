@@ -1098,6 +1098,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8627721853958336492, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
+      propertyPath: treasure
+      value: 
+      objectReference: {fileID: 2223655250361696173, guid: 062754206c6258b4082472ba1c8849d0, type: 3}
     - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_Name
       value: PrizeCardSpawner
