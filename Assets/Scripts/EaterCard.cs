@@ -67,7 +67,10 @@ public class EaterCard : MonoBehaviour
         displayText.text = this.hungerValue.ToString();
     }
 
-
+    /// <Summary> 
+    /// This method is used for feeding. It also checks if the 
+    /// current eater is full and does the corresponding updates
+    /// </Summary>
     private void feeding()
     {
         Card card = hand.selectedCard;
@@ -75,17 +78,28 @@ public class EaterCard : MonoBehaviour
         {
             this.hungerValue -= card.GetCardValue();
             displayText.text = hungerValue.ToString();
+            
             card.gameObject.SetActive(false);
             hand.UpdateHandDisplay();
             feedingList.FeedingUpdate();
 
             gameVars.AddScore();
             totalCardScore++;
-            eaterFed.Invoke();
+
+            eaterFed.Invoke();      //Mainly used for stopping player from feeding halfway to clear their hand and then draw more cards
             cardsFed.Add(card);
 
         }
-        if (this.hungerValue == 0) { feedingList.Remove(this); }
+
+        if (this.hungerValue == 0)
+        { 
+            feedingList.Remove(this);
+            clearCardsFed();
+            this.isFull = true;
+            feedingList.FeedingUpdate();
+
+        }
+
     }
     public void spit()
     {
@@ -97,9 +111,11 @@ public class EaterCard : MonoBehaviour
             gameVars.SubtractScore();
         }
 
-        displayText.text = this.hungerValue.ToString();
         cardsFed.Clear();
         scoreDisplay.Invoke();
+        
+        this.hungerValue = cardValue;
+        displayText.text = this.hungerValue.ToString();
     }
     private void clearCardsFed()
     {
@@ -122,8 +138,12 @@ public class EaterCard : MonoBehaviour
         this.hungerValue = 0;
     }
 
-    private void OnDisable() {eaterList.Remove(this);}
-    private void OnEnable() { eaterList.Add(this); }
+    private void OnDisable() { eaterList.Remove(this); }
+    private void OnEnable() 
+    { 
+        eaterList.Add(this);
+        gameVars.AddToEaterRecord(this);
+    }
 
 
     private void Update()
@@ -132,15 +152,11 @@ public class EaterCard : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && hand.selectedCard != null && !this.isFull)
         {
+            if (gameVars.GetGamePhase().name != "ACTION_PHASE") {return; }
+
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.zero);
             if (hit.collider == null || hit.collider.gameObject != hand.selectedCard.gameObject) { return; }
             feeding();
-
-            if (hungerValue == 0)
-            {
-                clearCardsFed();
-                this.isFull = true;
-            }
         }
 
         else if (Input.GetMouseButtonDown(0) && hand.selectedCard == null && !this.isFull)
@@ -149,9 +165,7 @@ public class EaterCard : MonoBehaviour
             Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
             RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero);
             if (hit.collider == null || hit.collider.gameObject != this.gameObject || this.cardsFed.Count == 0) { return; }
-
             spit();
-            this.hungerValue = cardValue;
         }
     }
 

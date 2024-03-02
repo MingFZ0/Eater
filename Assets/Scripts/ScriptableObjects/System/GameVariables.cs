@@ -11,7 +11,7 @@ public class GameVariables : ScriptableObject
     [SerializeField] private int INITIAL_PRIZE_AMOUNT;
     [SerializeField] private int NUM_OF_EATERS;
     [SerializeField] private int DISCARD_AMOUNT_ALLOWED;
-    [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 13 };
+    [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 14 };
     [SerializeField] private int HAND_SIZE;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
@@ -21,6 +21,7 @@ public class GameVariables : ScriptableObject
 
     [Header("<Game Status Attributes> \n<They needs to be reset at the end of every game>")]
     [SerializeReference] private GamePhaseEnumSO gamePhase;
+    [SerializeReference] private List<EaterCard> allEaterInScene;
     [SerializeReference] private int gamePhaseIndex;
     [SerializeReference] private int round;
     [SerializeReference] private int turn;
@@ -61,9 +62,11 @@ public class GameVariables : ScriptableObject
     public int GetDISCARD_AMOUNT_ALLOWED() { return DISCARD_AMOUNT_ALLOWED;}
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
+    public void AddToEaterRecord(EaterCard eater) { if (!allEaterInScene.Contains(eater)) { allEaterInScene.Add(eater); } }
 
     public void AddScore() { score++;}
     public void SubtractScore() { score--; }
+
 
     public void StartFirstTurn()
     {
@@ -138,10 +141,23 @@ public class GameVariables : ScriptableObject
         this.turn = 0;
         round++;
     }
+    private void nextRoundPrep()
+    {
+        nextRoundSetup.Invoke();
+        
+        foreach (EaterCard eater in allEaterInScene)
+        {
+            Debug.Log(eater.gameObject.activeSelf);
+            eater.gameObject.SetActive(true);
+            Debug.Log(eater.isActiveAndEnabled);
+            eater.NextRoundSetups();
+        }
+    }
+
     public void EndRound()
     {
         endRoundCleanup();
-        nextRoundSetup.Invoke();
+        nextRoundPrep();
         updateStatDisplay.Invoke();
         Debug.Log("Round has Ended! You Survived");
     }

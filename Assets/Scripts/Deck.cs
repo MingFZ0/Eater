@@ -62,7 +62,7 @@ public class Deck : MonoBehaviour
     public void CreateCard()
     {
 
-        if (hand.GetHandLength() == 0 && feedingList.GetIsFeeding() == false) { 
+        if ((hand.GetHandLength() == 0 && feedingList.GetIsFeeding() == false) || gameVars.Turn == 0) { 
             for (int i = 0; i < gameVars.GetHAND_SIZE(); i++)
             {
                 _createCard();

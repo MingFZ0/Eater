@@ -9,6 +9,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "EaterList", menuName = "ScriptableObjects/RuntimeSet/EaterList")]
 
+/*** <summary> This is a class meant to represent a list of all eaters that are still ACTIVE and are ALIVE in the scene. ***/
 public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
@@ -49,7 +50,7 @@ public class EaterList : RuntimeSetSO<EaterCard>
     {
         foreach (EaterCard eater in items)
         {
-            if (eater.GetHungerValue() > 0 || eater.GetIsFull() == true)
+            if (eater.GetIsFull() != true && eater.GetHungerValue() < eater.GetCardValue())
             {
                 isFeeding = true;
                 return;
@@ -59,14 +60,6 @@ public class EaterList : RuntimeSetSO<EaterCard>
 
     }
 
-
-    public void ReactivateEaters()
-    {
-        foreach (EaterCard eater in items)
-        {
-            eater.gameObject.SetActive(true);
-        }
-    }
     private void OnValidate()
     {
         numOfInstantiatedEaters = 0;

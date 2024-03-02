@@ -91,11 +91,9 @@ public class CardsInHand : RuntimeSetSO<Card>
 
     public void Clear() 
     {
-        Debug.Log("There are a total of " + items.Count + " cards in hand");
         for (int i = items.Count - 1; i >= 0; i--)
         {
             Card card = items[i];
-            Debug.Log("Destroying " + card);
             Destroy(card.gameObject);
         }
         items.Clear(); 
