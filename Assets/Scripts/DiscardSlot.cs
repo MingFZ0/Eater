@@ -8,9 +8,12 @@ public class DiscardSlot : MonoBehaviour
     [SerializeField] GameVariables gameVars;
     [SerializeReference] int discardAmount;
 
+    [SerializeField] TextMesh displayText;
+
     private void Awake()
     {
         discardAmount = gameVars.GetDISCARD_AMOUNT_ALLOWED();
+        displayText.text = discardAmount.ToString();
     }
 
     private void Update()
@@ -21,13 +24,18 @@ public class DiscardSlot : MonoBehaviour
             if (hit.collider && hit.collider.gameObject == hand.selectedCard.gameObject && discardAmount > 0)
             {
                 discardAmount--;
+                displayText.text = discardAmount.ToString();
                 Destroy(hand.selectedCard.gameObject);
                 hand.UpdateHandDisplay();
             }
         }
     }
 
-    public void StartOfTurnSetup() { discardAmount = gameVars.GetDISCARD_AMOUNT_ALLOWED(); }
+    public void StartOfTurnSetup() 
+    { 
+        discardAmount = gameVars.GetDISCARD_AMOUNT_ALLOWED(); 
+        displayText.text = discardAmount.ToString();
+    }
 
 
 

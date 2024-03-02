@@ -84,6 +84,7 @@ public class GameVariables : ScriptableObject
         turn++;
     }
 
+
     public void MoveToNextPhase()
     {
         this.gamePhaseIndex += 1;
@@ -97,7 +98,6 @@ public class GameVariables : ScriptableObject
         updateStatDisplay.Invoke();
         //Debug.Log("Current gamePhase is " + gamePhase);
     }
-
     private void EndPhaseCalculation()
     {
         if (feedingList.EaterCount == 0)
@@ -140,9 +140,8 @@ public class GameVariables : ScriptableObject
     }
     public void EndRound()
     {
-
-        nextRoundSetup.Invoke();
         endRoundCleanup();
+        nextRoundSetup.Invoke();
         updateStatDisplay.Invoke();
         Debug.Log("Round has Ended! You Survived");
     }

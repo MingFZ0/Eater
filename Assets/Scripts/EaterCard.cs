@@ -64,6 +64,7 @@ public class EaterCard : MonoBehaviour
     {
         this.isFull = false;
         this.hungerValue = this.cardValue;
+        displayText.text = this.hungerValue.ToString();
     }
 
 
@@ -73,7 +74,7 @@ public class EaterCard : MonoBehaviour
         if (card.GetCardValue() <= this.hungerValue)
         {
             this.hungerValue -= card.GetCardValue();
-            Debug.Log("Gabble Gabble. Eater " + name + " has " + hungerValue + " hunger points left");
+            displayText.text = hungerValue.ToString();
             card.gameObject.SetActive(false);
             hand.UpdateHandDisplay();
             feedingList.FeedingUpdate();
@@ -96,6 +97,7 @@ public class EaterCard : MonoBehaviour
             gameVars.SubtractScore();
         }
 
+        displayText.text = this.hungerValue.ToString();
         cardsFed.Clear();
         scoreDisplay.Invoke();
     }

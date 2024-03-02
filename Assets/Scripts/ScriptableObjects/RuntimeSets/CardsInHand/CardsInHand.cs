@@ -11,12 +11,10 @@ using UnityEngine;
 
 public class CardsInHand : RuntimeSetSO<Card>
 {
-
     [SerializeField] public int handLength { get { return items.Count; } private set { } }
     [SerializeReference] public Card selectedCard;
     [SerializeField] private float displayBoxWidth;
     [SerializeField] private float displayBoxYCoord;
-
 
 
     public override void Add(Card card)
@@ -92,10 +90,12 @@ public class CardsInHand : RuntimeSetSO<Card>
     }
 
     public void Clear() 
-    { 
-        for (int i = 0; i < items.Count; i++)
+    {
+        Debug.Log("There are a total of " + items.Count + " cards in hand");
+        for (int i = items.Count - 1; i >= 0; i--)
         {
             Card card = items[i];
+            Debug.Log("Destroying " + card);
             Destroy(card.gameObject);
         }
         items.Clear(); 
