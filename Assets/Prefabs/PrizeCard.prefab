@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_Text
+      value: ___
+      objectReference: {fileID: 0}
     - target: {fileID: 5221799895173120173, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
       propertyPath: m_Name
       value: PrizeCard
@@ -93,7 +97,6 @@ MonoBehaviour:
   cardValue: 0
   cardType: {fileID: 0}
   displayText: {fileID: 4127481072031198969}
-  PrizeCardClicked: {fileID: 0}
 --- !u!102 &4127481072031198969 stripped
 TextMesh:
   m_CorrespondingSourceObject: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}

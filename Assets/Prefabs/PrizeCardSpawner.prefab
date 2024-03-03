@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3420f04bb4e4cb0419be6e4619b76184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayBoxHeight: 3
   card: {fileID: 3631553180346286721, guid: 1691b9eaf2b648f4b8025713357080b0, type: 3}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  treasure: {fileID: 0}
   gameVars: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
 --- !u!114 &7444285464418119982
 MonoBehaviour:

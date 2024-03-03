@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PrizeCardSpawner : MonoBehaviour
 {
+    [SerializeField] private float displayBoxHeight;
+
     [SerializeField] private PrizeCard card;
     [SerializeField] private CardsInHand hand;
     private List<CardTypeEnumScriptableObject> availableCardTypes;
@@ -40,19 +42,24 @@ public class PrizeCardSpawner : MonoBehaviour
 
     public void RoundStartSpawnPrize()
     {
+        int tmpConstant = 20;
+
         float yCoord = transform.position.y;
-        float zCoord = transform.position.z;
+        float zCoord = transform.position.z + tmpConstant ;
         int amountNeeded = gameVars.GetINITIALPRIZE() + gameVars.Round;
-        TreasureCard treasureCard = Instantiate(treasure, this.transform.position, new Quaternion());
-        treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+
+        TreasureCard treasureCard = Instantiate(treasure, new Vector3(transform.position.x, transform.position.y, transform.position.z + tmpConstant), new Quaternion());
+        treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + tmpConstant);
+
+        float distanceBetweenEachCard = displayBoxHeight / (amountNeeded - 1);
 
         for (int i = 0; i < amountNeeded; i++)
         {
             Vector3 spawnPos = new Vector3(transform.position.x, yCoord, zCoord);
             SpawnCard(spawnPos);
-            yCoord -= 1;
-            zCoord -= 1;
 
+            yCoord -= distanceBetweenEachCard;
+            zCoord -= 1;
         }
     }
 }
