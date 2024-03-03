@@ -134,6 +134,7 @@ public class EaterCard : MonoBehaviour
         this.cardType = null;
         this.name = "Uninstantiated";
         displayText.text = name;
+
         this.isInstantiated = false;
         this.hungerValue = 0;
     }

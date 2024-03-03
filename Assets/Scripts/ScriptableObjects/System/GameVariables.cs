@@ -11,7 +11,7 @@ public class GameVariables : ScriptableObject
     [SerializeField] private int INITIAL_PRIZE_AMOUNT;
     [SerializeField] private int NUM_OF_EATERS;
     [SerializeField] private int DISCARD_AMOUNT_ALLOWED;
-    [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE = { 1, 14 };
+    [SerializeField] private int[] CARD_VALUE_RANGE_EXCLUSIVE;
     [SerializeField] private int HAND_SIZE;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
@@ -154,9 +154,11 @@ public class GameVariables : ScriptableObject
 
     public void EndRound()
     {
+        MoveToNextPhase();
         endRoundCleanup();
         nextRoundPrep();
         updateStatDisplay.Invoke();
+        eaterList.ResetRoundStats();
         Debug.Log("Round has Ended! You Survived");
     }
 }

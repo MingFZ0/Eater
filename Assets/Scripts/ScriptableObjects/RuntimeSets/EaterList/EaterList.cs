@@ -44,6 +44,12 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
     public bool GetIsFeeding() { return isFeeding; }
     public void Clear() { items.Clear(); }
+   
+
+    public void ResetRoundStats()
+    {
+        this.numOfInstantiatedEaters = 0;
+    }
 
 
     public void FeedingUpdate()

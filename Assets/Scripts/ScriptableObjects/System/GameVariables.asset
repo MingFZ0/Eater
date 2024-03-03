@@ -28,10 +28,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8919586695d23240b196aef7d365d24, type: 2}
   - {fileID: 11400000, guid: c4e036b564df6fe41b201b7c669f1f46, type: 2}
   gamePhase: {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
+  allEaterInScene:
+  - {fileID: 0}
+  - {fileID: 0}
   gamePhaseIndex: 0
-  round: 0
+  round: 1
   turn: 0
-  score: 0
+  score: 9
   updateStatDisplay:
     m_PersistentCalls:
       m_Calls:

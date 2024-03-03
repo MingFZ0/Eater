@@ -41,15 +41,17 @@ public class PrizeCardSpawner : MonoBehaviour
     public void RoundStartSpawnPrize()
     {
         float yCoord = transform.position.y;
+        float zCoord = transform.position.z;
         int amountNeeded = gameVars.GetINITIALPRIZE() + gameVars.Round;
         TreasureCard treasureCard = Instantiate(treasure, this.transform.position, new Quaternion());
         treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
 
         for (int i = 0; i < amountNeeded; i++)
         {
-            Vector3 spawnPos = new Vector3(transform.position.x, yCoord, transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, yCoord, zCoord);
             SpawnCard(spawnPos);
             yCoord -= 1;
+            zCoord -= 1;
 
         }
     }

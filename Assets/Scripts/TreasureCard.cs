@@ -26,10 +26,10 @@ public class TreasureCard : MonoBehaviour
         CardTypeEnumScriptableObject cardType = gameVar.GetAvailableCardTypes()[cardTypeIndex];
 
         gameVar.EndRound();
-        //Card card = Instantiate(emptyCard);
-        //card.Instantiation(cardValue, cardType);
-        //hand.UpdateHandDisplay();
-        //Destroy(this.gameObject);
+        Card card = Instantiate(emptyCard);
+        card.Instantiation(cardValue, cardType);
+        hand.UpdateHandDisplay();
+        Destroy(this.gameObject);
     }
 
     private void Update()
