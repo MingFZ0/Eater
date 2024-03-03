@@ -46,6 +46,7 @@ public class GameVariables : ScriptableObject
     {
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
+        this.allEaterInScene.Clear();
 
         round = 0;
         turn = 0;
@@ -120,7 +121,6 @@ public class GameVariables : ScriptableObject
                     EaterCard eater = feedingList.GetItem(i);
                     eater.spit();
                     score -= eater.GetTotalCardScore();
-                    eaterList.Remove(eater);
                     eater.gameObject.SetActive(false);
                 }
             }
@@ -147,9 +147,7 @@ public class GameVariables : ScriptableObject
         
         foreach (EaterCard eater in allEaterInScene)
         {
-            Debug.Log(eater.gameObject.activeSelf);
             eater.gameObject.SetActive(true);
-            Debug.Log(eater.isActiveAndEnabled);
             eater.NextRoundSetups();
         }
     }
