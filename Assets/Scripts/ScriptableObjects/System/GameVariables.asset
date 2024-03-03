@@ -16,7 +16,7 @@ MonoBehaviour:
   INITIAL_PRIZE_AMOUNT: 3
   NUM_OF_EATERS: 2
   DISCARD_AMOUNT_ALLOWED: 2
-  CARD_VALUE_RANGE_EXCLUSIVE: 010000000d000000
+  CARD_VALUE_RANGE_EXCLUSIVE: 010000000e000000
   HAND_SIZE: 7
   availableCardTypes:
   - {fileID: 11400000, guid: 31e651a60dc4a4d4dadc4bdf748a2542, type: 2}
@@ -32,9 +32,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gamePhaseIndex: 0
-  round: 1
+  round: 0
   turn: 0
-  score: 9
+  score: 0
   updateStatDisplay:
     m_PersistentCalls:
       m_Calls:
