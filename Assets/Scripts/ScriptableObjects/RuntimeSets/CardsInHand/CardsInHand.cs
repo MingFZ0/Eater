@@ -62,12 +62,6 @@ public class CardsInHand : RuntimeSetSO<Card>
         Handles.color = Color.green;
         Handles.DrawSolidRectangleWithOutline(new Rect(0 - (displayBoxWidth / 2), displayBoxYCoord + (displayBoxYCoord * 0.55f), displayBoxWidth, 3), Color.clear, Color.green);
     }
-    public void SwitchDisplayBoxOutline()
-    {
-        if (displayBoxOutline) { displayBoxOutline = false; }
-        else { displayBoxOutline = false; }
-    }
-
 
     public override Card GetItem(int index) {
         Debug.Log("DEBUG -GetItem--> Index is " + index);
@@ -133,21 +127,3 @@ public class CardsInHand : RuntimeSetSO<Card>
         selectedCard = null;
     }
 }
-
-
-//#if UNITY_EDITOR
-//[CustomEditor(typeof(CardsInHand))]
-//class CardsInHandEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        var cardsInHand = (CardsInHand)target;
-//        if (cardsInHand == null) { return; }
-
-//        if (GUILayout.Button("Hand DisplayBox Outline")) {
-//            CardsInHand thisHand = (CardsInHand)cardsInHand;
-//            thisHand.SwitchDisplayBoxOutline();
-//        }
-//    }
-//}
-//#endif

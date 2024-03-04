@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class PrizeCardSpawner : MonoBehaviour
 {
     [SerializeField] private float displayBoxHeight;
@@ -22,6 +26,14 @@ public class PrizeCardSpawner : MonoBehaviour
     {
         RoundStartSpawnPrize();
     }
+
+    private void OnDrawGizmos()
+    {
+        float cardWidth = card.GetComponent<BoxCollider2D>().size.x + 1;
+        float cardHeight = card.GetComponent<BoxCollider2D>().size.y;
+        Handles.DrawSolidRectangleWithOutline(new Rect((transform.position.x - (cardWidth/ 2 )), transform.position.y + cardHeight, cardWidth, (displayBoxHeight * -2f)), Color.clear, Color.green);
+    }
+
 
     public void SpawnCard(Vector3 spawnPos)
     {

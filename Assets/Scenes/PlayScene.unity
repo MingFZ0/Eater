@@ -1064,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8627721853958336491, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.71
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 8627721853958336491, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1107,8 +1107,16 @@ PrefabInstance:
       value: 2.41
       objectReference: {fileID: 0}
     - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_Name
       value: PrizeCardSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
