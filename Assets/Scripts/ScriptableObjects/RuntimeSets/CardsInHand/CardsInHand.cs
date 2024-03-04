@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /* One limitation of this technique is that if you inspect the ScriptableObject at runtime, you won’t be able to see the 
  * contents of the Items list in the Inspector by default. Instead, a “Type mismatch” appears in each element field. 
  * By design, a ScriptableObject can’t serialize a scene object. The list is actually working, but the data does not display correctly.
@@ -15,6 +19,8 @@ public class CardsInHand : RuntimeSetSO<Card>
     [SerializeReference] public Card selectedCard;
     [SerializeField] private float displayBoxWidth;
     [SerializeField] private float displayBoxYCoord;
+
+    [SerializeField] private bool displayBoxOutline;
 
 
     public override void Add(Card card)
@@ -42,6 +48,27 @@ public class CardsInHand : RuntimeSetSO<Card>
     }
 
 
+    private void OnEnable()
+    {
+        SceneView.duringSceneGui += OnSceneUpdate;
+    }
+    private void OnDisable()
+    {
+        SceneView.duringSceneGui -= OnSceneUpdate;
+    }
+    private void OnSceneUpdate(SceneView sceneView)
+    {
+        if (displayBoxOutline == false) { return; }
+        Handles.color = Color.green;
+        Handles.DrawSolidRectangleWithOutline(new Rect(0 - (displayBoxWidth / 2), displayBoxYCoord + (displayBoxYCoord * 0.55f), displayBoxWidth, 3), Color.clear, Color.green);
+    }
+    public void SwitchDisplayBoxOutline()
+    {
+        if (displayBoxOutline) { displayBoxOutline = false; }
+        else { displayBoxOutline = false; }
+    }
+
+
     public override Card GetItem(int index) {
         Debug.Log("DEBUG -GetItem--> Index is " + index);
         Debug.Log("DEBUG -GetItem--> Size of items is " + items.Count);
@@ -50,6 +77,7 @@ public class CardsInHand : RuntimeSetSO<Card>
     }
     public int GetHandLength() { return items.Count; }
     
+
     public bool ContainSameValueInList(Card card)
     {
         int value = card.GetCardValue();
@@ -105,3 +133,21 @@ public class CardsInHand : RuntimeSetSO<Card>
         selectedCard = null;
     }
 }
+
+
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(CardsInHand))]
+//class CardsInHandEditor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        var cardsInHand = (CardsInHand)target;
+//        if (cardsInHand == null) { return; }
+
+//        if (GUILayout.Button("Hand DisplayBox Outline")) {
+//            CardsInHand thisHand = (CardsInHand)cardsInHand;
+//            thisHand.SwitchDisplayBoxOutline();
+//        }
+//    }
+//}
+//#endif
