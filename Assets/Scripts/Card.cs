@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
     [Header("Attributes Used for Card Display")]
     [SerializeReference] private bool isSelected;
     [SerializeReference] public Vector2 previousPos;
+    [SerializeReference] private CardsInUse cardsInUse;
 
     /* === [Fields for GameEvents For Dropped Cards] */
     [Header("Fields for GameEvents For Dropped Cards")]
@@ -31,6 +32,9 @@ public class Card : MonoBehaviour
         this.cardType = cardType;
         name = cardType.name + " of " + cardValue;
         this.displayText.text = cardValue.ToString();
+        
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, cardValue);
     }
 
 
