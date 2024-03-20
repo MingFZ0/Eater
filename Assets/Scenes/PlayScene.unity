@@ -358,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.82
+      value: 0.9500001
       objectReference: {fileID: 0}
     - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1007,11 +1007,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6444584322294026860, guid: c66d80e75c36f8f45999d709e2016b47, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.62
+      value: -4.82
       objectReference: {fileID: 0}
     - target: {fileID: 6444584322294026860, guid: c66d80e75c36f8f45999d709e2016b47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.66
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 6444584322294026860, guid: c66d80e75c36f8f45999d709e2016b47, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1109,7 +1109,7 @@ PrefabInstance:
     - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+      objectReference: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8627721853958336493, guid: b5360d5ddb2c35646ba228de6de6877e, type: 3}
       propertyPath: m_Name
       value: PrizeCardSpawner
@@ -1137,7 +1137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8199999
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 8912873606503789587, guid: 49edd52115964444f9b6a578c9384070, type: 3}
       propertyPath: m_LocalPosition.z
