@@ -56,6 +56,7 @@ public class CardsInHand : RuntimeSetSO<Card>
     {
         SceneView.duringSceneGui -= OnSceneUpdate;
     }
+    
     private void OnSceneUpdate(SceneView sceneView)
     {
         if (displayBoxOutline == false) { return; }
