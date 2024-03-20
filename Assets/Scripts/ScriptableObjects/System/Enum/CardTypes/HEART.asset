@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c2e6b9286ad3a468c9662abfebf55d, type: 3}
   m_Name: HEART
   m_EditorClassIdentifier: 
+  CardType: HEART

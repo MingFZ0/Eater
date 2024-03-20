@@ -30,7 +30,7 @@ public class EaterCard : MonoBehaviour
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
-        this.name = "EATER " + cardType.name + " of " + cardValue;
+        this.name = "EATER " + cardType.getCardType() + " of " + cardValue;
         displayText.text = cardValue.ToString();
         this.isInstantiated = true;
 

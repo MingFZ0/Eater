@@ -14,6 +14,7 @@ public class Deck : MonoBehaviour
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
     [SerializeField] private GameVariables gameVars;
+    [SerializeField] private CardsInUse cardsInUse;
     [SerializeField] private UnityEvent UpdateHand;
 
 #if UNITY_EDITOR
@@ -43,19 +44,20 @@ public class Deck : MonoBehaviour
 
     private void _createCard()
     {
-        int cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
-        int cardTypeIndex = Random.Range(0, availableCardTypes.Count);
-        CardTypeEnumScriptableObject cardType = availableCardTypes[cardTypeIndex];
+        //int cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
+        //int cardTypeIndex = Random.Range(0, availableCardTypes.Count);
+        //CardTypeEnumScriptableObject cardType = availableCardTypes[cardTypeIndex];
 
-        while (hand.ContainSameValueInList(cardValue, cardType))
-        {
-            cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
-            cardTypeIndex = Random.Range(0, availableCardTypes.Count);
-            cardType = availableCardTypes[cardTypeIndex];
-        }
+        //while (hand.ContainSameValueInList(cardValue, cardType))
+        //{
+        //    cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
+        //    cardTypeIndex = Random.Range(0, availableCardTypes.Count);
+        //    cardType = availableCardTypes[cardTypeIndex];
+        //}
 
-        Card card = Instantiate(emptyCard);
-        card.Instantiation(cardValue, cardType);
+        //Card card = Instantiate(emptyCard);
+        //card.Instantiation(cardValue, cardType);
+        cardsInUse.CreateCard();
         hand.UpdateHandDisplay();
     }
 

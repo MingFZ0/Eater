@@ -17,6 +17,7 @@ public class PrizeCardSpawner : MonoBehaviour
     [SerializeField] private TreasureCard treasure;
 
     [SerializeField] private GameVariables gameVars;
+    [SerializeField] private CardsInUse cardsInUse;
 
     public void Awake()
     {
@@ -37,19 +38,7 @@ public class PrizeCardSpawner : MonoBehaviour
 
     public void SpawnCard(Vector3 spawnPos)
     {
-        int cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
-        int cardTypeIndex = Random.Range(0, availableCardTypes.Count);
-        CardTypeEnumScriptableObject cardType = availableCardTypes[cardTypeIndex];
-
-        while (hand.ContainSameValueInList(cardValue, cardType))
-        {
-            cardValue = Random.Range(gameVars.GetCARD_VALUE_RANGE()[0], gameVars.GetCARD_VALUE_RANGE()[1]);
-            cardTypeIndex = Random.Range(0, availableCardTypes.Count);
-            cardType = availableCardTypes[cardTypeIndex];
-        }
-
-        PrizeCard prizeCard = Instantiate(card, spawnPos, new Quaternion());
-        prizeCard.Instantiation(cardValue, cardType);
+        PrizeCard prizeCard = cardsInUse.CreatePrizeCard(spawnPos);
     }
 
     public void RoundStartSpawnPrize()

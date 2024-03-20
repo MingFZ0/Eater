@@ -30,7 +30,7 @@ public class Card : MonoBehaviour
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
-        name = cardType.name + " of " + cardValue;
+        name = cardType.getCardType() + " of " + cardValue;
         this.displayText.text = cardValue.ToString();
         
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -90,7 +90,7 @@ public class Card : MonoBehaviour
     {
         if (this.cardType == null)
         {
-            throw new System.Exception("Instance of Card: " + this.GetType().Name + " did not initizated. Did you forget to run it through the Instantiation class method?"); 
+            throw new System.Exception("Instance of Card: " + this.GetCardType() + " did not initizated. Did you forget to run it through the Instantiation class method?"); 
         }
     }
 
