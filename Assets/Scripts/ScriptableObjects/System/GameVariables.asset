@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2853bf1d8f47ceb4eb9e400656e39c95, type: 3}
+  m_Name: GameVariables
+  m_EditorClassIdentifier: 
+  MAX_ROUNDS: 3
+  INITIAL_PRIZE_AMOUNT: 3
+  NUM_OF_EATERS: 2
+  DISCARD_AMOUNT_ALLOWED: 2
+  CARD_VALUE_RANGE_EXCLUSIVE: 010000000e000000
+  HAND_SIZE: 7
+  availableCardTypes:
+  - {fileID: 11400000, guid: 31e651a60dc4a4d4dadc4bdf748a2542, type: 2}
+  - {fileID: 11400000, guid: 55da43a0652954547a01f3f3dce3f928, type: 2}
+  - {fileID: 11400000, guid: 59070e1792c15c24ca70486f72b808bc, type: 2}
+  - {fileID: 11400000, guid: e87824d00d08241499d6534765d1ff0c, type: 2}
+  availableGamePhase:
+  - {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
+  - {fileID: 11400000, guid: d8919586695d23240b196aef7d365d24, type: 2}
+  - {fileID: 11400000, guid: c4e036b564df6fe41b201b7c669f1f46, type: 2}
+  gamePhase: {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
+  allEaterInScene:
+  - {fileID: 0}
+  - {fileID: 0}
+  gamePhaseIndex: 0
+  round: 0
+  turn: 0
+  score: 0
+  updateStatDisplay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 53fb350699d482749b92c217593e76e3, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  startOfTurnSetup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 9a4b47183c53ded428d81e8f37d0f2a7, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextRoundSetup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 31a7281d32bf4174080ceaa58abf265d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
+  feedingList: {fileID: 11400000, guid: c906eda8aa1c8e8488a132e1ae0b32a9, type: 2}
+  prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
+  hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}

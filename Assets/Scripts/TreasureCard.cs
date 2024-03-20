@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrizeCard : MonoBehaviour
+public class TreasureCard : MonoBehaviour
 {
     [SerializeField] private GameVariables gameVar;
 
@@ -18,38 +18,23 @@ public class PrizeCard : MonoBehaviour
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeReference] private TextMesh displayText;
 
-
-    private void OnDisable() { prizeList.Remove(this); }
-    private void OnEnable() { prizeList.Add(this); }
-
-    public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
-    {
-        this.cardValue = cardValue;
-        this.cardType = cardType;
-        name = "[PrizeCard] " + cardValue + " of " + cardType.ToString();
-
-    }
-
     private void revealCard()
     {
-        prizeList.revealed = this;
         this.displayText.text = cardValue.ToString();
-        gameVar.MoveToNextPhase();
-    }
+        this.cardValue = Random.Range(gameVar.GetCARD_VALUE_RANGE()[0], gameVar.GetCARD_VALUE_RANGE()[1]);
+        int cardTypeIndex = Random.Range(0, gameVar.GetAvailableCardTypes().Count);
+        CardTypeEnumScriptableObject cardType = gameVar.GetAvailableCardTypes()[cardTypeIndex];
 
-    private void drawCard()
-    {
+        gameVar.EndRound();
         Card card = Instantiate(emptyCard);
         card.Instantiation(cardValue, cardType);
         hand.UpdateHandDisplay();
-        prizeList.revealed = null;
-        prizeList.Remove(this);
         Destroy(this.gameObject);
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && prizeList.PrizeCardsCount == 0)
         {
             Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
@@ -59,13 +44,10 @@ public class PrizeCard : MonoBehaviour
             if (!hit.collider) { return; }
             if (hit.collider.gameObject == this.gameObject)
             {
-                if (prizeList.revealed == null && gameVar.GetGamePhase().name == "ACTION_PHASE") {revealCard();} 
-                else if (prizeList.revealed == this && gameVar.GetGamePhase().name == "DRAW_PHASE") {drawCard();}
+                if (gameVar.GetGamePhase().name == "ACTION_PHASE") { revealCard(); }
             }
 
         }
 
     }
-
-
 }

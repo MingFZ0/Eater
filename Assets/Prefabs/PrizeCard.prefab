@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_Text
+      value: ___
+      objectReference: {fileID: 0}
     - target: {fileID: 5221799895173120173, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
       propertyPath: m_Name
       value: PrizeCard
@@ -59,34 +63,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6379884044620531927, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_Name
+      value: PrizeCard
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5221799895173120174, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+    - {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
---- !u!102 &2130759109038107302 stripped
-TextMesh:
-  m_CorrespondingSourceObject: {fileID: 6928122626713150926, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
-  m_PrefabInstance: {fileID: 9057962386592468840}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3874177161804304325 stripped
+--- !u!1 &2683510341806819263 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5221799895173120173, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6379884044620531927, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
   m_PrefabInstance: {fileID: 9057962386592468840}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-6747757241448625196
+--- !u!114 &3631553180346286721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3874177161804304325}
+  m_GameObject: {fileID: 2683510341806819263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1b2ec561ad74643932b024b60da4bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 78b27b58267de964a8d92e75a9785f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardValue: 0
-  CardType: 0
-  IsFaceUp: 0
-  faceUpColor: {r: 1, g: 1, b: 1, a: 1}
-  faceDownColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-  textDisplay: {fileID: 2130759109038107302}
+  gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
+  hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  emptyCard: {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
+  CardSprite: {fileID: 0}
+  CardBackSprite: {fileID: 0}
+  cardValue: 0
+  cardType: {fileID: 0}
+  displayText: {fileID: 4127481072031198969}
+--- !u!102 &4127481072031198969 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  m_PrefabInstance: {fileID: 9057962386592468840}
+  m_PrefabAsset: {fileID: 0}
