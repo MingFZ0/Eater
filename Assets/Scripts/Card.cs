@@ -8,7 +8,6 @@ public class Card : MonoBehaviour
     /* === [Fields for the Card] */
     [Header("Fields for the Card")]
     [SerializeField] CardsInHand hand;
-    [SerializeReference] private Sprite CardSprite;
     [SerializeReference] private Sprite CardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;

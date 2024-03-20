@@ -6,13 +6,16 @@ using UnityEngine.Events;
 public class EaterCard : MonoBehaviour
 {
     [SerializeField] GameVariables gameVars;
+    [SerializeField] CardsInUse cardsInUse;
     [SerializeField] EaterList eaterList;
     [SerializeField] EaterList feedingList;
     [SerializeField] CardsInHand hand;
 
     [Header("Fields for the EaterCard")]
-    [SerializeReference] private Sprite CardSprite;
-    [SerializeReference] private Sprite CardBackSprite;
+    private SpriteRenderer spriteRenderer;
+
+    private Sprite cardSprite;
+    [SerializeReference] private Sprite cardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeField] private TextMesh displayText;
@@ -26,6 +29,12 @@ public class EaterCard : MonoBehaviour
     [SerializeReference] private List<Card> cardsFed;
     [SerializeField] private UnityEvent scoreDisplay;
 
+    private void Start()
+    {
+        this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        //spriteRenderer.sprite = cardBackSprite;
+    }
+
     public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
         this.cardValue = cardValue;
@@ -35,6 +44,8 @@ public class EaterCard : MonoBehaviour
         this.isInstantiated = true;
 
         this.hungerValue = cardValue;
+        this.cardSprite = cardsInUse.getCardSprite(cardType, cardValue);
+        this.spriteRenderer.sprite = cardSprite;
         eaterList.NotifyInstantiated();
         
     }
@@ -78,7 +89,9 @@ public class EaterCard : MonoBehaviour
         {
             this.hungerValue -= card.GetCardValue();
             displayText.text = hungerValue.ToString();
-            
+            if (hungerValue > 0) {spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, hungerValue); }
+
+
             card.gameObject.SetActive(false);
             hand.UpdateHandDisplay();
             feedingList.FeedingUpdate();
@@ -97,6 +110,7 @@ public class EaterCard : MonoBehaviour
             clearCardsFed();
             this.isFull = true;
             feedingList.FeedingUpdate();
+            spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, cardValue);
 
         }
 
@@ -116,6 +130,7 @@ public class EaterCard : MonoBehaviour
         
         this.hungerValue = cardValue;
         displayText.text = this.hungerValue.ToString();
+        spriteRenderer.sprite = cardSprite;
     }
     private void clearCardsFed()
     {

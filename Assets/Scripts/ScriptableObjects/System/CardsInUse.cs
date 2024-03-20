@@ -9,6 +9,7 @@ public class CardsInUse : ScriptableObject
     [SerializeField] private Sprite[] cloverSet;
     [SerializeField] private Sprite[] diamondSet;
     [SerializeField] private Sprite[] heartSet;
+    [SerializeField] private Sprite cardBack;
 
     [SerializeField] private List<string> availableCards;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
@@ -77,5 +78,4 @@ public class CardsInUse : ScriptableObject
         if (cardType.getCardType() == "JOKER") { return heartSet[cardValue - 1]; }
         else { throw new System.Exception("Unknown card type"); }
     }
-
 }
