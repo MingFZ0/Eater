@@ -139,7 +139,12 @@ public class GameVariables : ScriptableObject
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         this.turn = 0;
-        round++;
+        if (round < MAX_ROUNDS) { round = MAX_ROUNDS; }
+        else 
+        {
+            Debug.Log("You Survived!");
+            Application.Quit(); 
+        }
     }
     private void nextRoundPrep()
     {
