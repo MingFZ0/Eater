@@ -32,9 +32,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gamePhaseIndex: 0
-  round: 0
+  round: 4
   turn: 0
-  score: 0
+  score: 61
   updateStatDisplay:
     m_PersistentCalls:
       m_Calls:
