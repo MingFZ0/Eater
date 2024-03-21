@@ -99,16 +99,18 @@ public class CardsInHand : RuntimeSetSO<Card>
 
     public void UpdateHandDisplay()
     {
-        float distanceBetweenEachCard = displayBoxWidth / (items.Count);
+        float currentZCord = 0 + items.Count;
 
+        float distanceBetweenEachCard = displayBoxWidth / (items.Count);
         float currentIteratingPos = distanceBetweenEachCard - (displayBoxWidth / 2);
         currentIteratingPos -= (distanceBetweenEachCard / 2);
 
         foreach (Card card in items)
         {
-            card.transform.position = new Vector2(currentIteratingPos, displayBoxYCoord);
-            card.previousPos = new Vector2(currentIteratingPos, displayBoxYCoord);
+            card.transform.position = new Vector3(currentIteratingPos, displayBoxYCoord, currentZCord);
+            card.previousPos = new Vector3(currentIteratingPos, displayBoxYCoord, currentZCord);
             currentIteratingPos += distanceBetweenEachCard;
+            currentZCord--;
         }
     }
 

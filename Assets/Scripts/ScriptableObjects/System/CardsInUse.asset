@@ -68,7 +68,7 @@ MonoBehaviour:
   - {fileID: -1955159675, guid: 6cebac41dba875f438fe993753b5937d, type: 3}
   - {fileID: -1749287379, guid: 6cebac41dba875f438fe993753b5937d, type: 3}
   - {fileID: 2146243577, guid: 6cebac41dba875f438fe993753b5937d, type: 3}
-  cardBack: {fileID: 0}
+  joker: {fileID: 21300000, guid: 01e3335136eb6d1489666d186a833031, type: 3}
   availableCards:
   - CLOVER_1
   - CLOVER_2

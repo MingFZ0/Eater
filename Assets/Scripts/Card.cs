@@ -8,7 +8,9 @@ public class Card : MonoBehaviour
     /* === [Fields for the Card] */
     [Header("Fields for the Card")]
     [SerializeField] CardsInHand hand;
-    [SerializeReference] private Sprite CardBackSprite;
+    [SerializeReference] private Sprite cardBackSprite;
+    [SerializeField] private SpriteRenderer cardBackgroundRenderer;
+
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeField] private TextMesh displayText;
@@ -74,8 +76,9 @@ public class Card : MonoBehaviour
         {
             Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
-
+            
             this.transform.position = mousePosInWorld;
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
         }
     }
 

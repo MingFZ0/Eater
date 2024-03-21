@@ -16,6 +16,7 @@ public class EaterCard : MonoBehaviour
 
     private Sprite cardSprite;
     [SerializeReference] private Sprite cardBackSprite;
+    [SerializeField] private SpriteRenderer cardBackgroundRenderer;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeField] private TextMesh displayText;
@@ -76,6 +77,7 @@ public class EaterCard : MonoBehaviour
         this.isFull = false;
         this.hungerValue = this.cardValue;
         displayText.text = this.hungerValue.ToString();
+        cardBackgroundRenderer.color = Color.white;
     }
 
     /// <Summary> 
@@ -111,6 +113,7 @@ public class EaterCard : MonoBehaviour
             this.isFull = true;
             feedingList.FeedingUpdate();
             spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, cardValue);
+            cardBackgroundRenderer.color = Color.grey;
 
         }
 
@@ -136,6 +139,7 @@ public class EaterCard : MonoBehaviour
     {
         foreach (Card card in cardsFed)
         {
+            cardsInUse.addToUnavailable(card);
             Destroy(card.gameObject);
         }
 
@@ -152,6 +156,8 @@ public class EaterCard : MonoBehaviour
 
         this.isInstantiated = false;
         this.hungerValue = 0;
+        this.spriteRenderer.sprite = cardBackSprite;
+
     }
 
     private void OnDisable() { eaterList.Remove(this); }

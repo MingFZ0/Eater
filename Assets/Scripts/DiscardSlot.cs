@@ -5,6 +5,7 @@ using UnityEngine;
 public class DiscardSlot : MonoBehaviour
 {
     [SerializeField] CardsInHand hand;
+    [SerializeField] CardsInUse cardsInUse;
     [SerializeField] GameVariables gameVars;
     [SerializeReference] int discardAmount;
 
@@ -25,6 +26,7 @@ public class DiscardSlot : MonoBehaviour
             {
                 discardAmount--;
                 displayText.text = discardAmount.ToString();
+                cardsInUse.addToUnavailable(hand.selectedCard);
                 Destroy(hand.selectedCard.gameObject);
                 hand.UpdateHandDisplay();
             }

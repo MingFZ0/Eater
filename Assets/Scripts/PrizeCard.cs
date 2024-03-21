@@ -12,11 +12,13 @@ public class PrizeCard : MonoBehaviour
 
     [Header("Fields for the PrizeCard")]
     [SerializeField] PrizeCardList prizeList;
-    [SerializeReference] private Sprite CardSprite;
-    [SerializeReference] private Sprite CardBackSprite;
+    private Sprite cardSprite;
+    private Sprite cardBackSprite;
     [SerializeReference] private int cardValue;
     [SerializeReference] private CardTypeEnumScriptableObject cardType;
     [SerializeReference] private TextMesh displayText;
+
+    [SerializeField] private CardsInUse cardsInUse;
 
 
     private void OnDisable() { prizeList.Remove(this); }
@@ -28,12 +30,14 @@ public class PrizeCard : MonoBehaviour
         this.cardType = cardType;
         name = "[PrizeCard] " + cardValue + " of " + cardType.ToString();
 
+        cardSprite = cardsInUse.getCardSprite(cardType, cardValue);
     }
 
     private void revealCard()
     {
         prizeList.revealed = this;
         this.displayText.text = cardValue.ToString();
+        gameObject.GetComponent<SpriteRenderer>().sprite = this.cardSprite;
         gameVar.MoveToNextPhase();
     }
 
