@@ -52,8 +52,8 @@ public class PrizeCardSpawner : MonoBehaviour
         float zCoord = transform.position.z + tmpConstant ;
         int amountNeeded = gameVars.GetINITIALPRIZE() + gameVars.Round;
 
-        TreasureCard treasureCard = Instantiate(treasure, new Vector3(transform.position.x, transform.position.y, transform.position.z + tmpConstant), new Quaternion());
-        treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + tmpConstant);
+        TreasureCard treasureCard = Instantiate(treasure, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1 + tmpConstant), new Quaternion());
+        treasureCard.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1 + tmpConstant);
 
         float distanceBetweenEachCard = displayBoxHeight / (amountNeeded - 1);
 

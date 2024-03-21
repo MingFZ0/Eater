@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
+  cardsInUse: {fileID: 11400000, guid: 3294e4b2cb23df24b9b06a7cbad161a3, type: 2}
   gameVars: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
   discardAmount: 0
   displayText: {fileID: 5356439298549987760}

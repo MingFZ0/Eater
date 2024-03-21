@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4443740910896246342, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4968485126588653969, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
       propertyPath: m_Text
       value: ___
@@ -66,6 +70,14 @@ PrefabInstance:
     - target: {fileID: 6379884044620531927, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
       propertyPath: m_Name
       value: PrizeCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379884044620531927, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177602574756391843, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5221799895173120174, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}

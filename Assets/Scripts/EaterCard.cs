@@ -67,6 +67,7 @@ public class EaterCard : MonoBehaviour
         if (hit.collider && hand.selectedCard != null)
         {
             if (hit.collider.gameObject != hand.selectedCard.gameObject) { return; }
+            if (hand.selectedCard.GetCardType().getCardType() == "JOKER") { return; }
             Card card = hand.selectedCard;
             Instantiation(card.GetCardValue(), card.GetCardType());
             hand.Destory(card);
@@ -76,6 +77,7 @@ public class EaterCard : MonoBehaviour
     {
         this.isFull = false;
         this.hungerValue = this.cardValue;
+        this.totalCardScore = 0;
         displayText.text = this.hungerValue.ToString();
         cardBackgroundRenderer.color = Color.white;
     }
@@ -89,7 +91,8 @@ public class EaterCard : MonoBehaviour
         Card card = hand.selectedCard;
         if (card.GetCardValue() <= this.hungerValue)
         {
-            this.hungerValue -= card.GetCardValue();
+            if (card.GetCardType().getCardType() == "JOKER") { this.hungerValue = 0; }
+            else { this.hungerValue -= card.GetCardValue(); }
             displayText.text = hungerValue.ToString();
             if (hungerValue > 0) {spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, hungerValue); }
 

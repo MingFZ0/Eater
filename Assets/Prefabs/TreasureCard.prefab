@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 436775640992490936}
   - component: {fileID: 9174433222686236039}
   - component: {fileID: 2223655250361696173}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TreasureCard
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 5433395912674038493}
   - component: {fileID: 6661837224668845951}
   - component: {fileID: 2210246365783531113}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

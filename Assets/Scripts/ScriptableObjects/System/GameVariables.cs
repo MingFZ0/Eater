@@ -48,7 +48,7 @@ public class GameVariables : ScriptableObject
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         this.allEaterInScene.Clear();
 
-        round = 0;
+        round = 1;
         turn = 0;
         score = 0;
     }

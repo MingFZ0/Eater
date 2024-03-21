@@ -93,6 +93,7 @@ public class CardsInUse : ScriptableObject
 
     public Sprite getCardSprite(CardTypeEnumScriptableObject cardType, int cardValue)
     {
+        //Debug.Log(cardType.getCardType() + "_" + cardValue);
         if (cardType.getCardType() == "SPADE") { return spadeSet[cardValue-1]; }
         if (cardType.getCardType() == "CLOVER") { return cloverSet[cardValue-1]; }
         if (cardType.getCardType() == "DIAMOND") { return diamondSet[cardValue-1]; }
