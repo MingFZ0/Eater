@@ -8,6 +8,8 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private string sceneName;
      public void loadScene()
     {
+        Scene current = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(current.name);
         SceneManager.LoadScene(sceneName);
     }
 }

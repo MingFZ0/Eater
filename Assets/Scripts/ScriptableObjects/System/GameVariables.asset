@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2853bf1d8f47ceb4eb9e400656e39c95, type: 3}
   m_Name: GameVariables
   m_EditorClassIdentifier: 
+  END_SCREEN: GameOver
   MAX_ROUNDS: 3
   INITIAL_PRIZE_AMOUNT: 3
   NUM_OF_EATERS: 2
@@ -28,13 +29,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8919586695d23240b196aef7d365d24, type: 2}
   - {fileID: 11400000, guid: c4e036b564df6fe41b201b7c669f1f46, type: 2}
   gamePhase: {fileID: 11400000, guid: 9dc029805f4971b46895c538c28881f8, type: 2}
-  allEaterInScene:
-  - {fileID: 0}
-  - {fileID: 0}
+  allEaterInScene: []
   gamePhaseIndex: 0
-  round: 4
+  round: 1
   turn: 0
-  score: 61
+  score: 0
   updateStatDisplay:
     m_PersistentCalls:
       m_Calls:

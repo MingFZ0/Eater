@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "GameVariables", menuName = "ScriptableObjects/GameVariables")]
 public class GameVariables : ScriptableObject
 {
     [Header("<Static Constant Attributes>")]
+    [SerializeField] private string END_SCREEN;
     [SerializeField] private int MAX_ROUNDS;
     [SerializeField] private int INITIAL_PRIZE_AMOUNT;
     [SerializeField] private int NUM_OF_EATERS;
@@ -44,6 +46,12 @@ public class GameVariables : ScriptableObject
 
     private void OnValidate()
     {
+        resetData();
+    }
+
+    private void resetData()
+    {
+        Debug.Log("Game Restart");
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         this.allEaterInScene.Clear();
@@ -111,8 +119,7 @@ public class GameVariables : ScriptableObject
         {
             if (feedingList.EaterCount == eaterList.EaterCount)
             {
-                Application.Quit();
-                throw new System.Exception("GAME OVER!");
+                SceneManager.LoadScene(END_SCREEN);
             }
             else
             {
@@ -139,10 +146,11 @@ public class GameVariables : ScriptableObject
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         this.turn = 0;
-        if (round < MAX_ROUNDS) { round = MAX_ROUNDS; }
-        else 
+        //if (round < MAX_ROUNDS) { round = MAX_ROUNDS; }
+        if (round == MAX_ROUNDS) 
         {
             Debug.Log("You Survived!");
+            SceneManager.LoadScene(END_SCREEN);
             Application.Quit(); 
         }
     }

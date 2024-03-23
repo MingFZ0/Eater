@@ -77,7 +77,6 @@ public class EaterCard : MonoBehaviour
     {
         this.isFull = false;
         this.hungerValue = this.cardValue;
-        this.totalCardScore = 0;
         displayText.text = this.hungerValue.ToString();
         cardBackgroundRenderer.color = Color.white;
     }
@@ -155,6 +154,7 @@ public class EaterCard : MonoBehaviour
         this.cardValue = 0;
         this.cardType = null;
         this.name = "Uninstantiated";
+        this.totalCardScore = 0;
         displayText.text = name;
 
         this.isInstantiated = false;
