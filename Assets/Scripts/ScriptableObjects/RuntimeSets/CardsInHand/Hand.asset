@@ -16,4 +16,4 @@ MonoBehaviour:
   selectedCard: {fileID: 0}
   displayBoxWidth: 11.9
   displayBoxYCoord: -2.74
-  displayBoxOutline: 1
+  displayBoxOutline: 0
