@@ -112,10 +112,8 @@ public class GameVariables : ScriptableObject
     }
     private void EndPhaseCalculation()
     {
-        if (feedingList.EaterCount == 0)
-        {
-            return;
-        } else
+        if (feedingList.EaterCount == 0) {return;} 
+        else
         {
             if (feedingList.EaterCount == eaterList.EaterCount)
             {
