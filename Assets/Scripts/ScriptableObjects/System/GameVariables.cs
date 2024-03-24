@@ -49,7 +49,7 @@ public class GameVariables : ScriptableObject
         resetData();
     }
 
-    private void resetData()
+    public void resetData()
     {
         Debug.Log("Game Restart");
         this.gamePhaseIndex = 0;

@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainMenu
+  gameVar: {fileID: 0}
 --- !u!1 &900332268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Classic
+  gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
 --- !u!1 &1975635023
 GameObject:
   m_ObjectHideFlags: 0

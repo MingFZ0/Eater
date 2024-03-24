@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private string sceneName;
+    [SerializeField] private GameVariables gameVar;
      public void loadScene()
     {
-        Scene current = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(current.name);
+        if (sceneName == "Classic") {gameVar.resetData();}
         SceneManager.LoadScene(sceneName);
     }
 }
