@@ -51,6 +51,8 @@ public class GameVariables : ScriptableObject
 
     public void resetData()
     {
+        endRoundCleanup();
+        eaterList.ResetRoundStats();
         Debug.Log("Game Restart");
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
@@ -150,7 +152,7 @@ public class GameVariables : ScriptableObject
             Debug.Log("You Survived!");
             SceneManager.LoadScene(END_SCREEN);
             Application.Quit(); 
-        }
+        } else { round++; }
     }
     private void nextRoundPrep()
     {
