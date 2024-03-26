@@ -103,6 +103,7 @@ MonoBehaviour:
   gameVar: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
   emptyCard: {fileID: 3468550621744959653, guid: e0510b1c590f9dc479b319fc8f8c44b6, type: 3}
+  eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
   prizeList: {fileID: 11400000, guid: f77303736f0dbeb4ba5029c2ff4640b0, type: 2}
   cardValue: 0
   cardType: {fileID: 0}

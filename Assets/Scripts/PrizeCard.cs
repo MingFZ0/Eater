@@ -9,6 +9,7 @@ public class PrizeCard : MonoBehaviour
     [Header("Fields for the Card")]
     [SerializeField] CardsInHand hand;
     [SerializeField] private Card emptyCard;
+    [SerializeField] private EaterList eaterList;
 
     [Header("Fields for the PrizeCard")]
     [SerializeField] PrizeCardList prizeList;
@@ -35,6 +36,8 @@ public class PrizeCard : MonoBehaviour
 
     private void revealCard()
     {
+        if (gameVar.Turn == 0 && eaterList.NumOfInstantiatedEaters < gameVar.GetNUM_OF_EATERS()) { return; }
+
         prizeList.revealed = this;
         this.displayText.text = cardValue.ToString();
         gameObject.GetComponent<SpriteRenderer>().sprite = this.cardSprite;

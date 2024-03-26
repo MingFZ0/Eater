@@ -151,7 +151,6 @@ public class GameVariables : ScriptableObject
         {
             Debug.Log("You Survived!");
             SceneManager.LoadScene(END_SCREEN);
-            Application.Quit(); 
         } else { round++; }
     }
     private void nextRoundPrep()
