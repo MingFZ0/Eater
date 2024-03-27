@@ -9,7 +9,6 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private GameVariables gameVar;
      public void loadScene()
     {
-        if (SceneManager.GetActiveScene().name == "Pause") { SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()); }
         if (sceneName == "Classic") {gameVar.resetData();}
         SceneManager.LoadScene(sceneName);
     }
