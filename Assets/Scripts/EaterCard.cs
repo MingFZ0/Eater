@@ -27,6 +27,7 @@ public class EaterCard : MonoBehaviour
     [SerializeReference] private bool isFull;
     [SerializeField] private UnityEvent eaterFed;
     [SerializeReference] private List<Card> feedingList;
+    [SerializeReference] private List<string> eatenList;
     [SerializeField] private UnityEvent scoreDisplay;
 
     private void Start()
@@ -115,8 +116,8 @@ public class EaterCard : MonoBehaviour
         }
 
         if (this.hungerValue == 0)
-        { 
-            clearCardsFed();
+        {
+            eatCardsFed();
             eaterList.FeedingUpdate();
             this.isFull = true;
             eaterList.IncrementEaterFull();
@@ -150,13 +151,14 @@ public class EaterCard : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears the feedingList
+    /// Transfer all cards in feedingList to eatenList and clear feedingList
     /// </summary>
-    private void clearCardsFed()
+    private void eatCardsFed()
     {
         foreach (Card card in feedingList)
         {
             cardsInUse.addToUnavailable(card);
+            eatenList.Add(card.name);
             Destroy(card.gameObject);
         }
 
@@ -198,10 +200,7 @@ public class EaterCard : MonoBehaviour
     }
 
     private void OnDisable() { eaterList.SubtractNumOfEaterAlive(); }
-    private void OnEnable() 
-    { 
-        eaterList.Add(this);
-    }
+    private void OnEnable() { eaterList.Add(this);}
 
     private void Update()
     {

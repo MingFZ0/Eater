@@ -35,7 +35,7 @@ public class Card : MonoBehaviour
     {
         this.cardValue = cardValue;
         this.cardType = cardType;
-        name = cardType.getCardType() + " of " + cardValue;
+        name = cardType.getCardType() + "_" + cardValue;
         this.displayText.text = cardValue.ToString();
         
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
