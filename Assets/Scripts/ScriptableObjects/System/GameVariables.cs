@@ -23,7 +23,6 @@ public class GameVariables : ScriptableObject
 
     [Header("<Game Status Attributes> \n<They needs to be reset at the end of every game>")]
     [SerializeReference] private GamePhaseEnumSO gamePhase;
-    [SerializeReference] private List<EaterCard> allEaterInScene;
     [SerializeReference] private int gamePhaseIndex;
     [SerializeReference] private int round;
     [SerializeReference] private int turn;
@@ -36,33 +35,14 @@ public class GameVariables : ScriptableObject
 
     [Header("<Runtime Sets>")]
     [SerializeField] private EaterList eaterList;
-    //[SerializeField] private EaterList feedingList;
     [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private CardsInHand hand;
 
-
+    // Public Variables //
     public int Turn { get { return turn; } private set { turn = value; } }
     public int Round { get { return round; } private set { turn = value; } }
 
-    private void OnValidate()
-    {
-        resetData();
-    }
-
-    public void resetData()
-    {
-        endRoundCleanup();
-        eaterList.ResetData();
-        Debug.Log("Game Restart");
-        this.gamePhaseIndex = 0;
-        this.gamePhase = availableGamePhase[gamePhaseIndex];
-        this.allEaterInScene.Clear();
-
-        round = 1;
-        turn = 0;
-        score = 0;
-    }
-
+    // === Getters and Setters === //
     public int GetTOTAL_ROUNDS() { return MAX_ROUNDS; }
     public int GetINITIALPRIZE() { return INITIAL_PRIZE_AMOUNT; }
     public GamePhaseEnumSO GetGamePhase() { return gamePhase; }
@@ -73,18 +53,28 @@ public class GameVariables : ScriptableObject
     public int GetDISCARD_AMOUNT_ALLOWED() { return DISCARD_AMOUNT_ALLOWED;}
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
-    public void AddToEaterRecord(EaterCard eater) { if (!allEaterInScene.Contains(eater)) { allEaterInScene.Add(eater); } }
 
+    // === Scores === //
     public void AddScore() { score++;}
     public void SubtractScore() { score--; }
 
+    // === Phase/Turn/Round Setup and Clean up === //
 
+    //--Turn Setup--//
+    /// <summary>
+    /// Method that kicks starts the first turn AFTER the eaters get picked at round 0
+    /// </summary>
     public void StartFirstTurn()
     {
+        Debug.Log("Start turn");
         StartTurnSetup();
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         updateStatDisplay.Invoke();
     }
+
+    /// <summary>
+    /// Method that runs at the start of EVERY TURN and resets the necessary fields and attributes for every turn
+    /// </summary>
     private void StartTurnSetup()
     {
         startOfTurnSetup.Invoke();
@@ -93,7 +83,10 @@ public class GameVariables : ScriptableObject
         eaterList.ResetEaterFullCount();
     }
 
-
+    //--Phase Setup--//
+    /// <summary>
+    /// Move the game to next phase
+    /// </summary>
     public void MoveToNextPhase()
     {
         this.gamePhaseIndex += 1;
@@ -107,6 +100,10 @@ public class GameVariables : ScriptableObject
         updateStatDisplay.Invoke();
         //Debug.Log("Current gamePhase is " + gamePhase);
     }
+    
+    /// <summary>
+    /// Does Endphase calculations to check for game over and does the killing of unfull eaters
+    /// </summary>
     private void EndPhaseCalculation()
     {
         if (eaterList.GetNumOfEaterFull() == NUM_OF_EATERS) {return;} 
@@ -124,7 +121,6 @@ public class GameVariables : ScriptableObject
                     eater.spit();
                     score -= eater.GetTotalCardScore();
                     eater.gameObject.SetActive(false);
-                    eaterList.SubtractNumOfEaterAlive();
                 }
             }
         }
@@ -132,7 +128,23 @@ public class GameVariables : ScriptableObject
         //feedingList.Clear();
     }
 
-
+    //--Round Setup--//
+    /// <summary>
+    /// Method that gets run at the end of a round
+    /// </summary>
+    public void EndRound()
+    {
+        MoveToNextPhase();
+        endRoundCleanup();
+        nextRoundPrep();
+        updateStatDisplay.Invoke();
+        eaterList.ResetRoundStats();
+        Debug.Log("Round has Ended! You Survived");
+    }
+    
+    /// <summary>
+    /// Method that is used to clean up during the end of a round
+    /// </summary>
     private void endRoundCleanup()
     {
         //feedingList.Clear();
@@ -149,24 +161,38 @@ public class GameVariables : ScriptableObject
             SceneManager.LoadScene(END_SCREEN);
         } else { round++; }
     }
+    
+    /// <summary>
+    /// Method that is used to prepare for the next round
+    /// </summary>
     private void nextRoundPrep()
     {
         nextRoundSetup.Invoke();
         
-        foreach (EaterCard eater in allEaterInScene)
+        for (int index = 0; index < NUM_OF_EATERS; index++)
         {
+            EaterCard eater = eaterList.GetItem(index);
             eater.gameObject.SetActive(true);
             eater.NextRoundSetups();
         }
     }
 
-    public void EndRound()
+    // === Data Reset === //
+    private void OnValidate()
     {
-        MoveToNextPhase();
+        resetData();
+    }
+
+    public void resetData()
+    {
         endRoundCleanup();
-        nextRoundPrep();
-        updateStatDisplay.Invoke();
-        eaterList.ResetRoundStats();
-        Debug.Log("Round has Ended! You Survived");
+        eaterList.ResetDataBetweenGames();
+        Debug.Log("Game Restart");
+        this.gamePhaseIndex = 0;
+        this.gamePhase = availableGamePhase[gamePhaseIndex];
+
+        round = 1;
+        turn = 0;
+        score = 0;
     }
 }

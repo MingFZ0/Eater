@@ -26,7 +26,11 @@ public class Card : MonoBehaviour
     [SerializeField] private GameEvent trySpawnEater;
 
 
-    /* Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/ */
+    /// <summary>
+    /// Method to change the values; Called after instantiating the card; https://forum.unity.com/threads/instantiate-a-object-with-a-constructor.1315239/ 
+    /// </summary>
+    /// <param name="cardValue"></param>
+    /// <param name="cardType"></param>
     public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
         this.cardValue = cardValue;
@@ -37,7 +41,6 @@ public class Card : MonoBehaviour
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, cardValue);
     }
-
 
     public int GetCardValue() { return this.cardValue; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }

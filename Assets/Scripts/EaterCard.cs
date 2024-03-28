@@ -32,32 +32,23 @@ public class EaterCard : MonoBehaviour
     private void Start()
     {
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        //spriteRenderer.sprite = cardBackSprite;
+        spriteRenderer.sprite = cardBackSprite;
     }
 
-    public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
-    {
-        this.cardValue = cardValue;
-        this.cardType = cardType;
-        this.name = "EATER " + cardType.getCardType() + " of " + cardValue;
-        displayText.text = cardValue.ToString();
-        this.isInstantiated = true;
+    // === Getters or Setters === //
 
-        this.hungerValue = cardValue;
-        this.cardSprite = cardsInUse.getCardSprite(cardType, cardValue);
-        this.spriteRenderer.sprite = cardSprite;
-        eaterList.NotifyInstantiated();
-        
-    }
     public int GetCardValue() { return this.cardValue; }
     public int GetTotalCardScore() { return totalCardScore; }
     public int GetHungerValue() { return hungerValue; }
     public bool GetIsFull() { return isFull; }
     public CardTypeEnumScriptableObject GetCardType() { return this.cardType; }
 
+    // === Methods Related to Spawning === //
 
-    /*These functions are UnityEvent Functions. You need to attach the GameEventListener script to this gameobject
-               and from there, select this functions to run when the specific UnityEvent is raised.*/
+    /// <summary>
+    /// An response method that triggers from the eaterFed event. need to attach the GameEventListener script to this gameobject
+    ///and from there, select this functions to run when the specific UnityEvent is raised
+    /// </summary>
     public void TrySpawnEater()
     {
         if (this.isInstantiated) { return; }
@@ -72,14 +63,28 @@ public class EaterCard : MonoBehaviour
             hand.Destory(card);
         }
     }
-    public void StartOfTurnUpdate()
+
+    /// <summary>
+    /// Assign the eater card with the coorsponding card Value and card Type
+    /// </summary>
+    /// <param name="cardValue"></param>
+    /// <param name="cardType"></param>
+    public void Instantiation(int cardValue, CardTypeEnumScriptableObject cardType)
     {
-        this.isFull = false;
-        this.hungerValue = this.cardValue;
-        this.feedingList.Clear();
-        displayText.text = this.hungerValue.ToString();
-        cardBackgroundRenderer.color = Color.white;
+        this.cardValue = cardValue;
+        this.cardType = cardType;
+        this.name = "EATER " + cardType.getCardType() + " of " + cardValue;
+        displayText.text = cardValue.ToString();
+        this.isInstantiated = true;
+
+        this.hungerValue = cardValue;
+        this.cardSprite = cardsInUse.getCardSprite(cardType, cardValue);
+        this.spriteRenderer.sprite = cardSprite;
+        eaterList.NotifyInstantiated();
+
     }
+
+    // === Methods Related to Feeding === //
 
     /// <Summary> 
     /// This method is used for feeding. It also checks if the 
@@ -105,7 +110,7 @@ public class EaterCard : MonoBehaviour
 
             feedingList.Add(card);
             eaterList.FeedingUpdate();
-            eaterFed.Invoke();      //Mainly used for stopping player from feeding halfway to clear their hand and then draw more cards
+            eaterFed.Invoke();      //invokes the eaterFed event which triggers phaseDisplay to update any stats needed
 
         }
 
@@ -121,6 +126,10 @@ public class EaterCard : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Spits out all cards in the feedingList
+    /// </summary>
     public void spit()
     {
         foreach (Card card in feedingList)
@@ -139,6 +148,10 @@ public class EaterCard : MonoBehaviour
         displayText.text = this.hungerValue.ToString();
         spriteRenderer.sprite = cardSprite;
     }
+
+    /// <summary>
+    /// Clears the feedingList
+    /// </summary>
     private void clearCardsFed()
     {
         foreach (Card card in feedingList)
@@ -150,7 +163,23 @@ public class EaterCard : MonoBehaviour
         feedingList.Clear();
     }
 
+    // === Methods Related to data reset between turns/rounds === //
 
+    /// <summary>
+    /// Updates at the start of the turn
+    /// </summary>
+    public void StartOfTurnUpdate()
+    {
+        this.isFull = false;
+        this.hungerValue = this.cardValue;
+        this.feedingList.Clear();
+        displayText.text = this.hungerValue.ToString();
+        cardBackgroundRenderer.color = Color.white;
+    }
+
+    /// <summary>
+    /// Reset current data to setup for the next round
+    /// </summary>
     public void NextRoundSetups()
     {
         this.cardValue = 0;
@@ -162,21 +191,17 @@ public class EaterCard : MonoBehaviour
         this.isInstantiated = false;
         this.hungerValue = 0;
         this.spriteRenderer.sprite = cardBackSprite;
-
+    }
+    private void OnValidate()
+    {
+        feedingList.Clear();
     }
 
-    private void OnDisable() { }
+    private void OnDisable() { eaterList.SubtractNumOfEaterAlive(); }
     private void OnEnable() 
     { 
         eaterList.Add(this);
-        gameVars.AddToEaterRecord(this);
     }
-
-    private void OnValidate()
-    {
-        feedingList.Clear();   
-    }
-
 
     private void Update()
     {
