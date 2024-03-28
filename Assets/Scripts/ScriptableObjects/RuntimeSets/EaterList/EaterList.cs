@@ -14,6 +14,8 @@ public class EaterList : RuntimeSetSO<EaterCard>
 {
     [SerializeField] private GameVariables gameVar;
     [SerializeField] private bool isFeeding;
+    [SerializeField] private int eatersAlive;
+    [SerializeField] private int eatersFull;
 
 
     [Header("Game Attributes that must be reset at the end of the game")]
@@ -27,6 +29,7 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public void NotifyInstantiated() 
     {
         this.numOfInstantiatedEaters++;
+        this.eatersAlive++;
         
         if (numOfInstantiatedEaters == gameVar.GetNUM_OF_EATERS())
         {
@@ -44,7 +47,17 @@ public class EaterList : RuntimeSetSO<EaterCard>
     public override void Remove(EaterCard eaterCard) {items.Remove(eaterCard);}
     public bool GetIsFeeding() { return isFeeding; }
     public void Clear() { items.Clear(); }
-   
+    public int GetNumOfEatersAlive() { return eatersAlive; }
+    public List<EaterCard> GetAllAliveEater() 
+    {
+        List<EaterCard> ls = new List<EaterCard>();
+        foreach (EaterCard eater in items) { if (eater.isActiveAndEnabled) { ls.Add(eater); } }
+        return ls;
+    }
+    public void SubtractNumOfEaterAlive() { eatersAlive--; }
+    public int GetNumOfEaterFull() { return eatersFull; }
+    public void IncrementEaterFull() { eatersFull++; }
+    public void ResetEaterFullCount() { eatersFull = 0; }
 
     public void ResetRoundStats()
     {
@@ -56,7 +69,7 @@ public class EaterList : RuntimeSetSO<EaterCard>
     {
         foreach (EaterCard eater in items)
         {
-            if (eater.GetIsFull() != true && eater.GetHungerValue() < eater.GetCardValue())
+            if (eater.GetIsFull() != true && (eater.GetHungerValue() != 0) && (eater.GetHungerValue() < eater.GetCardValue()))
             {
                 isFeeding = true;
                 return;
@@ -66,10 +79,17 @@ public class EaterList : RuntimeSetSO<EaterCard>
 
     }
 
+    public void ResetData()
+    {
+        items.Clear();
+        numOfInstantiatedEaters = 0;
+        eatersAlive = 0;
+        eatersFull = 0;
+        isFeeding = false;
+    }
+
     private void OnValidate()
     {
-        numOfInstantiatedEaters = 0;
-        isFeeding = false;
-        items.Clear();
+        ResetData();
     }
 }

@@ -36,7 +36,7 @@ public class GameVariables : ScriptableObject
 
     [Header("<Runtime Sets>")]
     [SerializeField] private EaterList eaterList;
-    [SerializeField] private EaterList feedingList;
+    //[SerializeField] private EaterList feedingList;
     [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private CardsInHand hand;
 
@@ -52,7 +52,7 @@ public class GameVariables : ScriptableObject
     public void resetData()
     {
         endRoundCleanup();
-        eaterList.ResetRoundStats();
+        eaterList.ResetData();
         Debug.Log("Game Restart");
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
@@ -87,15 +87,10 @@ public class GameVariables : ScriptableObject
     }
     private void StartTurnSetup()
     {
-        for (int i = 0; i < eaterList.EaterCount; i++)
-        {
-            EaterCard eater = eaterList.GetItem(i);
-            feedingList.Add(eater);
-        }
-
         startOfTurnSetup.Invoke();
         gamePhaseIndex = 0;
         turn++;
+        eaterList.ResetEaterFullCount();
     }
 
 
@@ -114,32 +109,33 @@ public class GameVariables : ScriptableObject
     }
     private void EndPhaseCalculation()
     {
-        if (feedingList.EaterCount == 0) {return;} 
+        if (eaterList.GetNumOfEaterFull() == NUM_OF_EATERS) {return;} 
         else
         {
-            if (feedingList.EaterCount == eaterList.EaterCount)
+            if (eaterList.GetNumOfEaterFull() == 0)
             {
                 SceneManager.LoadScene(END_SCREEN);
             }
             else
             {
-                for (int i = 0; i < feedingList.EaterCount; i++)
+                foreach (EaterCard eater in eaterList.GetAllAliveEater())
                 {
-                    EaterCard eater = feedingList.GetItem(i);
+                    if (eater.GetIsFull() == true) { continue; }
                     eater.spit();
                     score -= eater.GetTotalCardScore();
                     eater.gameObject.SetActive(false);
+                    eaterList.SubtractNumOfEaterAlive();
                 }
             }
         }
 
-        feedingList.Clear();
+        //feedingList.Clear();
     }
 
 
     private void endRoundCleanup()
     {
-        feedingList.Clear();
+        //feedingList.Clear();
         hand.Clear();
         hand.selectedCard = null;
 

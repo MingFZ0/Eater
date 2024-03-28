@@ -10,7 +10,7 @@ public class Deck : MonoBehaviour
     [SerializeField] private Card emptyCard;
     [SerializeField] private CardsInHand hand;
     [SerializeField] private PrizeCardList prizeList;
-    [SerializeField] private EaterList feedingList;
+    [SerializeField] private EaterList eaterList;
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
 
     [SerializeField] private GameVariables gameVars;
@@ -63,7 +63,7 @@ public class Deck : MonoBehaviour
 
     public void CreateCard()
     {
-        if ((hand.GetHandLength() == 0 && feedingList.GetIsFeeding() == false) || (gameVars.Turn == 0 && gameVars.GetGamePhase().name == "DRAW_PHASE")) { 
+        if ((hand.GetHandLength() == 0 && eaterList.GetIsFeeding() == false) || (gameVars.Turn == 0 && gameVars.GetGamePhase().name == "DRAW_PHASE")) { 
             for (int i = 0; i < gameVars.GetHAND_SIZE(); i++)
             {
                 _createCard();

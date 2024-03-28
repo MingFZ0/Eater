@@ -8,7 +8,6 @@ public class EaterCard : MonoBehaviour
     [SerializeField] GameVariables gameVars;
     [SerializeField] CardsInUse cardsInUse;
     [SerializeField] EaterList eaterList;
-    [SerializeField] EaterList feedingList;
     [SerializeField] CardsInHand hand;
 
     [Header("Fields for the EaterCard")]
@@ -27,7 +26,7 @@ public class EaterCard : MonoBehaviour
     [SerializeReference] private int hungerValue;
     [SerializeReference] private bool isFull;
     [SerializeField] private UnityEvent eaterFed;
-    [SerializeReference] private List<Card> cardsFed;
+    [SerializeReference] private List<Card> feedingList;
     [SerializeField] private UnityEvent scoreDisplay;
 
     private void Start()
@@ -77,6 +76,7 @@ public class EaterCard : MonoBehaviour
     {
         this.isFull = false;
         this.hungerValue = this.cardValue;
+        this.feedingList.Clear();
         displayText.text = this.hungerValue.ToString();
         cardBackgroundRenderer.color = Color.white;
     }
@@ -87,8 +87,9 @@ public class EaterCard : MonoBehaviour
     /// </Summary>
     private void feeding()
     {
+        if (gameVars.Turn == 0) { return; }
         Card card = hand.selectedCard;
-        if (card.GetCardValue() <= this.hungerValue)
+        if (card.GetCardValue() <= this.hungerValue || (card.GetCardType().getCardType() == "JOKER" && this.hungerValue > 0))
         {
             if (card.GetCardType().getCardType() == "JOKER") { this.hungerValue = 0; }
             else { this.hungerValue -= card.GetCardValue(); }
@@ -98,22 +99,22 @@ public class EaterCard : MonoBehaviour
 
             card.gameObject.SetActive(false);
             hand.UpdateHandDisplay();
-            feedingList.FeedingUpdate();
 
             gameVars.AddScore();
             totalCardScore++;
 
+            feedingList.Add(card);
+            eaterList.FeedingUpdate();
             eaterFed.Invoke();      //Mainly used for stopping player from feeding halfway to clear their hand and then draw more cards
-            cardsFed.Add(card);
 
         }
 
         if (this.hungerValue == 0)
         { 
-            feedingList.Remove(this);
             clearCardsFed();
+            eaterList.FeedingUpdate();
             this.isFull = true;
-            feedingList.FeedingUpdate();
+            eaterList.IncrementEaterFull();
             spriteRenderer.sprite = cardsInUse.getCardSprite(cardType, cardValue);
             cardBackgroundRenderer.color = Color.grey;
 
@@ -122,7 +123,7 @@ public class EaterCard : MonoBehaviour
     }
     public void spit()
     {
-        foreach (Card card in cardsFed)
+        foreach (Card card in feedingList)
         {
             card.gameObject.SetActive(true);
             hand.UpdateHandDisplay();
@@ -130,22 +131,23 @@ public class EaterCard : MonoBehaviour
             gameVars.SubtractScore();
         }
 
-        cardsFed.Clear();
+        feedingList.Clear();
         scoreDisplay.Invoke();
         
         this.hungerValue = cardValue;
+        eaterList.FeedingUpdate();
         displayText.text = this.hungerValue.ToString();
         spriteRenderer.sprite = cardSprite;
     }
     private void clearCardsFed()
     {
-        foreach (Card card in cardsFed)
+        foreach (Card card in feedingList)
         {
             cardsInUse.addToUnavailable(card);
             Destroy(card.gameObject);
         }
 
-        cardsFed.Clear();
+        feedingList.Clear();
     }
 
 
@@ -163,11 +165,16 @@ public class EaterCard : MonoBehaviour
 
     }
 
-    private void OnDisable() { eaterList.Remove(this); }
+    private void OnDisable() { }
     private void OnEnable() 
     { 
         eaterList.Add(this);
         gameVars.AddToEaterRecord(this);
+    }
+
+    private void OnValidate()
+    {
+        feedingList.Clear();   
     }
 
 
@@ -189,7 +196,7 @@ public class EaterCard : MonoBehaviour
             Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
             RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero);
-            if (hit.collider == null || hit.collider.gameObject != this.gameObject || this.cardsFed.Count == 0) { return; }
+            if (hit.collider == null || hit.collider.gameObject != this.gameObject || this.feedingList.Count == 0) { return; }
             spit();
         }
     }
