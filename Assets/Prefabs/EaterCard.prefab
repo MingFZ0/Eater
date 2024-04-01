@@ -339,6 +339,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   feedingList: []
+  eatenList: []
   scoreDisplay:
     m_PersistentCalls:
       m_Calls:
@@ -354,6 +355,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  eatenListDisplay: {fileID: 11400000, guid: 0d3dcfb58714d884c92612314999ca95, type: 2}
 --- !u!114 &4984212352662182631
 MonoBehaviour:
   m_ObjectHideFlags: 0

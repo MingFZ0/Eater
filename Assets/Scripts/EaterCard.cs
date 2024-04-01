@@ -30,6 +30,9 @@ public class EaterCard : MonoBehaviour
     [SerializeReference] private List<string> eatenList;
     [SerializeField] private UnityEvent scoreDisplay;
 
+    //[Header("FeedingList Display Fields")]
+    //[SerializeReference] EatenListDisplay eatenListDisplay;
+
     private void Start()
     {
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -223,6 +226,29 @@ public class EaterCard : MonoBehaviour
             if (hit.collider == null || hit.collider.gameObject != this.gameObject || this.feedingList.Count == 0) { return; }
             spit();
         }
+
+        //else if (hand.selectedCard == null && checkMouseOver()) { updateDisplay(); }
     }
 
+    //private bool checkMouseOver()
+    //{
+    //    Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+    //    Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+
+    //    RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
+    //    if (hit.collider && (hit.collider.gameObject.GetInstanceID() == this.gameObject.GetInstanceID()))
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    //public void updateDisplay()
+    //{
+    //    List<string> feedingListName = new List<string>();
+
+    //    foreach (Card card in feedingList) { feedingListName.Add(card.name); }
+
+    //    eatenListDisplay.updateDisplay(feedingListName, eatenList);
+    //}
 }

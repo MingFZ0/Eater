@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 263fe14fdcae13640be96d0ae6a044a6, type: 3}
+  m_Name: EatenListDisplay
+  m_EditorClassIdentifier: 
+  displayBoxWidth: 16.47
+  displayBoxYCoord: 0.78
+  cardsInUse: {fileID: 11400000, guid: 3294e4b2cb23df24b9b06a7cbad161a3, type: 2}
+  currentList: []
+  displayCard: {fileID: 6379884044620531927, guid: b22dbabc49a66d9449ae619874537113, type: 3}
+  displayBoxOutline: 1

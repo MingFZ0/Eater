@@ -101,4 +101,18 @@ public class CardsInUse : ScriptableObject
         if (cardType.getCardType() == "JOKER") { return joker; }
         else { throw new System.Exception("Unknown card type"); }
     }
+
+    public Sprite getCardSprite(string cardName)
+    {
+        string[] elements = cardName.Split("_");
+        CardTypeEnumScriptableObject cardType = CardTypeEnumScriptableObject.stringToCardType(elements[0], gameVar.GetAvailableCardTypes());
+        int cardValue = int.Parse(elements[1]);
+        //Debug.Log(cardType.getCardType() + "_" + cardValue);
+        if (cardType.getCardType() == "SPADE") { return spadeSet[cardValue - 1]; }
+        if (cardType.getCardType() == "CLOVER") { return cloverSet[cardValue - 1]; }
+        if (cardType.getCardType() == "DIAMOND") { return diamondSet[cardValue - 1]; }
+        if (cardType.getCardType() == "HEART") { return heartSet[cardValue - 1]; }
+        if (cardType.getCardType() == "JOKER") { return joker; }
+        else { throw new System.Exception("Unknown card type"); }
+    }
 }
