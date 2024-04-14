@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "CardsInUse", menuName = "ScriptableObjects/CardsInUse")]
 public class CardsInUse : ScriptableObject
@@ -16,12 +17,21 @@ public class CardsInUse : ScriptableObject
     [SerializeField] private List<CardTypeEnumScriptableObject> availableCardTypes = new List<CardTypeEnumScriptableObject>();
     [SerializeField] private Card emptyCard;
     [SerializeField] private PrizeCard emptyPrizeCard;
+    [SerializeField] private UnityEvent resetEaten;
 
     [SerializeField] private GameVariables gameVar;
 
 
     private void OnValidate()
     {
+        resetCards();
+
+    }
+
+    public void resetCards()
+    {
+        unavailableCards.Clear();
+        availableCards.Clear();
         availableCards = new List<string>();
         foreach (CardTypeEnumScriptableObject cardType in gameVar.GetAvailableCardTypes())
         {
@@ -29,7 +39,7 @@ public class CardsInUse : ScriptableObject
             for (int i = 1; i <= 13; i++)
             {
                 string cardName = cardType.getCardType() + "_" + i;
-                 //Debug.Log(cardName + " has been added to availableCards");
+                //Debug.Log(cardName + " has been added to availableCards");
                 availableCards.Add(cardName);
             }
         }
@@ -41,7 +51,6 @@ public class CardsInUse : ScriptableObject
             //Debug.Log(cardName + " has been added to availableCards");
             availableCards.Add(cardName);
         }
-
     }
 
     private void OnDisable()
@@ -56,13 +65,15 @@ public class CardsInUse : ScriptableObject
         unavailableCards.Add(cardName);
     }
 
-    private void refill()
+    public void refill()
     {
         foreach (string cardName in unavailableCards)
         {
             availableCards.Add(cardName);
         }
         unavailableCards.Clear();
+        resetEaten.Invoke();
+
     }
 
     public Card CreateCard()

@@ -28,8 +28,7 @@ public class TooltipSystem : ScriptableObject
 
     public void Hide(List<Card> feedingList)
     {
-        if (this.feedingList == null) { return; }
-        displayTooltip.gameObject.SetActive(false);
+        if (this.feedingList == null || this.displayTooltip == null) { return; }
         displayTooltip = displayTooltip.transform.parent.gameObject;
         Destroy(displayTooltip);
         displayTooltip = null;
@@ -49,7 +48,6 @@ public class TooltipSystem : ScriptableObject
 
     private void TooltipUpdate(List<Card> newFeeding)
     {
-        Debug.Log("Update tooltip");
         displayTooltip = Instantiate(tooltipPrefab).transform.GetChild(0).gameObject;
         this.feedingList = newFeeding;
 
@@ -65,6 +63,7 @@ public class TooltipSystem : ScriptableObject
 
     private void OnValidate()
     {
+
         this.feedingList = null;
         this.display = false;
         this.displayTooltip = null;

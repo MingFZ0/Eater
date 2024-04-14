@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: -4215272125345283329}
   - component: {fileID: 4984212352662182631}
   - component: {fileID: 6152166284993292087}
+  - component: {fileID: -4475514654268918344}
   - component: {fileID: -7627044512309563565}
   m_Layer: 0
   m_Name: EaterCard
@@ -357,6 +358,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  resetEaten:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4984212352662182631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +417,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-4475514654268918344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912873606503789589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02d3621b89c292428889b58f2b1d55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: faaf8087645b4984cab3bb788f224a1f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4215272125345283329}
+        m_TargetAssemblyTypeName: EaterCard, Assembly-CSharp
+        m_MethodName: resetEatenList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-7627044512309563565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,7 +452,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8912873606503789589}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02d3621b89c292428889b58f2b1d55d, type: 3}
   m_Name: 

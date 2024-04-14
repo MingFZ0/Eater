@@ -32,6 +32,7 @@ public class EaterCard : MonoBehaviour
     [SerializeReference] private List<Card> feedingList;
     [SerializeReference] private List<string> eatenList;
     [SerializeField] private UnityEvent scoreDisplay;
+    [SerializeField] private UnityEvent resetEaten;
 
     //[Header("FeedingList Display Fields")]
     //[SerializeReference] EatenListDisplay eatenListDisplay;
@@ -187,6 +188,13 @@ public class EaterCard : MonoBehaviour
 
         listGUI.ShowList(ls);
 
+    }
+
+    public void resetEatenList()
+    {
+        Debug.Log("EatenList was reset");
+        this.totalCardScore = 0;
+        this.eatenList.Clear();
     }
 
     // === Methods Related to data reset between turns/rounds === //

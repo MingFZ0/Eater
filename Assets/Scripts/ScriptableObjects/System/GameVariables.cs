@@ -37,6 +37,7 @@ public class GameVariables : ScriptableObject
     [SerializeField] private EaterList eaterList;
     [SerializeField] private PrizeCardList prizeList;
     [SerializeField] private CardsInHand hand;
+    [SerializeField] private CardsInUse cardsInUse;
 
     // Public Variables //
     public int Turn { get { return turn; } private set { turn = value; } }
@@ -168,7 +169,8 @@ public class GameVariables : ScriptableObject
     private void nextRoundPrep()
     {
         nextRoundSetup.Invoke();
-        
+        cardsInUse.refill();
+
         for (int index = 0; index < NUM_OF_EATERS; index++)
         {
             EaterCard eater = eaterList.GetItem(index);
@@ -185,6 +187,7 @@ public class GameVariables : ScriptableObject
 
     public void resetData()
     {
+        cardsInUse.resetCards();
         endRoundCleanup();
         eaterList.ResetDataBetweenGames();
         Debug.Log("Game Restart");
