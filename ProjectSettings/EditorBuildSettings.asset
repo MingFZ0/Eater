@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Screens/Pause.unity
     guid: 28c4c41f316198e46b3b4c888796997d
+  - enabled: 1
+    path: Assets/Scenes/Screens/EatenlistDisplay.unity
+    guid: 09eabb59f75941147aeca9384c8adf24
   m_configObjects: {}

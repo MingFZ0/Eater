@@ -18,10 +18,8 @@ public class TooltipSystem : ScriptableObject
         if (displayTooltip == null) { TooltipUpdate(newFeeding); }
         else if (equalsList(this.feedingList, newFeeding) == false) {Debug.Log("Teh two ls arent equal"); }
 
-        Debug.Log(this.feedingList.Count + " - " + newFeeding.Count);
         if (display == false)
         {
-            Debug.Log("Setting tooltip active");
             //displayTooltip.gameObject.SetActive(true);
             display = true;
         }
@@ -37,7 +35,6 @@ public class TooltipSystem : ScriptableObject
         displayTooltip = null;
         //displayTooltip.gameObject.SetActive(false);
         display = false;
-        Debug.Log("Disable tooltip");
     }
 
     private bool equalsList(List<Card> ls1, List<Card> ls2)
@@ -55,7 +52,6 @@ public class TooltipSystem : ScriptableObject
         Debug.Log("Update tooltip");
         displayTooltip = Instantiate(tooltipPrefab).transform.GetChild(0).gameObject;
         this.feedingList = newFeeding;
-        Debug.Log(feedingList);
 
         foreach (Card card in feedingList)
         {

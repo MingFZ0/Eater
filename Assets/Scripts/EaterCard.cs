@@ -10,6 +10,7 @@ public class EaterCard : MonoBehaviour
     [SerializeField] EaterList eaterList;
     [SerializeField] TooltipSystem tooltipSystem;
     [SerializeField] CardsInHand hand;
+    [SerializeField] ListDisplayGUISystem listGUI;
 
     [Header("Fields for the EaterCard")]
     private SpriteRenderer spriteRenderer;
@@ -171,6 +172,23 @@ public class EaterCard : MonoBehaviour
         feedingList.Clear();
     }
 
+    private void displayEaten()
+    {
+        List<string> ls = new List<string>();
+        foreach (Card feeding in feedingList)
+        {
+            ls.Add(feeding.name);
+        }
+
+        foreach (string eaten in eatenList)
+        {
+            ls.Add(eaten);
+        }
+
+        listGUI.ShowList(ls);
+
+    }
+
     // === Methods Related to data reset between turns/rounds === //
 
     /// <summary>
@@ -228,6 +246,14 @@ public class EaterCard : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero);
             if (hit.collider == null || hit.collider.gameObject != this.gameObject || this.feedingList.Count == 0) { return; }
             spit();
+        }
+        else if (Input.GetMouseButtonUp(1) && hand.selectedCard == null)
+        {
+            Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero);
+            if (hit.collider == null || hit.collider.gameObject != this.gameObject) { return; }
+            displayEaten();
         }
 
         checkMouseOver();
