@@ -153,6 +153,7 @@ public class EaterCard : MonoBehaviour
         eaterList.FeedingUpdate();
         displayText.text = this.hungerValue.ToString();
         spriteRenderer.sprite = cardSprite;
+        tooltipSystem.Hide(feedingList);
     }
 
     /// <summary>

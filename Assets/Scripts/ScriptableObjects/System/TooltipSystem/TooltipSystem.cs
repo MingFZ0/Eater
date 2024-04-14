@@ -15,14 +15,14 @@ public class TooltipSystem : ScriptableObject
 
     public void Show(List<Card> newFeeding, Vector2 mousePos)
     {
-        if (this.feedingList == null) { TooltipUpdate(newFeeding); }
+        if (displayTooltip == null) { TooltipUpdate(newFeeding); }
         else if (equalsList(this.feedingList, newFeeding) == false) {Debug.Log("Teh two ls arent equal"); }
 
         Debug.Log(this.feedingList.Count + " - " + newFeeding.Count);
         if (display == false)
         {
             Debug.Log("Setting tooltip active");
-            displayTooltip.gameObject.SetActive(true);
+            //displayTooltip.gameObject.SetActive(true);
             display = true;
         }
         displayTooltip.transform.position = Input.mousePosition;
@@ -30,8 +30,12 @@ public class TooltipSystem : ScriptableObject
 
     public void Hide(List<Card> feedingList)
     {
-        if (this.feedingList != feedingList) { return; }
+        if (this.feedingList == null) { return; }
         displayTooltip.gameObject.SetActive(false);
+        displayTooltip = displayTooltip.transform.parent.gameObject;
+        Destroy(displayTooltip);
+        displayTooltip = null;
+        //displayTooltip.gameObject.SetActive(false);
         display = false;
         Debug.Log("Disable tooltip");
     }
@@ -49,7 +53,6 @@ public class TooltipSystem : ScriptableObject
     private void TooltipUpdate(List<Card> newFeeding)
     {
         Debug.Log("Update tooltip");
-        if (displayTooltip != null) { Destroy(displayTooltip); }
         displayTooltip = Instantiate(tooltipPrefab).transform.GetChild(0).gameObject;
         this.feedingList = newFeeding;
         Debug.Log(feedingList);
