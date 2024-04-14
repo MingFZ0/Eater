@@ -313,6 +313,7 @@ MonoBehaviour:
   gameVars: {fileID: 11400000, guid: b2addb9f521d77140a1da559dce4bbfd, type: 2}
   cardsInUse: {fileID: 11400000, guid: 3294e4b2cb23df24b9b06a7cbad161a3, type: 2}
   eaterList: {fileID: 11400000, guid: a6801681d8ecd314389cf7e66fc95bfe, type: 2}
+  tooltipSystem: {fileID: 11400000, guid: e79d556d962a58d43b3849b384e3857d, type: 2}
   hand: {fileID: 11400000, guid: 232c0d42b42d2be4f9d8d5758c1691f0, type: 2}
   cardBackSprite: {fileID: 21300000, guid: 94b3b7912a486bd44bde1e31857a3743, type: 3}
   cardBackgroundRenderer: {fileID: 7502201540694299068}
@@ -355,7 +356,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  eatenListDisplay: {fileID: 11400000, guid: 0d3dcfb58714d884c92612314999ca95, type: 2}
 --- !u!114 &4984212352662182631
 MonoBehaviour:
   m_ObjectHideFlags: 0

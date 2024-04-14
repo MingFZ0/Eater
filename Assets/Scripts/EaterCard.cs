@@ -8,6 +8,7 @@ public class EaterCard : MonoBehaviour
     [SerializeField] GameVariables gameVars;
     [SerializeField] CardsInUse cardsInUse;
     [SerializeField] EaterList eaterList;
+    [SerializeField] TooltipSystem tooltipSystem;
     [SerializeField] CardsInHand hand;
 
     [Header("Fields for the EaterCard")]
@@ -21,6 +22,7 @@ public class EaterCard : MonoBehaviour
     [SerializeField] private TextMesh displayText;
     [SerializeReference] private bool isInstantiated;
     [SerializeReference] private int totalCardScore;
+    private bool mouseOver;
 
     [Header("Fields that relates to Feeding")]
     [SerializeReference] private int hungerValue;
@@ -227,21 +229,30 @@ public class EaterCard : MonoBehaviour
             spit();
         }
 
+        checkMouseOver();
         //else if (hand.selectedCard == null && checkMouseOver()) { updateDisplay(); }
     }
 
-    //private bool checkMouseOver()
-    //{
-    //    Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //    Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+    private void checkMouseOver()
+    {
+        if (feedingList.Count <= 0 ) { return; }
+        Vector2 mousePosOnScreen = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
 
-    //    RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
-    //    if (hit.collider && (hit.collider.gameObject.GetInstanceID() == this.gameObject.GetInstanceID()))
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
+        RaycastHit2D hit = Physics2D.Raycast(mousePosInWorld, Vector2.zero, 0f);
+        if (hit.collider && (hit.collider.gameObject.GetInstanceID() == this.gameObject.GetInstanceID()))
+        {
+            tooltipSystem.Show(feedingList, mousePosInWorld);
+            mouseOver = true;
+        }
+        else
+        {
+            if (mouseOver == false) { return; }
+
+            tooltipSystem.Hide(feedingList);
+            mouseOver = false;
+        }
+    }
 
     //public void updateDisplay()
     //{

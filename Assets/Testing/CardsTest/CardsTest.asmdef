@@ -1,0 +1,6 @@
+{
+    "name": "CardsTest",
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

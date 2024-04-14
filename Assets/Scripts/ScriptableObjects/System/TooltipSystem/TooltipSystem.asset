@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37553f3858a09d74aae34a067c1e6a58, type: 3}
   m_Name: TooltipSystem
   m_EditorClassIdentifier: 
-  tooltip: {fileID: 0}
+  tooltipPrefab: {fileID: 5064507736590898986, guid: 37f0aae09af2e1c429d0b812a902d308, type: 3}
+  cardImageDisplay: {fileID: 658265546821917713, guid: fbd52eba5257e2245b70be0921565f68, type: 3}
+  cardsInUse: {fileID: 11400000, guid: 3294e4b2cb23df24b9b06a7cbad161a3, type: 2}

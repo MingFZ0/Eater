@@ -117,6 +117,16 @@ public class Card : MonoBehaviour
 
     }
 
+    public override bool Equals(object other)
+    {
+        if (other is Card)
+        {
+            Card otherCard = (Card)other;
+            return otherCard.cardValue == this.cardValue && otherCard.cardType == this.cardType;
+        }
+        return false;
+    }
+
 
 
 }
