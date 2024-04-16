@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using System;
 
 [CreateAssetMenu(fileName = "GameVariables", menuName = "ScriptableObjects/GameVariables")]
 public class GameVariables : ScriptableObject
 {
+    public enum GameState
+    {
+        ONGOING,
+        WON,
+        LOSE
+    }
+
     [Header("<Static Constant Attributes>")]
     [SerializeField] private string END_SCREEN;
     [SerializeField] private int MAX_ROUNDS;
@@ -22,11 +32,14 @@ public class GameVariables : ScriptableObject
     [Space]
 
     [Header("<Game Status Attributes> \n<They needs to be reset at the end of every game>")]
-    [SerializeReference] private GamePhaseEnumSO gamePhase;
-    [SerializeReference] private int gamePhaseIndex;
-    [SerializeReference] private int round;
-    [SerializeReference] private int turn;
-    [SerializeReference] private int score;
+
+    [SerializeField] private string gameMode;
+    private GamePhaseEnumSO gamePhase;
+    private GameState gameState;
+    private int gamePhaseIndex;
+    private int round;
+    private int turn;
+    private int score;
 
     [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent updateStatDisplay;
@@ -67,6 +80,7 @@ public class GameVariables : ScriptableObject
     /// </summary>
     public void StartFirstTurn()
     {
+        gameState = GameState.ONGOING;
         Debug.Log("Start turn");
         StartTurnSetup();
         this.gamePhase = availableGamePhase[gamePhaseIndex];
@@ -112,6 +126,8 @@ public class GameVariables : ScriptableObject
         {
             if (eaterList.GetNumOfEaterFull() == 0)
             {
+                gameState = GameState.LOSE;
+                saveData();
                 SceneManager.LoadScene(END_SCREEN);
             }
             else
@@ -159,6 +175,8 @@ public class GameVariables : ScriptableObject
         if (round == MAX_ROUNDS) 
         {
             Debug.Log("You Survived!");
+            gameState = GameState.WON;
+            saveData();
             SceneManager.LoadScene(END_SCREEN);
         } else { round++; }
     }
@@ -179,7 +197,7 @@ public class GameVariables : ScriptableObject
         }
     }
 
-    // === Data Reset === //
+    // === Data Reset or Saving === //
     private void OnValidate()
     {
         resetData();
@@ -197,5 +215,91 @@ public class GameVariables : ScriptableObject
         round = 1;
         turn = 0;
         score = 0;
+    }
+
+    public void saveData()
+    {
+        ModeData modeData = new ModeData(gameMode, gameState.ToString(), score, round, eaterList.GetNumOfEaterFull());
+
+        if (File.Exists(Application.dataPath + "/SaveData.save") && JsonUtility.FromJson<SavedData>(File.ReadAllText(Application.dataPath + "/SaveData.save")) != null) 
+        { 
+            updateSaved(modeData); 
+        }
+        else {
+            SavedData savedData = new SavedData();
+            savedData.modesData.Add(modeData);
+            string json = JsonUtility.ToJson(savedData);
+            Debug.Log(json);
+            Debug.Log(Application.dataPath);
+            File.WriteAllText(Application.dataPath + "/SaveData.save", json); 
+        }
+    }
+
+    private void updateSaved(ModeData currentData)
+    {
+        string fileContent = File.ReadAllText(Application.dataPath + "/SaveData.save");
+        SavedData savedData = JsonUtility.FromJson<SavedData>(fileContent);
+
+        if (savedData.ContainsMode(gameMode))
+        {
+            ModeData data = savedData.GetModeData(gameMode);
+            if (data.score >= currentData.score)
+            {
+                Debug.Log("New score!");
+                savedData.modesData.Remove(data);
+                savedData.modesData.Add(currentData);
+            } else {
+                Debug.Log("You had a better score than this"); 
+            }
+        }
+        else
+        {
+            savedData.modesData.Add(currentData);
+        }
+
+        string json = JsonUtility.ToJson(savedData);
+        File.WriteAllText(Application.dataPath + "/SaveData.save", json);
+    }
+}
+
+[Serializable]
+public class SavedData
+{
+    public List<ModeData> modesData = new List<ModeData>();
+
+    public bool ContainsMode(string gameMode)
+    {
+        foreach (ModeData modeData in modesData)
+        {
+            if (modeData.gameMode.Equals(gameMode)) { return true; }
+        }
+        return false;
+    }
+
+    public ModeData GetModeData(string gameMode)
+    {
+        foreach (ModeData modeData in modesData)
+        {
+            if (modeData.gameMode.Equals(gameMode)) { return modeData; }
+        }
+        return null;
+    }
+}
+
+[Serializable]
+public class ModeData {
+    public string gameMode;
+    public string gameState;
+    public int score;
+    public int survivedRound;
+    public int remainingEater;
+
+    public ModeData(string mode, string gameState, int score, int survivedRound, int remainingEater)
+    {
+        this.gameMode = mode;
+        this.gameState = gameState;
+        this.score = score;
+        this.survivedRound = survivedRound;
+        this.remainingEater = remainingEater;
     }
 }
