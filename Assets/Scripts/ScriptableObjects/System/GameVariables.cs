@@ -40,6 +40,7 @@ public class GameVariables : ScriptableObject
     private int round;
     private int turn;
     private int score;
+    private PopupManager popupManager;
 
     [Header("<Central Game Events>")]
     [SerializeField] private UnityEvent updateStatDisplay;
@@ -52,11 +53,12 @@ public class GameVariables : ScriptableObject
     [SerializeField] private CardsInHand hand;
     [SerializeField] private CardsInUse cardsInUse;
 
-    // Public Variables //
+    #region Public Variables
     public int Turn { get { return turn; } private set { turn = value; } }
     public int Round { get { return round; } private set { turn = value; } }
+    #endregion
 
-    // === Getters and Setters === //
+    #region Getters and Setters
     public int GetTOTAL_ROUNDS() { return MAX_ROUNDS; }
     public int GetINITIALPRIZE() { return INITIAL_PRIZE_AMOUNT; }
     public GamePhaseEnumSO GetGamePhase() { return gamePhase; }
@@ -67,14 +69,16 @@ public class GameVariables : ScriptableObject
     public int GetDISCARD_AMOUNT_ALLOWED() { return DISCARD_AMOUNT_ALLOWED;}
     public List<CardTypeEnumScriptableObject> GetAvailableCardTypes() { return this.availableCardTypes; }
     public List<GamePhaseEnumSO> GetAvailableGamePhase() { return this.availableGamePhase; }
+    #endregion
 
-    // === Scores === //
+    #region Scores
     public void AddScore() { score++;}
     public void SubtractScore() { score--; }
+    #endregion
 
-    // === Phase/Turn/Round Setup and Clean up === //
+    #region Functions: Phase/Turn/Round Setup and Clean up
 
-    //--Turn Setup--//
+        #region Turn Setup
     /// <summary>
     /// Method that kicks starts the first turn AFTER the eaters get picked at round 0
     /// </summary>
@@ -82,9 +86,11 @@ public class GameVariables : ScriptableObject
     {
         gameState = GameState.ONGOING;
         Debug.Log("Start turn");
+        
         StartTurnSetup();
         this.gamePhase = availableGamePhase[gamePhaseIndex];
         updateStatDisplay.Invoke();
+        //popupManager.NotifyDrawPhase(2);
     }
 
     /// <summary>
@@ -96,9 +102,12 @@ public class GameVariables : ScriptableObject
         gamePhaseIndex = 0;
         turn++;
         eaterList.ResetEaterFullCount();
+        //popupManager.NotifyDrawPhase(2);
     }
 
-    //--Phase Setup--//
+    #endregion
+
+        #region Phase Setup
     /// <summary>
     /// Move the game to next phase
     /// </summary>
@@ -110,6 +119,9 @@ public class GameVariables : ScriptableObject
             EndPhaseCalculation();
             StartTurnSetup();
         }
+        //else if (availableGamePhase[gamePhaseIndex].GetDisplayName() == "Action Phase") { popupManager.NotifyActionPhase(2); }
+        //else if (availableGamePhase[gamePhaseIndex].GetDisplayName() == "Draw Phase") { popupManager.NotifyDrawPhase(2); }
+        Debug.Log("Called");
         this.gamePhase = availableGamePhase[gamePhaseIndex];
 
         updateStatDisplay.Invoke();
@@ -145,7 +157,9 @@ public class GameVariables : ScriptableObject
         //feedingList.Clear();
     }
 
-    //--Round Setup--//
+    #endregion
+
+        #region Round Setup
     /// <summary>
     /// Method that gets run at the end of a round
     /// </summary>
@@ -197,7 +211,9 @@ public class GameVariables : ScriptableObject
         }
     }
 
-    // === Data Reset or Saving === //
+    #endregion
+
+        #region Data Reset or Saving
     private void OnValidate()
     {
         resetData();
@@ -205,12 +221,17 @@ public class GameVariables : ScriptableObject
 
     public void resetData()
     {
+        if (popupManager != null) { Destroy(popupManager); }
+        popupManager = null;
         cardsInUse.resetCards();
         endRoundCleanup();
         eaterList.ResetDataBetweenGames();
         Debug.Log("Game Restart");
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
+
+        
+        
 
         round = 1;
         turn = 0;
@@ -260,6 +281,9 @@ public class GameVariables : ScriptableObject
         string json = JsonUtility.ToJson(savedData);
         File.WriteAllText(Application.dataPath + "/SaveData.save", json);
     }
+        #endregion
+    
+    #endregion
 }
 
 [Serializable]

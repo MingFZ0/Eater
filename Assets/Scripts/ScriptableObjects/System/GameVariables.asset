@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2853bf1d8f47ceb4eb9e400656e39c95, type: 3}
   m_Name: GameVariables
   m_EditorClassIdentifier: 
+  POPUP: {fileID: 2606371355036449508, guid: 6612b47926186f64c899c1e51877c74e, type: 3}
   END_SCREEN: GameOver
   MAX_ROUNDS: 3
   INITIAL_PRIZE_AMOUNT: 3
