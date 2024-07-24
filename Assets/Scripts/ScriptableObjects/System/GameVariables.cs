@@ -230,9 +230,6 @@ public class GameVariables : ScriptableObject
         this.gamePhaseIndex = 0;
         this.gamePhase = availableGamePhase[gamePhaseIndex];
 
-        
-        
-
         round = 1;
         turn = 0;
         score = 0;
