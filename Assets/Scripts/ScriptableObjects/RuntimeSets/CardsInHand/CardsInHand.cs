@@ -50,25 +50,25 @@ public class CardsInHand : RuntimeSetSO<Card>
 
     private void OnEnable()
     {
-        #if UNITY_EDITOR
-        SceneView.duringSceneGui += OnSceneUpdate;
-        #endif
+        //#if UNITY_EDITOR
+        //SceneView.duringSceneGui += OnSceneUpdate;
+        //#endif
     }
     private void OnDisable()
     {
-        #if UNITY_EDITOR
-        SceneView.duringSceneGui -= OnSceneUpdate;
-        #endif
+        //#if UNITY_EDITOR
+        //SceneView.duringSceneGui -= OnSceneUpdate;
+        //#endif
     }
 
-    #if UNITY_EDITOR
-    private void OnSceneUpdate(SceneView sceneView)
-    {
-        if (displayBoxOutline == false) { return; }
-        Handles.color = Color.green;
-        Handles.DrawSolidRectangleWithOutline(new Rect(0 - (displayBoxWidth / 2), displayBoxYCoord + (displayBoxYCoord * 0.55f), displayBoxWidth, 3), Color.clear, Color.green);
-    }
-    #endif
+    //#if UNITY_EDITOR
+    //private void OnSceneUpdate(SceneView sceneView)
+    //{
+    //    if (displayBoxOutline == false) { return; }
+    //    Handles.color = Color.green;
+    //    Handles.DrawSolidRectangleWithOutline(new Rect(0 - (displayBoxWidth / 2), displayBoxYCoord + (displayBoxYCoord * 0.55f), displayBoxWidth, 3), Color.clear, Color.green);
+    //}
+    //#endif
 
     public override Card GetItem(int index) {
         Debug.Log("DEBUG -GetItem--> Index is " + index);
